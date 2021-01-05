@@ -2,9 +2,9 @@
 
   <title>
     {% if page.title == "Home" %}
-      {{ site.title }} // Home
+      Blog // {{ site.title }}
     {% else %}
-      {{ site.title }} // {{ page.title }}
+      {{ page.title }} // {{ site.title }}
     {% endif %}
   </title>
 
