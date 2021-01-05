@@ -22,7 +22,7 @@ body {
   font-size: 18px;
   color: #515151;
   line-height: 1.75rem;
-  background-image: linear-gradient(#F3F3F3, #FFFFFF);
+  background-color: #F8F8F8;
 }
 
 @media (max-width: 30em) {
