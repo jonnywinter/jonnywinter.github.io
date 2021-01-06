@@ -1,18 +1,22 @@
 ---
 layout: page
-title: Welcome to Lagrange!
+title: Welcome!
 ---
 
-Lagrange is a minimalist Jekyll theme. The purpose of this theme is to provide a simple, clean, content-focused blogging platform for your personal site or blog. Below you can find everything you need to get started.
+Welcome, and congratulations on your visit.
 
-### Getting Started
+### About me
 
-[Getting Started]({{ site.github.url }}{% post_url 2015-10-10-getting-started %}): getting started with installing Lagrange, whether you are completely new to using Jekyll, or simply just migrating to a new Jekyll theme.
+I’m Jonny, a tech-head with a keen eye for interesting technologies - specifically network oriented ones.
 
-### Example Content
+### About this blog
 
-[Text and Formatting]({{ site.github.url }}{% post_url 2014-01-01-text-formatting-examples %})
+Fuelled by tech-knowledge and caffeine, I’ve decided it’s high time to make a blog. This site and its contents will be formed of projects, tools, tips, tricks, guides & fixes that I’m either working on, have just finished or have been squireling away for far too long. So, fellow tech-heads – fill your boots, share & feel free to reach out and contact me.
 
-### Questions?
+### Disclaimer
 
-This theme is completely free and open source software. You may use it however you want, as it is distributed under the [MIT License](http://choosealicense.com/licenses/mit/). If you are having any problems, any questions or suggestions, feel free to [tweet at me](https://twitter.com/intent/tweet?text=My%question%about%Lagrange%is:%&amp;via=paululele), or [file a GitHub issue](https://github.com/lenpaul/lagrange/issues/new).
+All of the information and views published on this blog are of my own opinion and not of any of my employers and/or vendors that I work with.
+
+### Questions
+
+If you have any questions or comments with any of the posts/topics raised in my blog, you can contact me [through my email](mailto:me@jonathan-winter.co.uk) or reach me through any of the social media contact links at the top/bottom of the page.
