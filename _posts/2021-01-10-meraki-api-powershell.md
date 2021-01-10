@@ -37,13 +37,13 @@ relxteb's Meraki [GitHub repository](https://github.com/relaxteb/Meraki)
 
 ## Let's begin
 
-**NOTE**: Instead of re-inventing the wheel and explaining things that have been well defined by someone else, I have included links next to some words/technologies/acronyms/protocols that I feel could proove useful to those not yet 'in the know'. **/NOTE**
+**&lt;NOTE>**: Instead of re-inventing the wheel and explaining things that have been well defined by someone else, I have included links next to some words/technologies/acronyms/protocols that I feel could proove useful to those not yet 'in the know'. **&lt;/NOTE>**
 
 Now you've generated your API key (and created a dashboard account if you do not already have one to use), get PowerShell ISE open and we can go about calling the Dashboard [REST API](https://www.youtube.com/watch?v=7YcW25PHnAA&t=1s&ab_channel=WebConcepts). To get started, we are going to perform a [GET request](https://www.youtube.com/watch?v=guYMSP7JVTA&ab_channel=Telusko) to fetch all of the organisations in which your dashboard administrator account has access to - if you have access to the [MSP Portal](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Using_the_MSP_Portal_to_Manage_Multiple_Organizations) you will return multiple organisations, if not then you will only return one.
 
 In PowerShell, we're going to be using the [**Invoke-RestMethod**](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-restmethod?view=powershell-7.1) cmdlet to interact with the Meraki Dashboard and storing the returned values in a [variable](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-7.1). Once these variables have a value we will then display the values in a nicely formatted table.
 
-Firstly, create a new script (File > Save) and type the following text to store your API key in the $APIKey variable - **NOTE**: Storing an API key in clear text in any location that anyone other than you have access to is a security risk as your API key is acting as your username & password. There are many well documented ways on how to secure this in a production environment. This is solely educational. **/NOTE**.
+Firstly, create a new script (File > Save) and type the following text to store your API key in the $APIKey variable - **&lt;NOTE>**: Storing an API key in clear text in any location that anyone other than you have access to is a security risk as your API key is acting as your username & password. There are many well documented ways on how to secure this in a production environment. This is solely educational. **&lt;/NOTE>**.
 ```powershell
 $APIKey = "Enter your API key here"
 ```
