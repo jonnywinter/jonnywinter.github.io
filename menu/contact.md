@@ -3,4 +3,6 @@ layout: page
 title: Contact
 ---
 
-If you are having any problems, any questions or suggestions, feel free to [tweet at me](https://twitter.com/intent/tweet?text=%40paululele), or [file a GitHub issue](https://github.com/lenpaul/lagrange/issues/new)
+<p style="text-align: justify; text-justify: inter-word;">
+If you are having any problems, any questions or suggestions, feel free to <a href="mailto:me@jonathan-winter.co.uk">email me</a> or connect with me on one of the social medial links at the top & bottom of this page.
+</p>
