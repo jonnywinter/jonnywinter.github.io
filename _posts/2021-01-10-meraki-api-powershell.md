@@ -23,7 +23,7 @@ Music: [To The 5 Boroughs by Beastie Boys](https://open.spotify.com/album/1yw6pI
 <br>
 OS: Windows 10 Pro v20H2 x64.
 
-## Hat Tips
+## Tip o' the Hat
 
 The Meraki [API docs](https://developer.cisco.com/meraki/api-v1/) on developer.cisco.com
 <br>
@@ -36,22 +36,33 @@ relxteb's Meraki [GitHub repository](https://github.com/relaxteb/Meraki)
 To understand what is happening here please fully read the article, however this is the first bit of code we're going to write so we can programatically get a list of all organisations we have access to.
 <br>
 ```powershell
-$APIKey = 'Enter your API key here'
+$APIKey = "Enter your API key here"
 $headers = @{
-    'Content-Type' = 'application/json'
-    'X-Cisco-Meraki-API-Key' = $APIKey
+    "Content-Type" = "application/json"
+    "X-Cisco-Meraki-API-Key" = $APIKey
 }
-Invoke-RestMethod -Method Get -Uri 'https://api.meraki.com/api/v1/organizations' -Headers $headers
+$organisations = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations" -Headers $headers
+$organisations
 ```
-... the above output will be displayed in a PowerShell table. For those wanting a JSON output we can use the following text instead (with the $APIKey & $headers variables from the code snippet).
+... the above output will be displayed in a PowerShell table. For those wanting a JSON output you can use the following text instead of the final line of the above.
 ```powershell
-$var = Invoke-RestMethod -Method Get -Uri 'https://api.meraki.com/api/v1/organizations' -Headers $headers
-ConvertTo-Json -InputObject $var
+ConvertTo-Json -InputObject $organisations
 ```
-```json
-{
-  "firstName": "John",
-  "lastName": "Smith",
-  "age": 25
+End code
+```powershell
+$APIKey = "Enter your API key here"
+$headers = @{
+    "Content-Type" = "application/json"
+    "X-Cisco-Meraki-API-Key" = $APIKey
 }
+$organisations = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations" -Headers $Headers
+Out-Host -InputObject $organisations
+$organisationName = read-host -Prompt "Please type an organisation name: "
+foreach ($organisation in $organisations){
+    if ($organisation.name -Like $organisationName) {
+        $organisationId = $organisation.id
+    }
+}
+$networks = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/$($organisationId)/networks" -Headers $Headers
+$networks | Sort-Object Name | Format-Table Name,ID,productTypes
 ```
