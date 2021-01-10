@@ -7,11 +7,11 @@ tags: [API,Meraki,PowerShell]
 image: Meraki-API-PowerShell-Menu.png
 ---
 
-### Summary
+## Summary
 
 To quote [Meraki](https://documentation.meraki.com/Getting_Started#:~:text=The%20Meraki%20dashboard%20itself%20is,organizations%2C%20networks%2C%20and%20devices), *"The Meraki dashboard itself is a centralized, web browser-based tool used to monitor and configure Meraki devices and services. A dashboard account is what you use to log in to the dashboard in order to manage and configure your organizations, networks, and devices."* Using the Meraki Dashboard REST API we can use CRUD (Create, Read, Update & Delete) to interact with the server in a programatic way, as opposed to using the web UI. In this post I'm going to show the steps that are needed in order to perform API calls to the Meraki dashboard and display the JSON responses in PowerShell. 
 
-### Requirements
+## Requirements
 
 To perform the majority of what we're going to do below there aren't many requirements other than having access to PowerShell, a [Meraki Dashboard Account](https://documentation.meraki.com/Getting_Started) and [generating your API key](https://documentation.meraki.com/General_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API). Simple stuff. Once you're at that point, read on. For reference, I'll be using [Windows PowerShell ISE](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/ise/introducing-the-windows-powershell-ise?view=powershell-7.1) as it's built into Windows 10 and easy to use. 
 
@@ -39,7 +39,7 @@ $headers = @{
     'Content-Type' = 'application/json'
     'X-Cisco-Meraki-API-Key' = $APIKey
 }
-Invoke-RestMethod -Method Get -uri 'https://api.meraki.com/api/v1/organizations' -Headers $headers
+Invoke-RestMethod -Method Get -Uri 'https://api.meraki.com/api/v1/organizations' -Headers $headers
 ```
 
 ```json
