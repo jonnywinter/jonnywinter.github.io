@@ -2,12 +2,7 @@
 layout: page
 title: Welcome!
 ---
-<style>
-div {
-  text-align: justify;
-  text-justify: inter-word;
-}
-</style>
+
 ### About me
 <div>
 I’m Jonny, a tech-head with a keen eye for interesting technologies - specifically network oriented ones.
