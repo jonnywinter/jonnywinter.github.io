@@ -7,7 +7,10 @@ title: Welcome!
 I’m Jonny, a tech-head with a keen eye for interesting technologies - specifically network oriented ones.
 
 <p float="left">
-  <img src="/assets/img/cutting.jpg" width="100" />
+  <img src="/assets/img/CCENT.png" width="100" />
+  <img src="/assets/img/CCNA.png" width="100" />
+  <img src="/assets/img/Level-200.png" width="100" />
+  <img src="/assets/img/Azure-Fundamentals.png" width="100" />
 </p>
 
 ### About this blog
