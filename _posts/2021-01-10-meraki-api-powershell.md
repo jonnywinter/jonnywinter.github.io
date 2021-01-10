@@ -47,4 +47,16 @@ Firstly, create a new script (File > Save) and type the following text to store 
 ```powershell
 $APIKey = "Enter your API key here"
 ```
-**&lt;NOTE>**: Storing an API key, as with any credentials, in clear text is a security risk - your API key is effectively your username & password. If a malicious party were to obtain this key, they would be able to authenticate as you. There are many well documented ways on how to secure this in a production environment, i.e. [here](https://www.freecodecamp.org/news/how-to-securely-store-api-keys-4ff3ea19ebda/). This project is a purely educational project, do this at your own risk. **&lt;/NOTE>**.
+**&lt;NOTE>**: Storing an API key, as with any credentials, in clear text is a security risk - your API key is effectively your username & password. If a malicious party were to obtain this key, they would be able to authenticate as you. There are many well documented ways on how to secure this in a production environment, i.e. [here](https://www.freecodecamp.org/news/how-to-securely-store-api-keys-4ff3ea19ebda/). This is a purely educational project, do this at your own risk. **&lt;/NOTE>**.
+
+When we communicate with the Meraki Dashboard API, we need to provide a header with two values - your API key & the content type. Due to the way that Meraki API works, we need to provide authentication with each request - hense the API key. The Content-Type header is provided to let the server know that any data sent to the server is provided in JSON (**J**ava**S**cript **O**bject **N**otation). When we provide these, we'll use a variable called $headers - the @ is used when we put data on multiple lines. 
+```powershell
+$headers = @{
+    "X-Cisco-Meraki-API-Key" = $APIKey
+    "Content-Type" = "application/json"
+}
+```
+Now we've got our API key & headers defined as variables, we can put them to use in the GET request using Invoke-RestMethod. The switches for the cmdlet are self explanitory - -Uri is the URI, -Headers is the headers & -Method is the CRUD method. Easy mode. The URI we are using is obtained from the [Meraki Dashboard API docs](https://developer.cisco.com/meraki/api-v1/#!get-organizations), all we need to do is prepend each request with https://api.meraki.com/api/v1.
+```powershell
+Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations" -Headers $Headers
+```
