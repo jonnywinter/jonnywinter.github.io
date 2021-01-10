@@ -6,13 +6,13 @@ title: Welcome!
 
 I’m Jonny, a tech-head with a keen eye for interesting technologies - specifically network oriented ones.
 
-<p float="center">
-  <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25">
-    <img alt="CCENTs" src="/assets/img/CCENT.png" width="100" />
-    <img alt="CCNA Routing & Switching" src="/assets/img/CCNA.png" width="100" />
-    <img alt="Understanding Cisco Networking Devices" src="/assets/img/Level-200.png" width="100" />
-    <img alt="Azure Fundamentals" src="/assets/img/Azure-Fundamentals.png" width="100" />
-  </a>
+<p float="left">
+  <center>
+    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CCENTs" src="/assets/img/CCENT.png" width="100" /></a>
+    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CCNA Routing & Switching" src="/assets/img/CCNA.png" width="100" /></a>
+    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="Understanding Cisco Networking Devices" src="/assets/img/Level-200.png" width="100" /></a>
+    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="Azure Fundamentals" src="/assets/img/Azure-Fundamentals.png" width="100" /></a>
+  </center>
 </p>
 
 ### About this blog
