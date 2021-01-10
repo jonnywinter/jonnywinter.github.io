@@ -25,6 +25,6 @@ All of the information and views published on this blog are of my own opinion an
 
 ### Questions
 
-<p style=text-align: justify; text-justify: inter-word;>
+<p style="text-align: justify; text-justify: inter-word;">
 If you have any questions or comments with any of the posts/topics raised in my blog, you can contact me <a href="mailto:me@jonathan-winter.co.uk">through my email</a> or reach me through any of the social media contact links at the top/bottom of the page.
 </p>
