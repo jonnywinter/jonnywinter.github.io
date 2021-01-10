@@ -8,3 +8,15 @@ image: Meraki-API-PowerShell-Menu.png
 ---
 
 Jonny
+
+```powershell
+Invoke-RestMethod -method Get -uri "http:"
+```
+
+```json
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "age": 25
+}
+```
