@@ -2,12 +2,13 @@
 layout: page
 title: Welcome!
 ---
-
-Welcome, and congratulations on your visit.
-
 ### About me
 
 I’m Jonny, a tech-head with a keen eye for interesting technologies - specifically network oriented ones.
+
+<p float="left">
+  <img src="/cutting.jpg" width="100" />
+</p>
 
 ### About this blog
 
