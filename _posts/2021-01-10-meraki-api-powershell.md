@@ -26,7 +26,9 @@ OS: Windows 10 Pro v20H2 x64.
 ## Hat Tips
 
 The Meraki [API docs](https://developer.cisco.com/meraki/api-v1/) on developer.cisco.com
+<br>
 NetworkEngineer7's [video](https://www.youtube.com/watch?v=MTOyge6ZZmg&ab_channel=NetworkEngineer7) on YouTube
+<br>
 relxteb's Meraki [GitHub repository](https://github.com/relaxteb/Meraki)
 
 ## TL;DR;
@@ -41,7 +43,11 @@ $headers = @{
 }
 Invoke-RestMethod -Method Get -Uri 'https://api.meraki.com/api/v1/organizations' -Headers $headers
 ```
-
+... the above output will be displayed in a PowerShell table. For those wanting a JSON output we can use the following text instead (with the $APIKey & $headers variables from the code snippet).
+```powershell
+$var = Invoke-RestMethod -Method Get -Uri 'https://api.meraki.com/api/v1/organizations' -Headers $headers
+ConvertTo-Json -InputObject $var
+```
 ```json
 {
   "firstName": "John",
