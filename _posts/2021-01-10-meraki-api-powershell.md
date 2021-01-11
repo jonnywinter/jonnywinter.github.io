@@ -60,7 +60,9 @@ Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations"
 ```
 You should receive a response something like this - 
 <br>
+<br>
 <a href="#"><img alt="Meraki API PowerShell Get Organisations" src="/assets/img/Meraki-API-PowerShell-Get-Organisations.png"/></a>
+<br>
 <br>
 What you can see is the organisation name (in the pink rectangle) and the organisation ID (in the green rectangle). Using the organisation ID and the same headers as before (included here for completeness), we can do things like displaying the number of [networks within the organisation](https://developer.cisco.com/meraki/api-v1/#!get-organization-networks) by simply replacing {organizationId} with the organisation ID against the name of the organisation you want to query - 
 ```powershell
