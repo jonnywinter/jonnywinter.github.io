@@ -73,3 +73,25 @@ $headers = @{
 }
 Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/{organizationId}/networks" -Headers $Headers
 ```
+You should receive a response something like this - 
+```powershell
+id               : L_XXXXXXXXXXXXXXXXXXXX
+organizationId   : XXXXX
+name             : XXXXXXXX
+productTypes     : {camera, switch, wireless}
+timeZone         : Europe/London
+tags             : {}
+enrollmentString : 
+url              : https://nXXX.meraki.com/XXXXXXXXXXX/n/XXXXXXXXX/manage/usage/list
+notes            : 
+
+id               : L_XXXXXXXXXXXXXXXXXXXXXXXXX
+organizationId   : XXXXX
+name             : XXXXXXXX
+productTypes     : {appliance, switch, wireless}
+timeZone         : America/Los_Angeles
+tags             : {}
+enrollmentString : 
+url              : https://nXXX.meraki.com/XXXXXXXXXXXXX/n/_XXXXXXXXX/manage/usage/list
+notes            : 
+```
