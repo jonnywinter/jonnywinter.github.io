@@ -75,9 +75,9 @@ Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/
 ```
 You should receive a response something like this - 
 ```powershell
-id               : L_XXXXXXXXXXXXXXXXXXXX
+id               : L_Network-ID-1
 organizationId   : XXXXX
-name             : XXXXXXXX
+name             : Network Name 1
 productTypes     : {camera, switch, wireless}
 timeZone         : Europe/London
 tags             : {}
@@ -85,13 +85,26 @@ enrollmentString :
 url              : https://nXXX.meraki.com/XXXXXXXXXXX/n/XXXXXXXXX/manage/usage/list
 notes            : 
 
-id               : L_XXXXXXXXXXXXXXXXXXXXXXXXX
+id               : L_Network-ID-2
 organizationId   : XXXXX
-name             : XXXXXXXX
+name             : Network Name 2
 productTypes     : {appliance, switch, wireless}
 timeZone         : America/Los_Angeles
 tags             : {}
 enrollmentString : 
 url              : https://nXXX.meraki.com/XXXXXXXXXXXXX/n/_XXXXXXXXX/manage/usage/list
 notes            : 
+```
+Great! Only thing is, it looks kind-a iffy. So, let's display it in a table and only display the network ID, organization ID, network name & product types. To do this, put the Invoke-RestMethod request in a variable. Then, call that variable followed by Format-Table cmdlet, like so - 
+```powershell
+$request = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/{organizationId}/networks" -Headers $Headers
+$request | Format-Table id,organizationId,name,productTypes
+
+###
+#Example output below (not script text)
+###
+id                   organizationId name        productTypes                 
+--                   -------------- ----        ------------                 
+L_Network-ID-1       XXXXXX         Network 1   {camera, switch, wireless}   
+L_Network-ID-2       XXXXXX         Network 2   {appliance, switch, wireless}
 ```
