@@ -7,9 +7,9 @@ tags: [API,Meraki,PowerShell]
 image: Meraki-API-PowerShell-Menu.png
 ---
 
-## Summary
-
 *"The Meraki dashboard itself is a centralized, web browser-based tool used to monitor and configure Meraki devices and services. A dashboard account is what you use to log in to the dashboard in order to manage and configure your organizations, networks, and devices."* - [Cisco Meraki](https://documentation.meraki.com/Getting_Started#:~:text=The%20Meraki%20dashboard%20itself%20is,organizations%2C%20networks%2C%20and%20devices)
+
+## Summary
 
 Using the Meraki Dashboard REST API we can use CRUD (**C**reate, **R**ead, **U**pdate & **D**elete) to interact with the server in a programatic way, as opposed to using the web UI. In this post I'm going to show the steps that are needed in order to perform API calls to the Meraki dashboard and display the JSON responses in PowerShell. We'll then go a bit further and create a script that can be double clicked to present you the list of networks against an organisation, using a user input. 
 
