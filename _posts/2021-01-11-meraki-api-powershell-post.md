@@ -89,15 +89,12 @@ $headers = @{
     "Content-Type" = "application/json"
     "X-Cisco-Meraki-API-Key" = $APIKey
 }
-#$organisations = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations" -Headers $Headers
-#Out-Host -InputObject $organisations
 
 $body = @{
     "name"              = "New Network"
     "productTypes"      = "switch","wireless"
     }
 $jsonBody = ConvertTo-Json -InputObject $body
-$jsonBody
 
 Invoke-RestMethod -Method Post -Uri "https://api.meraki.com/api/v1/organizations/{organizationId}/networks" -Headers $Headers -Body $jsonBody
 Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/{organizationId}/networks" -Headers $Headers
