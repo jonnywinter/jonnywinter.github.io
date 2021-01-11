@@ -11,7 +11,7 @@ image: Meraki-API-PowerShell-Menu.png
 
 *"The Meraki dashboard itself is a centralized, web browser-based tool used to monitor and configure Meraki devices and services. A dashboard account is what you use to log in to the dashboard in order to manage and configure your organizations, networks, and devices."* - [Cisco Meraki](https://documentation.meraki.com/Getting_Started#:~:text=The%20Meraki%20dashboard%20itself%20is,organizations%2C%20networks%2C%20and%20devices)
 
-Using the Meraki Dashboard REST API we can use CRUD (**C**reate, **R**ead, **U**pdate & **D**elete) to interact with the server in a programatic way, as opposed to using the web UI. In this post I'm going to show the steps that are needed in order to perform API calls to the Meraki dashboard and display the JSON responses in PowerShell. We'll then go a bit further and create a script that can be double clicked to present you the list of networks against an organisation, using a user input. To finish off, we'll create a network within an organisation.
+Using the Meraki Dashboard REST API we can use CRUD (**C**reate, **R**ead, **U**pdate & **D**elete) to interact with the server in a programatic way, as opposed to using the web UI. In this post I'm going to show the steps that are needed in order to perform API calls to the Meraki dashboard and display the JSON responses in PowerShell. We'll then go a bit further and create a script that can be double clicked to present you the list of networks against an organisation, using a user input. 
 
 ## Requirements
 
@@ -124,7 +124,7 @@ $organisations = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/
 Out-Host -InputObject $organisations
 #----Prompt the user to enter an organisation name and then save the ID of that organisation in a variable
 $organisationName = read-host -Prompt "Please type an organisation name"
-foreach ($organisation in $organisations){
+ForEach ($organisation in $organisations){
     if ($organisation.name -like $organisationName.ToLower()) {
         $organisationId = $organisation.id
     }
@@ -134,3 +134,9 @@ $networks = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/or
 $networks | Sort-Object Name | Format-Table Name,ID,productTypes
 pause
 ```
+The for loop is a common thing in scripting. In PowerShell the syntax is ForEach and well documented [here](https://devblogs.microsoft.com/scripting/basics-of-powershell-looping-foreach/) by Dr Scripto. The lines marked with a # are not processed by PowerShell and the ---- are used for ease of visibility. 
+<br>
+<br>
+But yeah, there we go. You can now query all networks on all of your organisations via PowerShell using the Meraki Dashboard API. From here, or using this/similar method, you can query things like MS switches, switch ports, MR Wi-Fi APs, SSIDs, etc., etc. The destination you'll need to add to the base URI for each query are found on [https://developer.cisco.com/meraki/api-v1](https://developer.cisco.com/meraki/api-v1). 
+
+Happy scripting!
