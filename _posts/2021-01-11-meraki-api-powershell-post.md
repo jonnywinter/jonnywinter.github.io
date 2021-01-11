@@ -111,7 +111,7 @@ enrollmentString :
 url              : https://n1.meraki.com/New-Network-swit/n/xxxxxxxx/manage/usage/list
 notes            :
 ```
-Whey! Network created. To make it a little more user friendly, having a person enter the product types & network name after typing the name of an organisation, you could end up with something like this - 
+Whey! Network created. To make it a little more user friendly, having a person enter the product types & network name after typing the name of an organisation, you could end up with something like the below. The following example is, once saved, easy to run by right-clicking the file and selecting Run with PowerShell. - 
 ```powershell
 #----Headers
 $APIKey = "Enter your API key here"
@@ -146,6 +146,7 @@ $jsonBody = ConvertTo-Json -InputObject $body
 Invoke-RestMethod -Method Post -Uri "https://api.meraki.com/api/v1/organizations/$($organisationId)/networks" -Headers $Headers -Body $jsonBody
 #----Display the list of networks within that organisation, including the new one
 Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/$($organisationId)/networks" -Headers $Headers
+pause
 ```
 We are using Read-Host to get the user to type in text, -split to split a string into an array, ConvertTo-Json to convert to JSON, .Replace to replace text and .ToLower to convert a string to lower case. Other than that, the script is very similar to the one in the last post. Again, the lines marked with a # are not processed by PowerShell and the ---- are used for ease of visibility. 
 
