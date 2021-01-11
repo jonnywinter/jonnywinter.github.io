@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Meraki API & PowerShell - GET Requests"
+title: "Meraki API & PowerShell - POST Requests"
 author: "Jonny Winter"
 categories: journal
 tags: [API,Meraki,PowerShell]
-image: Meraki-API-PowerShell-Menu.png
+image: Meraki-API-PowerShell-Code.png
 ---
 
-*"The Meraki dashboard itself is a centralized, web browser-based tool used to monitor and configure Meraki devices and services. A dashboard account is what you use to log in to the dashboard in order to manage and configure your organizations, networks, and devices."* - [Cisco Meraki](https://documentation.meraki.com/Getting_Started#:~:text=The%20Meraki%20dashboard%20itself%20is,organizations%2C%20networks%2C%20and%20devices)
+*"Verbs in the API follow the usual REST conventions: GET returns the value of a resource or a list of resources, depending on whether an identifier is specified. POST adds a new resource. PUT updates a resource. DELETE removes a resource."* - [Cisco Meraki](https://documentation.meraki.com/General_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API#API_Requests)
 
 ## Summary
 
