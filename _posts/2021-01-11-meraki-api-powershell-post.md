@@ -113,55 +113,39 @@ notes            :
 ```
 Whey! Network created. To make it a little more user friendly, having a person enter the product types & network name after typing the name of an organisation, you could end up with something like this - 
 ```powershell
-#
 #----Headers
-#
 $APIKey = "Enter your API key here"
 $headers = @{
     "Content-Type" = "application/json"
     "X-Cisco-Meraki-API-Key" = $APIKey
 }
-#
 #----Get the list of organisations
-#
 $organisations = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations" -Headers $Headers
-#
 #----Display the list of organisations
-#
 Out-Host -InputObject $organisations
-#
+
 #----Prompt the user to enter an organisation name and then save the ID of that organisation in a variable
-#
 $organisationName = read-host -Prompt "Please type an organisation name"
 foreach ($organisation in $organisations){
     if ($organisation.name -like $organisationName.ToLower()) {
         $organisationId = $organisation.id
     }
 }
-#
 #----Prompt the user to enter a network name and type(s) and store them as variables
-#
 $networkName = read-host -Prompt "Please type a new network name"
 $networkType = (Read-Host "Please enter the type of network, it can be one or a combination (space separated) of the following - wireless | switch | appliance | systemsManager | camera | cellularGateway").ToLower().Replace("systemsmanager", "systemsManager").Replace("cellulargateway", "cellularGateway") -split " "
-#
 #----Create the body formed of the variables above
-#
 $body = @{
     "name"              = $networkName
     "productTypes"      = $networkType
     }
-#
 #----Convert the above variable to a new, JSON formatted variable
-#
 $jsonBody = ConvertTo-Json -InputObject $body
-#
+
 #----Create the network
-#
-Invoke-RestMethod -Method Post -Uri "https://api.meraki.com/api/v1/organizations/{organizationId}/networks" -Headers $Headers -Body $jsonBody
-#
+Invoke-RestMethod -Method Post -Uri "https://api.meraki.com/api/v1/organizations/$($organisationId)/networks" -Headers $Headers -Body $jsonBody
 #----Display the list of networks within that organisation, including the new one
-#
-Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/{organizationId}/networks" -Headers $Headers
+Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/$($organisationId)/networks" -Headers $Headers
 ```
 We are using Read-Host to get the user to type in text, -split to split a string into an array, ConvertTo-Json to convert to JSON, .Replace to replace text and .ToLower to convert a string to lower case. Other than that, the script is very similar to the one in the last post. Again, the lines marked with a # are not processed by PowerShell and the ---- are used for ease of visibility. 
 
