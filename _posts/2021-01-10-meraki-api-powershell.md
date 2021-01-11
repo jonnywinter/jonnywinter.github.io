@@ -137,6 +137,6 @@ pause
 The for loop is a common thing in scripting. In PowerShell the syntax is ForEach and well documented [here](https://devblogs.microsoft.com/scripting/basics-of-powershell-looping-foreach/) by Dr Scripto. The lines marked with a # are not processed by PowerShell and the ---- are used for ease of visibility. 
 <br>
 <br>
-But yeah, there we go. You can now query all networks on all of your organisations via PowerShell using the Meraki Dashboard API. From here, or using this/similar method, you can query things like MS switches, switch ports, MR Wi-Fi APs, SSIDs, etc., etc. The destination you'll need to add to the base URI for each query are found on [https://developer.cisco.com/meraki/api-v1](https://developer.cisco.com/meraki/api-v1). 
+But yeah, there we go. You can now query all of your networks over all of your organisations via PowerShell using the Meraki Dashboard API. From here, using this/similar method, you can query things like MS switches, switch ports, MR Wi-Fi APs, SSIDs, etc., etc. The destination you'll need to add to the base URI for each query are found on [https://developer.cisco.com/meraki/api-v1](https://developer.cisco.com/meraki/api-v1). 
 
 Happy scripting!
