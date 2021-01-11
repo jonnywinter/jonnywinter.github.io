@@ -64,7 +64,7 @@ You should receive a response something like this -
 <a href="#"><img alt="Meraki API PowerShell Get Organisations" src="/assets/img/Meraki-API-PowerShell-Get-Organisations.png"/></a>
 <br>
 <br>
-What you can see is the organisation name (in the pink rectangle) and the organisation ID (in the green rectangle). Using the organisation ID and the same headers as before (included here for completeness), we can do things like displaying the number of [networks within the organisation](https://developer.cisco.com/meraki/api-v1/#!get-organization-networks) by simply replacing {organizationId} with the organisation ID against the name of the organisation you want to query - 
+What you can see is the organisation name (in the pink rectangle) and the organisation ID (in the green rectangle - unique to the organisation). Using the organisation ID and the same headers as before (included here for completeness), we can do things like displaying the number of [networks within the organisation](https://developer.cisco.com/meraki/api-v1/#!get-organization-networks) by simply replacing {organizationId} with the organisation ID against the name of the organisation you want to query - 
 ```powershell
 $APIKey = "Enter your API key here"
 $headers = @{
@@ -95,6 +95,8 @@ enrollmentString :
 url              : https://nXXX.meraki.com/XXXXXXXXXXXXX/n/_XXXXXXXXX/manage/usage/list
 notes            : 
 ```
+**&lt;NOTE>**: Most objects have an ID, this is aparent with the network ID above. Devices use their serial number instead, but unique IDs are common. **&lt;/NOTE>**.
+
 Great! Only thing is, it looks kind-a iffy. So, let's display it in a table and only display the network ID, organization ID, network name & product types. To do this, put the Invoke-RestMethod request in a variable. Then, call that variable followed by Format-Table cmdlet, like so - 
 ```powershell
 $request = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/{organizationId}/networks" -Headers $Headers
@@ -107,4 +109,28 @@ id                   organizationId name        productTypes
 --                   -------------- ----        ------------                 
 L_Network-ID-1       XXXXXX         Network 1   {camera, switch, wireless}   
 L_Network-ID-2       XXXXXX         Network 2   {appliance, switch, wireless}
+```
+Using a little ingenuity you can make these steps automatic by simply typing in the name of the organisation, finding that name using the if cmdlet and storing the ID relating to it in a variable. You can then place this variable in the Invoke-RestMethod -Uri string and query networks without ever having to type in an ID. The following example is, once saved, easy to run by right-clicking the file and selecting Run with PowerShell.
+```powershell
+#----Headers
+$APIKey = "Enter your API key here"
+$headers = @{
+    "Content-Type" = "application/json"
+    "X-Cisco-Meraki-API-Key" = $APIKey
+}
+#----Get the list of organisations
+$organisations = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations" -Headers $Headers
+#----Display the list of organisations
+Out-Host -InputObject $organisations
+#----Prompt the user to enter an organisation name and then save the ID of that organisation in a variable
+$organisationName = read-host -Prompt "Please type an organisation name"
+foreach ($organisation in $organisations){
+    if ($organisation.name -like $organisationName.ToLower()) {
+        $organisationId = $organisation.id
+    }
+}
+#----Using that organisation ID, display the list of networks in a formatted table
+$networks = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/$($organisationId)/networks" -Headers $Headers
+$networks | Sort-Object Name | Format-Table Name,ID,productTypes
+pause
 ```
