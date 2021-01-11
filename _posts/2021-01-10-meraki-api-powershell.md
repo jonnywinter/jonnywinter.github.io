@@ -59,5 +59,15 @@ Now we've got our API key & headers defined as variables, we can put them to use
 Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations" -Headers $Headers
 ```
 You should receive a response something like this - 
-<img src="{{ site.github.url }}/assets/img/>
+<br>
 <a href="#"><img alt="Meraki API PowerShell Get Organisations" src="/assets/img/Meraki-API-PowerShell-Get-Organisations.png"/></a>
+<br>
+What you can see is the organisation name (in the pink rectangle) and the organisation ID (in the green rectangle). Using the organisation ID and the same headers as before (included here for completeness), we can do things like displaying the number of [networks within the organisation](https://developer.cisco.com/meraki/api-v1/#!get-organization-networks) by simply replacing {organizationId} with the organisation ID against the name of the organisation you want to query - 
+```powershell
+$APIKey = "Enter your API key here"
+$headers = @{
+    "Content-Type" = "application/json"
+    "X-Cisco-Meraki-API-Key" = $APIKey
+}
+Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/{organizationId}/networks" -Headers $Headers
+```
