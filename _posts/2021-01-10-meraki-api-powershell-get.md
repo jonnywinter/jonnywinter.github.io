@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Meraki API & PowerShell"
+title: "Meraki API & PowerShell - GET Requests"
 author: "Jonny Winter"
 categories: journal
 tags: [API,Meraki,PowerShell]
