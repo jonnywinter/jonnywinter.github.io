@@ -72,11 +72,11 @@ Select an organisation in which to create a network, note down the coresponding 
 ```
 ... but let's take it back to basics and send only the required fields - name & product types. For the sake of this network, we'll create a combined network formed of wireless & switching. To do this, we will need to create the JSON body in PowerShell as the variable $body then convert it into the JSON format using the ConvertTo-Json cmdlet, stored as another variable called $jsonBody.
 ```powershell
-    $body = @{
-        "name"              = "New Network"
-        "type"              = "switch","wireless"
-        }
-    $jsonBody = ConvertTo-Json -InputObject $body
+$body = @{
+    "name"              = "New Network"
+    "type"              = "switch","wireless"
+    }
+$jsonBody = ConvertTo-Json -InputObject $body
 ```
 For the request, it's as simple as the Invoke-RestMethod from the last post but with the -body switch followed by the variable with our JSON formatted body. Replace {organizationId} with your organisation ID from a few steps back and you're good to go. Like so - 
 ```powershell
