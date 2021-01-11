@@ -58,3 +58,5 @@ Now we've got our API key & headers defined as variables, we can put them to use
 ```powershell
 Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations" -Headers $Headers
 ```
+You should receive a response something like this - 
+<img src="{{ site.github.url }}/assets/img/Meraki-API-PowerShell-Get-Organisations.png"></a>
