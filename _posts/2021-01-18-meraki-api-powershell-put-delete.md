@@ -7,7 +7,7 @@ tags: [API,Meraki,PowerShell]
 image: Meraki-API-PowerShell-Code.png
 ---
 
-*"The difference between the POST and PUT APIs can be observed in request URIs. POST requests are made on resource collections, whereas PUT requests are made on a single resource."* - [restfulapi.net](https://restfulapi.net/http-methods/#put)
+*"The difference between the POST and PUT APIs can be observed in request URIs. POST requests are made on resource collections, whereas PUT requests are made on a single resource." [...] "As the name applies, DELETE APIs are used to delete resources."* - [restfulapi.net](https://restfulapi.net/http-methods/#put)
 
 ## Summary
 
@@ -21,25 +21,21 @@ To keep it simple, we'll stick to the same requirements as the last post. For ea
 
 ## My Environment
 
-Coffee: [Décaféiné by Carte Noire](https://www.cartenoire.co.uk/en/shop/instant/decafeine-100g.html)
+Coffee: [Decaf, Blend from Union Hand-Roasted Coffee ](https://unionroasted.com/collections/decaf/products/decaf-blend)
 <br>
-Music: [Everything Is A-OK by Violent Soho](https://open.spotify.com/album/4IayAjHP3LfFZZ79jetguT?si=U3pCXCMWRuqXOn3vComiJg)
+Music: [Clutch by Clutch](https://open.spotify.com/album/5snxt6YTFHrBD8ACd0hPJA?si=0p49Rd5kRjujYuMo-fpGhQ)
 <br>
 OS: Windows 10 Pro v20H2 x64.
 
 ## Tip o' the Hat
 
 The Meraki [API docs](https://developer.cisco.com/meraki/api-v1/) on developer.cisco.com
-<br>
-joshand's [response](https://community.meraki.com/t5/Developers-APIs/Powershell-POST-Script-Help/m-p/61542) on community.meraki.com
-<br>
-Wikipedia's [page](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) on time zones.
 
 ## Let's begin
 
 **&lt;NOTE>**: Instead of re-inventing the wheel and explaining things that have been well defined by someone else, I have included links next to some words/technologies/acronyms/protocols that I feel could proove useful to those not yet 'in the know'. **&lt;/NOTE>**
 
-Right. Let's get PowerShell ISE open and create the beginings of a script. In the below text - which is largely using the script created in the last post - we have defined a few variables and using Invoke-RestMethod we can see the list of organisations and their IDs in a response -
+Okie dokie. Let's get PowerShell ISE open and create the beginings of a script. In order to perform the PUT & DELETE requests, to modify and remove a resource on a server respectively, we are going to need two things - the ID of the organisation that the network belongs to, as well as the ID of that network. In the below text - which is largely formed of the script from the last post, and the one before that - we have defined a few variables and using Invoke-RestMethod we can see a list of organisations and their IDs in a response, then taking an ID we can perform a second request to get a list of networks and their IDs - 
 ```powershell
 $APIKey = "Enter your API key here"
 $headers = @{
@@ -56,6 +52,18 @@ id                 name                   url
 80009             Org 1              https://n3.meraki.com/o/4xxxxxxd/manage/organization/overview  
 80019             Org 2              https://n1.meraki.com/o/Sxxxxxb/manage/organization/overview  
 80005             Org 3              https://n1.meraki.com/o/Fxxxxxd/manage/organization/overview  
+###
+#Back to the script
+###
+$networks = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/80009/networks" -Headers $Headers #80009 is an example
+Out-Host -InputObject $networks
+###
+#Example output below (not script text)
+###
+id                   name          productTypes      
+--                   ----          ------------      
+L_1234567891         New Network 1 {switch, wireless}
+N_1234567892         New Network 2 {switch}          
 ```
 Select an organisation in which to create a network, note down the coresponding ID and check out the instructions written by Meraki [here](https://developer.cisco.com/meraki/api-v1/#!create-organization-network). The request is saying to send a POST request to /organizations/{organizationId}/networks - the same destination we previously sent a GET request to to retrieve the list of networks. A POST request is used to create data on a specific resource, like a web server (think a Facebook post). The instructions state that we will need to supply all data for the new network in JSON format - a common theme with Meraki. There is a sample body on that link, but for ease I've included it below - 
 ```json
