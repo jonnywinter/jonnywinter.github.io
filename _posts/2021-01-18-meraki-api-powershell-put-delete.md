@@ -4,14 +4,14 @@ title: "Meraki API & PowerShell - PUT & DELETE Requests"
 author: "Jonny Winter"
 categories: journal
 tags: [API,Meraki,PowerShell]
-image: Meraki-API-PowerShell-Code.png
+image: Meraki-API-PowerShell-Code-2.png
 ---
 
 *"The difference between the POST and PUT APIs can be observed in request URIs. POST requests are made on resource collections, whereas PUT requests are made on a single resource." [...] "As the name applies, DELETE APIs are used to delete resources."* - [restfulapi.net](https://restfulapi.net/http-methods/#put)
 
 ## Summary
 
-In my  we walked through the steps - and a few more - on how to perform a POST request to the Meraki Dashboard API to create a new network in PowerShell. In this post, we're going to perform both PUT & DELETE requests to update and then delete a resource - a network in our case.  As opposed to creating the script with the user inputs, as with my last two posts, we're going to skip that bit - but with the information from those two posts you should be able to add something in pretty simply.
+In my [last post]({{ site.github.url }}{% post_url 2021-01-11-meraki-api-powershell-post %}) we walked through the steps - and a few more - on how to perform a POST request to the Meraki Dashboard API to create a new network in PowerShell. In this post, we're going to perform both PUT & DELETE requests to update and then delete a resource - a network in our case.  
 
 ## Requirements
 
@@ -35,7 +35,7 @@ The Meraki [API docs](https://developer.cisco.com/meraki/api-v1/) on developer.c
 
 **&lt;NOTE>**: Instead of re-inventing the wheel and explaining things that have been well defined by someone else, I have included links next to some words/technologies/acronyms/protocols that I feel could proove useful to those not yet 'in the know'. **&lt;/NOTE>**
 
-Okie dokie. Let's get PowerShell ISE open and create the beginings of a script. In order to perform the PUT & DELETE requests, to modify and remove a resource on a server respectively, we are going to need two things - the ID of the organisation that the network belongs to, as well as the ID of that network. In the below text - which is largely formed of the script from the last post, and the one before that - we have defined a few variables and using Invoke-RestMethod we can see a list of organisations and their IDs in a response, then taking an ID we can perform a second request to get a list of networks and their IDs - 
+Okie dokie. Let's get PowerShell ISE open and create the beginings of a script. In order to perform the PUT & DELETE requests, to modify and remove a resource on a server respectively, we are going to need two things - the ID of the organisation that the network belongs to, as well as the ID of that network. In the below text - which is largely formed of the script from the last post (and the one before that) - we have defined a few variables and using Invoke-RestMethod we can see a list of organisations and their IDs in a response, then taking an ID we can perform a second request to get a list of networks and their IDs replace {organizationId} with a valid organisation ID- 
 ```powershell
 $APIKey = "Enter your API key here"
 $headers = @{
@@ -55,7 +55,7 @@ id                 name                   url
 ###
 #Back to the script
 ###
-$networks = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/80009/networks" -Headers $Headers #80009 is an example
+$networks = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/{organizationId}/networks" -Headers $Headers
 Out-Host -InputObject $networks
 ###
 #Example output below (not script text)
