@@ -57,7 +57,7 @@ id                 name                   url
 80019             Org 2              https://n1.meraki.com/o/Sxxxxxb/manage/organization/overview  
 80005             Org 3              https://n1.meraki.com/o/Fxxxxxd/manage/organization/overview  
 ```
-Select an organisation in which to create a network, note down the coresponding ID and check out the instructions written by Meraki [here](https://developer.cisco.com/meraki/api-v1/#!create-organization-network). The request is saying to send a POST request to /organizations/{organizationId}/networks - the same destination we previously sent a GET request to to retrieve the list of networks. As it's a POST request we will need to supply a body in JSON format. There is a sample body on that link, but for ease I've included it below - 
+Select an organisation in which to create a network, note down the coresponding ID and check out the instructions written by Meraki [here](https://developer.cisco.com/meraki/api-v1/#!create-organization-network). The request is saying to send a POST request to /organizations/{organizationId}/networks - the same destination we previously sent a GET request to to retrieve the list of networks. A POST request is used to create data on a specific resource, like a web server (think a Facebook post). The instructions state that we will need to supply all data for the new network in JSON format - a common theme with Meraki. There is a sample body on that link, but for ease I've included it below - 
 ```json
 {
     "name": "Long Island Office",
@@ -78,7 +78,7 @@ $body = @{
     }
 $jsonBody = ConvertTo-Json -InputObject $body
 ```
-For the request, it's as simple as the Invoke-RestMethod from the last post but with the -body switch followed by the variable with our JSON formatted body. Replace {organizationId} with your organisation ID from a few steps back and you're good to go. Like so - 
+For the request, it's as simple as the Invoke-RestMethod from the last post but with the -body switch followed by the variable with our JSON formatted body, swapping Get for Post against the -method switch and replacing {organizationId} with your organisation ID from a few steps back and you're good to go. Like so - 
 ```powershell
 Invoke-RestMethod -Method Post -Uri "https://api.meraki.com/api/v1/organizations/{organizationId}/networks" -Headers $Headers -Body $jsonBody
 ```
@@ -111,7 +111,7 @@ enrollmentString :
 url              : https://n1.meraki.com/New-Network-swit/n/xxxxxxxx/manage/usage/list
 notes            :
 ```
-Whey! Network created. To make it a little more user friendly, having a person enter the product types & network name after typing the name of an organisation, you could end up with something like the below. The following example is, once saved, easy to run by right-clicking the file and selecting Run with PowerShell. - 
+Whey! Network created. To make it a little more user friendly, having a person enter the product types & network name after typing the name of an organisation, you could end up with something like the below. The following example is, once saved, easy to run by right-clicking the file and selecting Run with PowerShell - 
 ```powershell
 #----Headers
 $APIKey = "Enter your API key here"
