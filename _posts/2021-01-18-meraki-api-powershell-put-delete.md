@@ -11,7 +11,7 @@ image: Meraki-API-PowerShell-Code.png
 
 ## Summary
 
-In my [last post]({{ site.github.url }}{% post_url 2021-01-10-meraki-api-powershell-post %}) we walked through the steps - and a few more - on how to perform a POST request to the Meraki Dashboard API to create a new network in PowerShell. In this post, we're going to perform both PUT & DELETE requests to update and then delete a resource - a network in our case.  As opposed to creating the script with the user inputs, as with my last two posts, we're going to skip that bit - but with the information from those two posts you should be able to add something in pretty simply.
+In my  we walked through the steps - and a few more - on how to perform a POST request to the Meraki Dashboard API to create a new network in PowerShell. In this post, we're going to perform both PUT & DELETE requests to update and then delete a resource - a network in our case.  As opposed to creating the script with the user inputs, as with my last two posts, we're going to skip that bit - but with the information from those two posts you should be able to add something in pretty simply.
 
 ## Requirements
 
