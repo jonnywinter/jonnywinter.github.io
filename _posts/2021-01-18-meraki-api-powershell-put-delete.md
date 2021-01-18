@@ -73,7 +73,7 @@ Select a network that you want to rename/delete, note down the coresponding ID a
     "tags": [ "tag1", "tag2" ]
 }
 ```
-... but in this instance, we're simply going to rename the network - meaning our JSON body will only need one KVP (Key-value Pair); name. To do this, we will need to create the JSON body in PowerShell as the variable $body then convert it into the JSON format using the ConvertTo-Json cmdlet, stored as another variable called $jsonBody.
+... but in this instance, we're simply going to rename the network - meaning our JSON body will only need one KVP (Key-value Pair); name. To do this, we will need to create the JSON body in PowerShell as the variable body then convert it into the JSON format using the ConvertTo-Json cmdlet, stored as another variable called jsonBody.
 ```powershell
 $body = @{
     "name"              = "Renamed Network"
