@@ -11,11 +11,11 @@ I’m Jonny, a tech-head with a keen eye for interesting technologies - specific
 <p style="text-align: center;">
     <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CCENTs" src="/assets/img/CCENT.png" width="100" /></a>
     <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CCNA Routing & Switching" src="/assets/img/CCNA.png" width="100" /></a>
-    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CMNA" src="/assets/img/ECMS1.png" width="100" /></a>
-    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CMNA" src="/assets/img/ECMS2.png" width="100" /></a>
     <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CMNA" src="/assets/img/CMNA.png" width="100" /></a>
     <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="Understanding Cisco Networking Devices" src="/assets/img/Level-200.png" width="100" /></a>
     <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="Azure Fundamentals" src="/assets/img/Azure-Fundamentals.png" width="100" /></a>
+    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CMNA" src="/assets/img/ECMS1.png" width="100" /></a>
+    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CMNA" src="/assets/img/ECMS2.png" width="100" /></a>
 </p>
 
 ### About this blog
