@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Meraki API & PowerShell - GET Requests"
+title: "Meraki API & PowerShell - Basics & GET Requests"
 author: "Jonny Winter"
 categories: journal
 tags: [API,Meraki,PowerShell]
@@ -11,11 +11,11 @@ image: Meraki-API-PowerShell-Menu.png
 
 ## Summary
 
-Using the Meraki Dashboard REST API we can use CRUD (**C**reate, **R**ead, **U**pdate & **D**elete) to interact with the server in a programatic way, as opposed to using the web UI. In this post I'm going to show the steps that are needed in order to perform API calls to the Meraki dashboard and display the JSON responses in PowerShell. We'll then go a bit further and create a script that can be double clicked to present you the list of networks against an organisation, using a user input. 
+Using the Meraki Dashboard REST API we can use CRUD (**C**reate, **R**ead, **U**pdate & **D**elete) to interact with the Meraki Dashboard and, in turn, the devices in a programatic way - an alternate method to simply using the web UI. In this post I'm going to show the steps that are required to perform API requests to the Meraki dashboard and display the responses in PowerShell. We'll then go a bit further and create a script that can be double clicked to present you the list of networks against an organisation with user input. 
 
 ## Requirements
 
-To perform the majority of what we're going to do below there aren't many requirements other than having access to PowerShell, a [Meraki Dashboard Account](https://documentation.meraki.com/Getting_Started) and [generating your API key](https://documentation.meraki.com/General_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API). Simple stuff. Once you're at that point, read on. For reference, I'll be using [Windows PowerShell ISE](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/ise/introducing-the-windows-powershell-ise?view=powershell-7.1) as it's built into Windows 10 and easy to use, but you could use another IDE - like [VScode](https://code.visualstudio.com/). 
+To perform the majority of what we're going to do below there aren't many requirements other than having access to PowerShell, a [Meraki Dashboard Account](https://documentation.meraki.com/Getting_Started) and [generating your API key](https://documentation.meraki.com/General_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API). Simple stuff. Once you're at that point, read on. For reference, I'll be using [Windows PowerShell ISE](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/ise/introducing-the-windows-powershell-ise?view=powershell-5.1) as it's built into Windows 10 and easy to use, but you could use another IDE - like [VScode](https://code.visualstudio.com/). 
 
 ## My Environment
 
@@ -37,9 +37,9 @@ relxteb's Meraki [GitHub repository](https://github.com/relaxteb/Meraki)
 
 **&lt;NOTE>**: Instead of re-inventing the wheel and explaining things that have been well defined by someone else, I have included links next to some words/technologies/acronyms/protocols that I feel could proove useful to those not yet 'in the know'. **&lt;/NOTE>**
 
-Now you've generated your API key (and created a dashboard account if you do not already have one to use), get PowerShell ISE open and we can go about calling the Dashboard [REST API](https://www.youtube.com/watch?v=7YcW25PHnAA&t=1s&ab_channel=WebConcepts). To get started, we are going to perform a [GET request](https://www.youtube.com/watch?v=guYMSP7JVTA&ab_channel=Telusko) to fetch all of the organisations in which your dashboard administrator account has access to - if you have access to the [MSP Portal](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Using_the_MSP_Portal_to_Manage_Multiple_Organizations) you will return multiple organisations, if not then you will only return one.
+Now you've generated your API key and created a dashboard account (if you do not already have these), open PowerShell ISE so we can go about calling the Dashboard [REST API](https://www.youtube.com/watch?v=7YcW25PHnAA&t=1s&ab_channel=WebConcepts). To get started, we are going to perform a [GET request](https://www.youtube.com/watch?v=guYMSP7JVTA&ab_channel=Telusko) to fetch all of the organisations in which your dashboard administrator account has access to - if you have access to the [MSP Portal](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Using_the_MSP_Portal_to_Manage_Multiple_Organizations) you will return multiple organisations, if not then you will only return one. A GET request is used to retrieve data from a specific resource, like a web server.
 
-In PowerShell, we're going to be using the [Invoke-RestMethod](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-restmethod?view=powershell-7.1) cmdlet to interact with the Meraki Dashboard and storing the returned values in a [variable](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-7.1). Once these variables have a value we will then display the values in a nicely formatted table.
+In PowerShell, we're going to be using the [Invoke-RestMethod](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-restmethod?view=powershell-7.1) cmdlet to interact with the Meraki Dashboard REST API and storing the returned values in a [variable](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-5.1). Once these variables have a value we will then display the values in a nicely formatted table.
 
 Firstly, create a new script (File > Save) and type the following text to store your API key in the $APIKey variable.
 ```powershell
@@ -47,14 +47,14 @@ $APIKey = "Enter your API key here"
 ```
 **&lt;NOTE>**: Storing an API key, as with any credentials, in clear text is a security risk - your API key is effectively your username & password. If a malicious party were to obtain this key, they would be able to authenticate as you. There are many well documented ways on how to secure this in a production environment, i.e. [here](https://www.freecodecamp.org/news/how-to-securely-store-api-keys-4ff3ea19ebda/). This is a purely educational project, do this at your own risk. **&lt;/NOTE>**.
 
-When we communicate with the Meraki Dashboard API, we need to provide a header with two values - your API key & the content type. Due to the way that Meraki API works, we need to provide authentication with each request - hense the API key. The Content-Type header is provided to let the server know that any data sent to the server is provided in JSON (**J**ava**S**cript **O**bject **N**otation). When we provide these, we'll use a variable called $headers - the @ is used when we put data on multiple lines. 
+When we communicate with the Meraki Dashboard API, the server requires a few headers are passed along with the URI each request; X-Cisco-Meraki-API-Key, your API key, & Content-Type. The Content-Type header is provided to let the server know that any data sent to the server is provided in JSON (**J**ava**S**cript **O**bject **N**otation). In PowerShell, we'll include both of these in a single variable called $headers - the @ is used when we put data on multiple lines. 
 ```powershell
 $headers = @{
     "X-Cisco-Meraki-API-Key" = $APIKey
     "Content-Type" = "application/json"
 }
 ```
-Now we've got our API key & headers defined as variables, we can put them to use in the GET request using Invoke-RestMethod. The switches for the cmdlet are self explanitory - -Uri is the URI, -Headers is the headers & -Method is the CRUD method. Easy mode. The URI we are using is obtained from the [Meraki Dashboard API docs](https://developer.cisco.com/meraki/api-v1/#!get-organizations), all we need to do is prepend each request with https://api.meraki.com/api/v1.
+Now we've got our API key & headers defined as variables, we can put them to use in a GET request using Invoke-RestMethod. The switches for the cmdlet are self explanitory - -Uri is the URI, -Headers is the headers & -Method is the CRUD method. Easy mode. The URI we are using is obtained from the [Meraki Dashboard API docs](https://developer.cisco.com/meraki/api-v1/#!get-organizations), all we need to do is prepend each request with https://api.meraki.com/api/v1.
 ```powershell
 Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations" -Headers $Headers
 ```
