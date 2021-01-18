@@ -11,7 +11,7 @@ image: Meraki-API-PowerShell-Code.png
 
 ## Summary
 
-In my [last post]({{ site.github.url }}{% post_url 2021-01-10-meraki-api-powershell-part-1 %}) we walked through the nesecary steps - and a few more - on how to perform a GET request to the Meraki Dashboard API and display data in a table in PowerShell. In this post, we're going to follow on from there and perform a POST request to create a resource - a network in our case. We'll then go a bit further and create a script that can be run, allowing you to create networks on demand across any organisation you have access to.
+In my [last post]({{ site.github.url }}{% post_url 2021-01-10-meraki-api-powershell-part1 %}) we walked through the nesecary steps - and a few more - on how to perform a GET request to the Meraki Dashboard API and display data in a table in PowerShell. In this post, we're going to follow on from there and perform a POST request to create a resource - a network in our case. We'll then go a bit further and create a script that can be run, allowing you to create networks on demand across any organisation you have access to.
 
 ## Requirements
 
