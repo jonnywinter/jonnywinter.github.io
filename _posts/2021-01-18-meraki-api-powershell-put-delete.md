@@ -65,30 +65,24 @@ id                   name          productTypes
 L_1234567891         New Network 1 {switch, wireless}
 N_1234567892         New Network 2 {switch}          
 ```
-Select an organisation in which to create a network, note down the coresponding ID and check out the instructions written by Meraki [here](https://developer.cisco.com/meraki/api-v1/#!create-organization-network). The request is saying to send a POST request to /organizations/{organizationId}/networks - the same destination we previously sent a GET request to to retrieve the list of networks. A POST request is used to create data on a specific resource, like a web server (think a Facebook post). The instructions state that we will need to supply all data for the new network in JSON format - a common theme with Meraki. There is a sample body on that link, but for ease I've included it below - 
+Select a network that you want to rename/delete, note down the coresponding ID and check out the instructions written by Meraki for [PUT](https://developer.cisco.com/meraki/api-v1/#!update-network) & [DELETE](https://developer.cisco.com/meraki/api-v1/#!delete-network). Lets tackle the PUT first, which is the request to update a resource. The documentation instructs us to send a PUT request to /networks/{networkId}. As with the POST request, we need to supply all data that we will be changing about the network in JSON format - a common theme with Meraki. There is a sample body on that link, but for ease I've included it below - 
 ```json
 {
     "name": "Long Island Office",
     "timeZone": "America/Los_Angeles",
-    "tags": [ "tag1", "tag2" ],
-    "productTypes": [
-        "appliance",
-        "switch",
-        "camera"
-    ]
+    "tags": [ "tag1", "tag2" ]
 }
 ```
-... but let's take it back to basics and send only the required fields - name & product types. For the sake of this network, we'll create a combined network formed of wireless & switching. To do this, we will need to create the JSON body in PowerShell as the variable $body then convert it into the JSON format using the ConvertTo-Json cmdlet, stored as another variable called $jsonBody.
+... but in this instance, we're simply going to rename the network - meaning our JSON body will only need one KVP (Key-value Pair); name. To do this, we will need to create the JSON body in PowerShell as the variable $body then convert it into the JSON format using the ConvertTo-Json cmdlet, stored as another variable called $jsonBody.
 ```powershell
 $body = @{
-    "name"              = "New Network"
-    "type"              = "switch","wireless"
+    "name"              = "Renamed Network"
     }
 $jsonBody = ConvertTo-Json -InputObject $body
 ```
-For the request, it's as simple as the Invoke-RestMethod from the last post but with the -body switch followed by the variable with our JSON formatted body, swapping Get for Post against the -method switch and replacing {organizationId} with your organisation ID from a few steps back and you're good to go. Like so - 
+For the request, we need to specify Put after -Method, supply the JSON formatted body using the -body switch followed by the variable with our JSON formatted body and replace {networkId} with your network ID from a few steps back and you're good to go. Like so - 
 ```powershell
-Invoke-RestMethod -Method Post -Uri "https://api.meraki.com/api/v1/organizations/{organizationId}/networks" -Headers $Headers -Body $jsonBody
+Invoke-RestMethod -Method Put -Uri "https://api.meraki.com/api/v1/networks/{networkId}" -Headers $Headers -Body $jsonBody
 ```
 Put together, with the response included, it'll look something like this - 
 ```powershell
@@ -99,65 +93,69 @@ $headers = @{
 }
 
 $body = @{
-    "name"              = "New Network"
-    "productTypes"      = "switch","wireless"
+    "name"              = "Renamed Network"
     }
 $jsonBody = ConvertTo-Json -InputObject $body
 
-Invoke-RestMethod -Method Post -Uri "https://api.meraki.com/api/v1/organizations/{organizationId}/networks" -Headers $Headers -Body $jsonBody
+Invoke-RestMethod -Method Put -Uri "https://api.meraki.com/api/v1/networks/{networkId}" -Headers $Headers -Body $jsonBody
 Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/{organizationId}/networks" -Headers $Headers
 ###
 #Example output below (not code text)
 ###
 id               : L_Some-Network-ID
 organizationId   : 1_Some-Organisation-ID
-name             : New Network
+name             : Renamed Network
 productTypes     : {switch, wireless}
 timeZone         : America/Los_Angeles
 tags             : {}
 enrollmentString : 
-url              : https://n1.meraki.com/New-Network-swit/n/xxxxxxxx/manage/usage/list
+url              : https://n1.meraki.com/Renamed-Network-swit/n/xxxxxxxx/manage/usage/list
 notes            :
 ```
-Whey! Network created. To make it a little more user friendly, having a person enter the product types & network name after typing the name of an organisation, you could end up with something like the below. The following example is, once saved, easy to run by right-clicking the file and selecting Run with PowerShell - 
+Mission accomplished. Very similar to the POST, just instead of sending the request to the organisation (collection) we send it directly to the network (resource) - as seen in the URI. In the same light, the DELETE request follows the exact same idea - send the request to the resource - although we don't have to supply a JSON formatted body. Simply change -Method Put to -Method Delete, delete the -body $jsonBody and you'll be good-to-go. Like so - 
 ```powershell
-#----Headers
+Invoke-RestMethod -Method Delete -Uri "https://api.meraki.com/api/v1/networks/{networkId}" -Headers $Headers
+```
+To make it a little more user friendly, having a person type the name of the network after typing the name of the organisation, you could end up with something like the below. The following example is, once saved, easy to run by right-clicking the file and selecting Run with PowerShell - 
+```powershell
 $APIKey = "Enter your API key here"
 $headers = @{
     "Content-Type" = "application/json"
     "X-Cisco-Meraki-API-Key" = $APIKey
 }
-#----Get the list of organisations
+Write-Host "This script allows us to rename & delete networks within an organisation."
+Write-Host ""
+
 $organisations = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations" -Headers $Headers
-#----Display the list of organisations
 Out-Host -InputObject $organisations
 
-#----Prompt the user to enter an organisation name and then save the ID of that organisation in a variable
 $organisationName = read-host -Prompt "Please type an organisation name"
 foreach ($organisation in $organisations){
     if ($organisation.name -like $organisationName.ToLower()) {
         $organisationId = $organisation.id
     }
 }
-#----Prompt the user to enter a network name and type(s) and store them as variables
-$networkName = read-host -Prompt "Please type a new network name"
-$networkType = (Read-Host "Please enter the type of network, it can be one or a combination (space separated) of the following - wireless | switch | appliance | systemsManager | camera | cellularGateway").ToLower().Replace("systemsmanager", "systemsManager").Replace("cellulargateway", "cellularGateway") -split " "
-#----Create the body formed of the variables above
-$body = @{
-    "name"              = $networkName
-    "productTypes"      = $networkType
-    }
-#----Convert the above variable to a new, JSON formatted variable
-$jsonBody = ConvertTo-Json -InputObject $body
 
-#----Create the network
-Invoke-RestMethod -Method Post -Uri "https://api.meraki.com/api/v1/organizations/$($organisationId)/networks" -Headers $Headers -Body $jsonBody
-#----Display the list of networks within that organisation, including the new one
-Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/$($organisationId)/networks" -Headers $Headers
+$question1 = Read-Host -Prompt "Would you like to delete a network (y/n)"
+if ($question1.ToLower() -eq "y"){
+    $networks = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/$($organisationId)/networks" -Headers $Headers
+    $networks | Format-Table id,name,productTypes
+
+    $networkName = read-host -Prompt "Please type a network name"
+    foreach ($network in $networks){
+        if ($network.name -like $networkName.ToLower()) {
+            $networkId = $network.id
+        }
+    }
+    Invoke-RestMethod -Method Delete -Uri "https://api.meraki.com/api/v1/networks/$($networkId)" -Headers $Headers
+    $networks = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/$($organisationId)/networks" -Headers $Headers
+    $networks | Format-Table id,name,productTypes
+}
+
 pause
 ```
-We are using Read-Host to get the user to type in text, -split to split a string into an array, ConvertTo-Json to convert to JSON, .Replace to replace text and .ToLower to convert a string to lower case. Other than that, the script is very similar to the one in the last post. Again, the lines marked with a # are not processed by PowerShell and the ---- are used for ease of visibility. 
+We are using Read-Host to get the user to type in text, | FormatTable to display certain data in a table, .ToLower() to convert a string to lower case, an if (a -eq b){do something} statement for logic and ConvertTo-Json to convert to JSON. Other than that, it's a very simple scipt - similar to the one in the last post. 
 
-There we go. You can now script the creation of networks. There's not much different here to claiming devices, adding admin accounts, adding SSIDs, adding VLANs, etc., etc. The destination you'll need to add to the base URI for each query are found on [https://developer.cisco.com/meraki/api-v1](https://developer.cisco.com/meraki/api-v1). 
+Using the PUT and DELETE methods explained above, you can start to build scripts to rename & delete things like SSIDs, VLANs, etc., etc. The destination you'll need to add to the base URI for each query are found on [https://developer.cisco.com/meraki/api-v1](https://developer.cisco.com/meraki/api-v1). 
 
 Happy scripting!
