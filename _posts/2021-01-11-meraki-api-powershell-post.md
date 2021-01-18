@@ -11,13 +11,13 @@ image: Meraki-API-PowerShell-Code.png
 
 ## Summary
 
-In my [last post]({{ site.github.url }}{% post_url 2021-01-10-meraki-api-powershell-get %}) we walked through the nesecary steps - and a few more - on how to perform a GET request to the Meraki Dashboard API and display data in a table in PowerShell. In this post, we're going to follow on from there and perform a POST request to create a resource - a network in our case. We'll then go a bit further and create a script that can be run, allowing you to create networks on demand across any organisation you have access to.
+In my [last post]({{ site.github.url }}{% post_url 2021-01-10-meraki-api-powershell-basics-get %}) we walked through the nesecary steps - and a few more - on how to perform a GET request to the Meraki Dashboard API and display data in a table in PowerShell. In this post, we're going to follow on from there and perform a POST request to create a resource - a network in our case. We'll then go a bit further and create a script that can be run, allowing you to create networks on demand across any organisation you have access to.
 
 ## Requirements
 
 To keep it simple, we'll stick to the same requirements as the last post. For ease, here are those requirements again - 
 <br>
-*"To perform the majority of what we're going to do below there aren't many requirements other than having access to PowerShell, a [Meraki Dashboard Account](https://documentation.meraki.com/Getting_Started) and [generating your API key](https://documentation.meraki.com/General_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API). Simple stuff. Once you're at that point, read on. For reference, I'll be using [Windows PowerShell ISE](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/ise/introducing-the-windows-powershell-ise?view=powershell-7.1) as it's built into Windows 10 and easy to use, but you could use another IDE - like [VScode](https://code.visualstudio.com/)."*
+*"To perform the majority of what we're going to do below there aren't many requirements other than having access to PowerShell, a [Meraki Dashboard Account](https://documentation.meraki.com/Getting_Started) and [generating your API key](https://documentation.meraki.com/General_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API). Simple stuff. Once you're at that point, read on. For reference, I'll be using [Windows PowerShell ISE](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/ise/introducing-the-windows-powershell-ise?view=powershell-5.1) as it's built into Windows 10 and easy to use, but you could use another IDE - like [VScode](https://code.visualstudio.com/)."*
 
 ## My Environment
 
