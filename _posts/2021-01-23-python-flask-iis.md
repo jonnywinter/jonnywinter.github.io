@@ -25,8 +25,6 @@ Other than the free software, you will need either a copy of Windows Server or i
 <br>
 <br>
 <a href="#"><img alt="Installing IIS on Windows Desktop OS" src="/assets/img/IIS-Windows-Desktop.png"/></a>
-<br>
-<br>
 
 ## My Environment
 
