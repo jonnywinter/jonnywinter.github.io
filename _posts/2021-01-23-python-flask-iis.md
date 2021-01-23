@@ -15,7 +15,13 @@ Using the Meraki Dashboard REST API we can use CRUD (**C**reate, **R**ead, **U**
 
 ## Requirements
 
-To perform the majority of what we're going to do below there aren't many requirements other than having access to PowerShell, a [Meraki Dashboard Account](https://documentation.meraki.com/Getting_Started) and [generating your API key](https://documentation.meraki.com/General_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API). Simple stuff. Once you're at that point, read on. For reference, I'll be using [Windows PowerShell ISE](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/ise/introducing-the-windows-powershell-ise?view=powershell-5.1) as it's built into Windows 10 and easy to use, but you could use another IDE - like [VScode](https://code.visualstudio.com/). 
+Other than the free software, you will need either a copy of Windows Server or install the IIS features in Windows (10) Pro. If you are to perform the bits on a Windows Desktop OS, then you'll be able to install IIS by -
+<br>
+#1 - Open up the Programs and Features control panel applet (or use run dialog + appwiz.cpl).
+<br>
+#2 - Click Turn Windows features on or off.
+<br>
+#3 - Locate Internet Information Services
 
 ## My Environment
 
