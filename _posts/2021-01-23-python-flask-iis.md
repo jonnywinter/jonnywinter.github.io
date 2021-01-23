@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Deploying Python Flask app in IIS"
+title: "Deploying a Python Flask app in IIS"
 author: "Jonny Winter"
 categories: journal
 tags: [IIS,Python,Flask]
@@ -19,19 +19,30 @@ To perform the majority of what we're going to do below there aren't many requir
 
 ## My Environment
 
-Coffee: [House Roast, Original Blend from Union Hand-Roasted Coffee](https://unionroasted.com/collections/our-favourite-coffees/products/house-roast-original-blend)
+Coffee: [Timana, Colombia from Union Hand-Roasted Coffee](https://unionroasted.com/products/timana-colombia)
 <br>
-Music: [To The 5 Boroughs by Beastie Boys](https://open.spotify.com/album/1yw6pIVYjbf9WoLiPkIPJv?si=hFBr1chPQ9GnD48pULQMaQ)
+Music: [Hello Nasty by Beastie Boys](https://open.spotify.com/album/2cT6Yb6EWcBhyqGd7DXeL2?si=EDW8IUMWR7mOpHTpCBk23g)
 <br>
 OS: Windows 10 Pro v20H2 x64.
+<br>
+Python: [Python 3.8.0](https://www.python.org/downloads/release/python-380/)
+<br>
+Packages: [Flask v1.1.2](https://pypi.org/project/Flask/)
+<br>
+IDE: [Visual Studio Code v1.52.1](https://code.visualstudio.com/)
 
 ## Tip o' the Hat
 
-The Meraki [API docs](https://developer.cisco.com/meraki/api-v1/) on developer.cisco.com
+The [Flask documentation](https://flask.palletsprojects.com/en/1.1.x/) by Pallets
 <br>
-NetworkEngineer7's [video](https://www.youtube.com/watch?v=MTOyge6ZZmg&ab_channel=NetworkEngineer7) on YouTube
+Bilal Bayasut's [post](https://medium.com/@bilalbayasut/deploying-python-web-app-flask-in-windows-server-iis-using-fastcgi-6c1873ae0ad8)  on Medium
 <br>
-relxteb's Meraki [GitHub repository](https://github.com/relaxteb/Meraki)
+The [WFastCGI documentation](https://pypi.org/project/wfastcgi/) by Microsoft
+<br>
+This [Stack Overflow post answere](https://stackoverflow.com/questions/50592847/web-platform-installer-python-installer-downloaded-file-failed-signature-veri) by William Sousa
+<br>
+KiranH's [post and document](https://techcommunity.microsoft.com/t5/iis-support-blog/how-to-run-python-application-on-iis-that-uses-flask-framework/ba-p/812898) in the Microsoft Tech forum
+Michael Fore's [video](https://www.youtube.com/watch?v=En9vo7Ognm0&t) on YouTube (and [GitHub](https://github.com/Michael-fore))
 
 ## Let's begin
 
