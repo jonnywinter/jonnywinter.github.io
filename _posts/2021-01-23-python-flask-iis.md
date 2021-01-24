@@ -34,10 +34,6 @@ Music: [Hello Nasty by Beastie Boys](https://open.spotify.com/album/2cT6Yb6EWcBh
 <br>
 OS: Windows Server 2012 Datacenter (but also tested on Windows 10 Pro v20H2 x64). 
 <br>
-Python: 
-<br>
-Packages: [Flask v1.1.2](https://pypi.org/project/Flask/)
-<br>
 IDE: [Visual Studio Code v1.52.1](https://code.visualstudio.com/)
 
 ## Tip o' the Hat
@@ -79,9 +75,9 @@ Install-WindowsFeature -Name Web-Server -IncludeAllSubFeature
 12. To install the selected roles, role services, and features, click **Install**.
 13. To complete the installation, click **Close**.
 
-Easily done. Next, let's get [Python](https://www.python.org/) installed. Download the [Python 3.9.0](https://www.python.org/downloads/release/python-390/) installer and open it up. In the installation process choose **Customize installation** and in the **Advanced Options** window that pops up, tick the box for **Install for all users** is selected so that the install location changes to **C:\Program Files\Python39**.
+Easily done. Next, let's get [Python](https://www.python.org/) installed. Download the [Python 3.9.0](https://www.python.org/downloads/release/python-390/) installer and open it up. In the installation process choose **Customize installation** and in the **Advanced Options** window that pops up, tick the box for **Install for all users** is selected so that the install location changes to **C:\Program Files\Python39**. 
 
-Because [Flask](https://flask.palletsprojects.com/) is pre-packaged with Python, we don't have to run any pip commands for it, but it is worth making sure everything is up-to-date. To do this, open up PowerShell and type - 
+When Python installs, it installs pip - the Python package manager. But, because [Flask](https://flask.palletsprojects.com/) is pre-packaged with Python, we don't have to run any pip commands for it. However, it is worth making sure everything is up-to-date. To do this, open up PowerShell and type - 
 ```powershell
 pip install pip --upgrade
 pip install Flask --upgrade
@@ -125,7 +121,7 @@ At this point, we really need to open up IIS and make a few changes. I've docume
 19. Add in two new members, one with the **Name** of **PYTHONPATH** with the **Value** %SYSTEMDRIVE%\inetpub\wwwroot\app\, the other with the **Name** of **WSGI_HANDLER** and the **Value** app.app. Here, replace the first app of that with the name of the python script file you created earlier - i.e. I created app.py, so this is app.app. If you created yours as coolscript.py then this would be coolscript.app.
 20. Click **OK** in the **EnvironmentalVariables Collection Editor** window and **OK** in the **Edit FastCGI Application** window behind it. 
 
-With the IIS 'stuff' complete. We're about ready to open up VScode, write some Python code & serve a web page!
+With the IIS 'stuff' complete. We're about ready to open up VScode, write some Python code & serve a web page! 
 
 ```python
 from flask import Flask
