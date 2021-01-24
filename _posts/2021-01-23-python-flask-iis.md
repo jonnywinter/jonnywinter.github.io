@@ -148,7 +148,7 @@ Decoding the above Python code, we have a few things -
 - *if _name_ == "_main_":* & *app.run()* - these lines tell the next line to function only if it's being called by itself, not as module in another Python app.
 
 Lasly, we need to populate our .html file with some simple code. If you're using VScode, simply type an exclamation mark followed by the return key to add the box standard boilerplate - 
-[Alt Text](/assets/img/Boilerplate-HTML.gif)
+<a href="#"><img alt="Adding a boilerplate to HTML" src="/assets/img/Boilerplate-HTML.gif"/></a>
 
 ```html
 <!DOCTYPE html>
