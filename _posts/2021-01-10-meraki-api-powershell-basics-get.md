@@ -5,6 +5,7 @@ author: "Jonny Winter"
 categories: journal
 tags: [API,Meraki,PowerShell]
 image: Meraki-API-PowerShell-Menu.png
+comments: true
 ---
 
 *"The Meraki dashboard itself is a centralized, web browser-based tool used to monitor and configure Meraki devices and services. A dashboard account is what you use to log in to the dashboard in order to manage and configure your organizations, networks, and devices."* - [Cisco Meraki](https://documentation.meraki.com/Getting_Started#:~:text=The%20Meraki%20dashboard%20itself%20is,organizations%2C%20networks%2C%20and%20devices)
