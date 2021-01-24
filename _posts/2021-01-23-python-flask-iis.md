@@ -15,14 +15,13 @@ Python has quickly become a very, if not the most, popular programming language,
 
 ## Requirements
 
-Other than the free software, you will need either a copy of Windows Server or install the IIS features in Windows (10) Pro. If you are to perform the bits on a Windows Desktop OS, then you'll be able to install IIS by -
-* Bullet list
+Other than the free software, you will need a copy of Windows Server. You can install the IIS features in Windows (10) Pro to bypass this, but you're not realistically going to use a desktop OS as your web server. However, if you wanted to perform the bits on a Windows Desktop OS, you'll be able to install IIS by -
 <br>
-#1 - Open up the Programs and Features control panel applet (or use run dialog + appwiz.cpl).
+* #1 - Open up the Programs and Features control panel applet (or use run dialog + appwiz.cpl).
 <br>
-#2 - Click Turn Windows features on or off.
+* #2 - Click Turn Windows features on or off.
 <br>
-#3 - Locate Internet Information Services
+* #3 - Locate Internet Information Services
 <br>
 <br>
 <a href="#"><img alt="Installing IIS on Windows Desktop OS" src="/assets/img/IIS-Windows-Desktop.png"/></a>
