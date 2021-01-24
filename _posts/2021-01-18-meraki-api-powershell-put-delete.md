@@ -5,6 +5,7 @@ author: "Jonny Winter"
 categories: journal
 tags: [API,Meraki,PowerShell]
 image: Meraki-API-PowerShell-Code-2.png
+comments: true
 ---
 
 *"The difference between the POST and PUT APIs can be observed in request URIs. POST requests are made on resource collections, whereas PUT requests are made on a single resource." [...] "As the name applies, DELETE APIs are used to delete resources."* - [restfulapi.net](https://restfulapi.net/http-methods/#put)
