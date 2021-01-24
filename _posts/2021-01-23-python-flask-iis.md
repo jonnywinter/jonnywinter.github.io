@@ -121,19 +121,22 @@ At this point, we really need to open up IIS and make a few changes. I've docume
 19. Add in two new members, one with the **Name** of **PYTHONPATH** with the **Value** %SYSTEMDRIVE%\inetpub\wwwroot\app\, the other with the **Name** of **WSGI_HANDLER** and the **Value** app.app. Here, replace the first app of that with the name of the python script file you created earlier - i.e. I created app.py, so this is app.app. If you created yours as coolscript.py then this would be coolscript.app.
 20. Click **OK** in the **EnvironmentalVariables Collection Editor** window and **OK** in the **Edit FastCGI Application** window behind it. 
 
-With the IIS 'stuff' complete. We're about ready to open up VScode, write some Python code & serve a web page! 
-
+With the IIS 'stuff' complete. We're about ready towrite some Python code & serve a web page! You don't have to use an IDE, like VScode, but it does help a lot. However, for the sake of this post I'm only going to reference the code itself - so feel free to simply use Windows notepad or something like [Notepad + +](https://notepad-plus-plus.org/downloads/). Open up your app.py (or whatever you called your application Python file) and copy/paste in the following code - 
 ```python
-from flask import Flask
+from flask import Flask, render_template
+
+var = "Hello, World!"
 
 app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "Hello from FastCGI via IIS!"
+    return render_template("home.html", data = var)
     
 if __name__ == "__main__":
     app.run()
 ```
-
+Decoding the above Python code, we have a few things - 
+- from flask import Flask, render_template - this line loads the Flask & render_template modules from the Flask so we can use them in our code.
+- var = "Hello, World!" - this line creates a variable called var and sets it to hold the string "Hello, World!". We'll display this in our home.html file.
 Happy scripting!
