@@ -144,12 +144,12 @@ Decoding the above Python code, we have a few things -
 - *app = Flask(_name_)* - this line instantiates Flask and passes the  _name_ argument to it.
 - *@app.route("/")* - this line tells the Flask what code to run when it recieves a HTML GET request against it, i.e. http://ipaddress. This could be set to "/home" but your GET URL would have to be http://ipaddress/home.
 - *def home():* - this is function that holds the code that the HTML GET request runs once it is recieved.
-- *return render_template("home.html", data = var)* - this line tells Flask to serve the home.html file and pass it the data within the var variable.
+- *return render_template("home.html", data = var)* - this line tells Flask to serve the home.html file and to pass it a variable called data, with the content of the var variable.
 - *if _name_ == "_main_":* & *app.run()* - these lines tell the next line to function only if it's being called by itself, not as module in another Python app.
 
 Lasly, we need to populate our .html file with some simple code. If you're using VScode, simply type an exclamation mark followed by the return key to add the box standard boilerplate - 
 <a href="#"><img alt="Adding a boilerplate to HTML" src="/assets/img/Boilerplate-HTML.gif"/></a>
-
+...if not, simply paste the text below into your .html file -
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -159,8 +159,12 @@ Lasly, we need to populate our .html file with some simple code. If you're using
     <title>Document</title>
 </head>
 <body>
-    {{ data }}
+    {{ var }}
 </body>
 </html>
 ```
+The only change from the boilerplate here is the addition of *{{ data }}* which is [Jinja2](https://jinja.palletsprojects.com/en/2.11.x/) syntax. All it is doing is displaying the data variable, which is which was formed of the var variable. Although this is simply a string of data, this could be an aray of data that could populate a HTML table, as an example.
+
+Well, mission accomplished. We've got an IIS web server with WSGI passing requests to a Python file running Flask. 
+
 Happy scripting!
