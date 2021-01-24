@@ -34,7 +34,7 @@ Music: [Hello Nasty by Beastie Boys](https://open.spotify.com/album/2cT6Yb6EWcBh
 <br>
 OS: Windows Server 2012 Datacenter (but also tested on Windows 10 Pro v20H2 x64). 
 <br>
-Python: [Python 3.9.0](https://www.python.org/downloads/release/python-390/)
+Python: 
 <br>
 Packages: [Flask v1.1.2](https://pypi.org/project/Flask/)
 <br>
@@ -79,5 +79,18 @@ Install-WindowsFeature -Name Web-Server -IncludeAllSubFeature
 12. To install the selected roles, role services, and features, click **Install**.
 13. To complete the installation, click **Close**.
 
+Easily done. Next, let's get [Python](https://www.python.org/) installed. Download the [Python 3.9.0](https://www.python.org/downloads/release/python-390/) installer and open it up. In the installation process choose **Customize installation** and in the **Advanced Options** window that pops up, tick the box for **Install for all users** is selected and the install location changes to **C:\Program Files\Python39**.
+
+Because [Flask](https://flask.palletsprojects.com/) is pre-packaged with Python, we don't have to run any pip commands for it, but it is worth making sure everything is up-to-date. To do this, open up PowerShell and type - 
+```powershell
+pip install pip --upgrade
+pip install Flask --upgrade
+```
+As breifly explained in the summary, we need WSGI to pass requests from IIS to Flask. More specifically, we're going to use WFastCGI - which uses both WSGI (**W**eb, **S**erver, **G**ateway & **I**nterface) & FastCGI (**Fast** **C**ommon **G**ateway **I**nterface). This will need to be installed by pip and then activated. To do this, open up PowerShell as an administrator and use the following commands - 
+```powershell
+pip install wfastcgi
+#... and once WFastCGI is installed
+wfastcgi-enable
+```
 
 Happy scripting!
