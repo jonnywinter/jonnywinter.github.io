@@ -5,6 +5,7 @@ author: "Jonny Winter"
 categories: journal
 tags: [IIS,Python,Flask]
 image: Python-Flask.png
+comments: true
 ---
 
 *"Flask is a lightweight WSGI web application framework. It is designed to make getting started quick and easy, with the ability to scale up to complex applications. It began as a simple wrapper around Werkzeug and Jinja and has become one of the most popular Python web application frameworks."* - [Armin Ronacher on The Pallets Projects](https://palletsprojects.com/p/flask/)
