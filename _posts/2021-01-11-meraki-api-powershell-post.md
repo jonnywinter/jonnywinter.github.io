@@ -5,6 +5,7 @@ author: "Jonny Winter"
 categories: journal
 tags: [API,Meraki,PowerShell]
 image: Meraki-API-PowerShell-Code.png
+comments: true
 ---
 
 *"Verbs in the API follow the usual REST conventions: GET returns the value of a resource or a list of resources, depending on whether an identifier is specified. POST adds a new resource. PUT updates a resource. DELETE removes a resource."* - [Cisco Meraki](https://documentation.meraki.com/General_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API#API_Requests)
