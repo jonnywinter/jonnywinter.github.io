@@ -125,4 +125,17 @@ At this point, we really need to open up IIS and make a few changes. I've docume
 
 With the IIS 'stuff' complete. We're about ready to open up VScode, write some Python code & serve a web page!
 
+```python
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello from FastCGI via IIS!"
+    
+if __name__ == "__main__":
+    app.run()
+```
+
 Happy scripting!
