@@ -92,7 +92,7 @@ Getting there! We now need to create a directory for your application. When IIS 
 
 As we're going to be utilising Flask here, we will need to create a sub-directory called **templates** which will be used to host all of our .html files. So - %SYSTEMDRIVE%\inetpub\wwwroot\app\templates. If you are looking to serve images as well, create an additional sub-directory in the root directory called **static** with another sub-directory called **images**. So - %SYSTEMDRIVE%\inetpub\wwwroot\app\static\images. 
 
-Now we've got our directories sorted, create a Python code file for your application inside the root of your application. For me, I'm going to name it the name of my app. The resulting file will be called app.py in my case. So - %SYSTEMDRIVE%\inetpub\wwwroot\app\app.py. To create the file, simply open Notepad on the server, click **File** > **Save**, locate the new root of the application directory and save the file as app.py, changing **Save as type** to **All files**. 
+Now we've got our directories sorted, create a Python code file for your application inside the root of your application. For me, I'm going to name it the name of my app. The resulting file will be called app.py in my case. So - %SYSTEMDRIVE%\inetpub\wwwroot\app\app.py. To create the file, simply open Notepad on the server, click **File** > **Save**, locate the new root of the application directory and save the file as app.py, changing **Save as type** to **All files**. Using that same method, create a .html file inside the templates directory, i.e. home.html. So - %SYSTEMDRIVE%\inetpub\wwwroot\app\templates\home.html.
 
 Next step is to copy a file created by WFastCGI when we installed it into the root directory of our application. The file we need to copy is located - %SYSTEMDRIVE%\Python39\Lib\site-packages\wfastcgi.py. So, you need to end up with a copy of that file located - %SYSTEMDRIVE%\inetpub\wwwroot\app\wfastcgi.py.
 
@@ -121,7 +121,7 @@ At this point, we really need to open up IIS and make a few changes. I've docume
 19. Add in two new members, one with the **Name** of **PYTHONPATH** with the **Value** %SYSTEMDRIVE%\inetpub\wwwroot\app\, the other with the **Name** of **WSGI_HANDLER** and the **Value** app.app. Here, replace the first app of that with the name of the python script file you created earlier - i.e. I created app.py, so this is app.app. If you created yours as coolscript.py then this would be coolscript.app.
 20. Click **OK** in the **EnvironmentalVariables Collection Editor** window and **OK** in the **Edit FastCGI Application** window behind it. 
 
-With the IIS 'stuff' complete. We're about ready towrite some Python code & serve a web page! You don't have to use an IDE, like VScode, but it does help a lot. However, for the sake of this post I'm only going to reference the code itself - so feel free to simply use Windows notepad or something like [Notepad + +](https://notepad-plus-plus.org/downloads/). Open up your app.py (or whatever you called your application Python file) and copy/paste in the following code - 
+With the IIS 'stuff' complete. We're about ready towrite some Python code & serve a web page! You don't have to use an IDE, like VScode, but it does help a lot. However, for the sake of this post I'm only going to reference the code itself - so feel free to simply use Windows notepad or something like [Notepad + +](https://notepad-plus-plus.org/downloads/). Open up your app.py (or whatever you called your application Python file) and copy/paste in the following code, followed by saving the file - 
 ```python
 from flask import Flask, render_template
 
@@ -130,13 +130,33 @@ var = "Hello, World!"
 app = Flask(__name__)
 
 @app.route("/")
-def hello():
+def home():
     return render_template("home.html", data = var)
     
 if __name__ == "__main__":
     app.run()
 ```
 Decoding the above Python code, we have a few things - 
-- from flask import Flask, render_template - this line loads the Flask & render_template modules from the Flask so we can use them in our code.
-- var = "Hello, World!" - this line creates a variable called var and sets it to hold the string "Hello, World!". We'll display this in our home.html file.
+- *from flask import Flask, render_template* - this line loads the Flask & render_template modules from the Flask so we can use them in our code.
+- *var = "Hello, World!"* - this line creates a variable called var and sets it to hold the string "Hello, World!". We'll display this in our home.html file.
+- *app = Flask(_name_)* - this line instantiates Flask and passes the  _name_ argument to it.
+- *@app.route("/")* - this line tells the Flask what code to run when it recieves a HTML GET request against it, i.e. http://ipaddress. This could be set to "/home" but your GET URL would have to be http://ipaddress/home.
+- *def home():* - this is function that holds the code that the HTML GET request runs once it is recieved.
+- *return render_template("home.html", data = var)* - this line tells Flask to serve the home.html file and pass it the data within the var variable.
+- *if _name_ == "_main_":* & *app.run()* - these lines tell the next line to function only if it's being called by itself, not as module in another Python app.
+
+Lasly, we need to populate our .html file with some simple code. 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {{ data }}
+</body>
+</html>
+```
 Happy scripting!
