@@ -21,7 +21,7 @@ Other than the free software, you will need a copy of Windows Server. You can in
 <br>
 - Click Turn Windows features on or off.
 <br>
-- Locate Internet Information Services
+- Locate Internet Information Services.
 <br>
 <br>
 <a href="#"><img alt="Installing IIS on Windows Desktop OS" src="/assets/img/IIS-Windows-Desktop.png"/></a>
