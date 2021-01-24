@@ -79,7 +79,7 @@ Install-WindowsFeature -Name Web-Server -IncludeAllSubFeature
 12. To install the selected roles, role services, and features, click **Install**.
 13. To complete the installation, click **Close**.
 
-Easily done. Next, let's get [Python](https://www.python.org/) installed. Download the [Python 3.9.0](https://www.python.org/downloads/release/python-390/) installer and open it up. In the installation process choose **Customize installation** and in the **Advanced Options** window that pops up, tick the box for **Install for all users** is selected and the install location changes to **C:\Program Files\Python39**.
+Easily done. Next, let's get [Python](https://www.python.org/) installed. Download the [Python 3.9.0](https://www.python.org/downloads/release/python-390/) installer and open it up. In the installation process choose **Customize installation** and in the **Advanced Options** window that pops up, tick the box for **Install for all users** is selected so that the install location changes to **C:\Program Files\Python39**.
 
 Because [Flask](https://flask.palletsprojects.com/) is pre-packaged with Python, we don't have to run any pip commands for it, but it is worth making sure everything is up-to-date. To do this, open up PowerShell and type - 
 ```powershell
@@ -92,5 +92,14 @@ pip install wfastcgi
 #... and once WFastCGI is installed
 wfastcgi-enable
 ```
+Getting there! We now need to create a directory for your application. When IIS is installed it creates a directory under %SYSTEMDRIVE%\inetpub\wwwroot, create a new folder here to host your application. The great thing about using this directory is that the permissions required by IIS/unauthenticated web users is automatically applied. My directory & application will be called **app**, just to keep it simple. So - %SYSTEMDRIVE%\inetpub\wwwroot\app. As we're going to be utilising Flask here, we will need to create a sub-directory called **templates** which will be used to host all of our .html files. So - %SYSTEMDRIVE%\inetpub\wwwroot\app\templates. If you are looking to serve images as well, create an additional sub-directory in the root directory called **static** with another sub-directory called **images**. So - %SYSTEMDRIVE%\inetpub\wwwroot\app\static\images. 
+
+Now we've got our directories sorted, create a Python code file for your application inside the root of your application. For me, I'm going to name it the name of my app. So - %SYSTEMDRIVE%\inetpub\wwwroot\app\app.py.
+
+Next step is to copy a file created by WFastCGI when we installed it into the root directory of our application. The file we need to copy is located - %SYSTEMDRIVE%\Python39\Lib\site-packages\wfastcgi.py. So, you need to end up with a copy of that file located - %SYSTEMDRIVE%\inetpub\wwwroot\app\wfastcgi.py.
+
+At this point, we really need to open up IIS and make a few changes. I've documented them below with some information against specific steps - 
+1. Open IIS (or run the command inetmgr.exe).
+2. 
 
 Happy scripting!
