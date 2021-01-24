@@ -49,6 +49,8 @@ This [Stack Overflow post answere](https://stackoverflow.com/questions/50592847/
 KiranH's [post and document](https://techcommunity.microsoft.com/t5/iis-support-blog/how-to-run-python-application-on-iis-that-uses-flask-framework/ba-p/812898) in the Microsoft Tech forum
 <br>
 Michael Fore's [video](https://www.youtube.com/watch?v=En9vo7Ognm0&t) on YouTube (and [GitHub](https://github.com/Michael-fore))
+<br>
+Prateek's [post](https://www.codementor.io/@overiq/basics-of-flask-fzvh8ueed) on Codementor
 
 ## Let's begin
 
@@ -145,7 +147,9 @@ Decoding the above Python code, we have a few things -
 - *return render_template("home.html", data = var)* - this line tells Flask to serve the home.html file and pass it the data within the var variable.
 - *if _name_ == "_main_":* & *app.run()* - these lines tell the next line to function only if it's being called by itself, not as module in another Python app.
 
-Lasly, we need to populate our .html file with some simple code. 
+Lasly, we need to populate our .html file with some simple code. If you're using VScode, simply type an exclamation mark followed by the return key to add the box standard boilerplate - 
+[Alt Text](/assets/img/Boilerplate-HTML.gif)
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
