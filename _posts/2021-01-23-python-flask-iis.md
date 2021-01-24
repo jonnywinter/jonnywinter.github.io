@@ -100,6 +100,8 @@ Now we've got our directories sorted, create a Python code file for your applica
 
 Next step is to copy a file created by WFastCGI when we installed it into the root directory of our application. The file we need to copy is located - %SYSTEMDRIVE%\Python39\Lib\site-packages\wfastcgi.py. So, you need to end up with a copy of that file located - %SYSTEMDRIVE%\inetpub\wwwroot\app\wfastcgi.py.
 
+<a href="#"><img alt="wfastcgi.py Placement" src="/assets/img/Copy-wfastcgi.png"/></a>
+
 At this point, we really need to open up IIS and make a few changes. I've documented them below with some information against specific steps - 
 1. Open IIS (or run the command inetmgr.exe).
 2. (OPTIONAL) Locate **Default Web Site** under **Server** > **Application Pools** > **Sites**, right click it and click **Stop** under **Manage Website**. 
