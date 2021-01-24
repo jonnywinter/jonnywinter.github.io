@@ -11,7 +11,7 @@ image: Python-Flask.png
 
 ## Summary
 
-Using the Meraki Dashboard REST API we can use CRUD (**C**reate, **R**ead, **U**pdate & **D**elete) to interact with the Meraki Dashboard and, in turn, the devices in a programatic way - an alternate method to simply using the web UI. In this post I'm going to show the steps that are required to perform API requests to the Meraki dashboard and display the responses in PowerShell. We'll then go a bit further and create a script that can be double clicked to present you the list of networks against an organisation with user input. 
+Python has quickly become a very, if not the most, popular programming language, and Flask is a framework that can be used to run web apps within it. Flask can scale from small apps to much larger ones, but when compared with other alternatives, like Django, it is suited to smaller applications. For me, Flask is simple, easy to use and quick to troubleshoot, so I think of it when I think of web apps. Although Flask has the ability to run a web server, it's not designed for production purposes like IIS or Apache are - as I'm an avid Windows user I'm sticking with IIS. With the addition of WSGI (**W**eb, **S**erver, **G**ateway & **I**nterface) we can pass requests from IIS to Flask. In this post I'm going to show the steps required to get IIS to serve a Flask app, display a .html web page and pass data between them. 
 
 ## Requirements
 
@@ -32,9 +32,9 @@ Coffee: [Timana, Colombia from Union Hand-Roasted Coffee](https://unionroasted.c
 <br>
 Music: [Hello Nasty by Beastie Boys](https://open.spotify.com/album/2cT6Yb6EWcBhyqGd7DXeL2?si=EDW8IUMWR7mOpHTpCBk23g)
 <br>
-OS: Windows 10 Pro v20H2 x64.
+OS: Windows Server 2012 Datacenter (but also tested on Windows 10 Pro v20H2 x64). 
 <br>
-Python: [Python 3.8.0](https://www.python.org/downloads/release/python-380/)
+Python: [Python 3.9.0](https://www.python.org/downloads/release/python-390/)
 <br>
 Packages: [Flask v1.1.2](https://pypi.org/project/Flask/)
 <br>
