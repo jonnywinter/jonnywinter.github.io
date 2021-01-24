@@ -92,7 +92,9 @@ pip install wfastcgi
 #... and once WFastCGI is installed
 wfastcgi-enable
 ```
-Getting there! We now need to create a directory for your application. When IIS is installed it creates a directory under %SYSTEMDRIVE%\inetpub\wwwroot, create a new folder here to host your application. The great thing about using this directory is that the permissions required by IIS/unauthenticated web users is automatically applied. My directory & application will be called **app**, just to keep it simple. So - %SYSTEMDRIVE%\inetpub\wwwroot\app. As we're going to be utilising Flask here, we will need to create a sub-directory called **templates** which will be used to host all of our .html files. So - %SYSTEMDRIVE%\inetpub\wwwroot\app\templates. If you are looking to serve images as well, create an additional sub-directory in the root directory called **static** with another sub-directory called **images**. So - %SYSTEMDRIVE%\inetpub\wwwroot\app\static\images. 
+Getting there! We now need to create a directory for your application. When IIS is installed it creates a directory under %SYSTEMDRIVE%\inetpub\wwwroot, create a new folder here to host your application. The great thing about using this directory is that the permissions required by IIS/unauthenticated web users is automatically applied. My directory & application will be called **app**, just to keep it simple. So - %SYSTEMDRIVE%\inetpub\wwwroot\app. 
+
+As we're going to be utilising Flask here, we will need to create a sub-directory called **templates** which will be used to host all of our .html files. So - %SYSTEMDRIVE%\inetpub\wwwroot\app\templates. If you are looking to serve images as well, create an additional sub-directory in the root directory called **static** with another sub-directory called **images**. So - %SYSTEMDRIVE%\inetpub\wwwroot\app\static\images. 
 
 Now we've got our directories sorted, create a Python code file for your application inside the root of your application. For me, I'm going to name it the name of my app. So - %SYSTEMDRIVE%\inetpub\wwwroot\app\app.py.
 
@@ -100,6 +102,27 @@ Next step is to copy a file created by WFastCGI when we installed it into the ro
 
 At this point, we really need to open up IIS and make a few changes. I've documented them below with some information against specific steps - 
 1. Open IIS (or run the command inetmgr.exe).
-2. 
+2. (OPTIONAL) Locate **Default Web Site** under **Server** > **Application Pools** > **Sites**, right click it and click **Stop** under **Manage Website**. 
+3. (OPTIONAL) Right click **Default Web Site** again, and within **Manage Website** click **Advanced Settings**. 
+4. (OPTIONAL) Change the value next to **Start Automatically** to **False**. 
+5. Create a new site by right clicking **Sites** and selecting **Add Website...**
+6. Give the site a name, i.e. app, in the **Site name** field. 
+7. Ensure **DefaultAppPool** is selected under the **Application pool** field.
+8. Next to **Physical path** enter the root directory of your application, i.e. - %SYSTEMDRIVE%\inetpub\wwwroot\app
+9. Leave the section bindings default (the points above marked OPTIONAL could aid here if you choose to have **All Unassigned** selected, but you could easily select a single IP address assigned to your server, i.e. 192.168.0.2 (as an example)). 
+10. Click **OK** to create and start the website.
+11. Breathe.
+12. Click the newly created site under **Sites** and double click **Handler Mappings**. Right click the empty space, or go to the **Actions** pane on the right hand side and select **Add Module Mapping...**. 
+13. Set the **Request path** to be * , **Module** to be **FastCgiModule**, **Name** to be **Flask** and **Executable** to be the following string, all one string (no spaces) - 
+%PROGRAMFILES%\Python39\python.exe|%SYSTEMDRIVE%\inetpub\wwwroot\app\wfastcgi.py
+14. Click **Request Restrictions...** and uncheck the checkbox against the wording **Invoke handler only if request is mapped to**. 
+15. **OK** both the **Request Restrictions** window and the **Add Module Mapping Window** and once it pops up, click **Yes** to create a FastCGI application.
+16. Click your server's name inside the **Connections** pane on the left, then double click **FastCGI Settings**.
+17. Locate the newly created FastCGI application, right click it and select **Edit**.
+18. Click the word **(Collection)** then the **[...]** button next to **Environment Variables**. 
+19. Add in two new members, one with the **Name** of **PYTHONPATH** with the **Value** %SYSTEMDRIVE%\inetpub\wwwroot\app\, the other with the **Name** of **WSGI_HANDLER** and the **Value** app.app. Here, replace the first app of that with the name of the python script file you created earlier - i.e. I created app.py, so this is app.app. If you created yours as coolscript.py then this would be coolscript.app.
+20. Click **OK** in the **EnvironmentalVariables Collection Editor** window and **OK** in the **Edit FastCGI Application** window behind it. 
+
+With the IIS 'stuff' complete. We're about ready to open up VScode, write some Python code & serve a web page!
 
 Happy scripting!
