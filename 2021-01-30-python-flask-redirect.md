@@ -8,50 +8,31 @@ image: Python-Flask.png
 comments: true
 ---
 
-*"Flask is a lightweight WSGI web application framework. It is designed to make getting started quick and easy, with the ability to scale up to complex applications. It began as a simple wrapper around Werkzeug and Jinja and has become one of the most popular Python web application frameworks."* - [Armin Ronacher on The Pallets Projects](https://palletsprojects.com/p/flask/)
+*"jQuery is a small JavaScript library commonly used to simplify working with the DOM and JavaScript in general. It is the perfect tool to make web applications more dynamic by exchanging JSON between server and client."* - [Armin Ronacher on The Pallets Projects](https://flask.palletsprojects.com/en/1.1.x/patterns/jquery/
 
 ## Summary
 
-Python has quickly become a very, if not the most, popular programming language, and Flask is a framework that can be used to run web apps within it. Flask can scale from small apps to much larger ones, but when compared with other alternatives, like Django, it is suited to smaller applications. For me, Flask is simple, easy to use and quick to troubleshoot, so I think of it when I think of web apps. Although Flask has the ability to run a web server, it's not designed for production purposes like IIS or Apache are - as I'm an avid Windows user I'm sticking with IIS. With the addition of WSGI (**W**eb, **S**erver, **G**ateway & **I**nterface) we can pass requests from IIS to Flask. In this post I'm going to show the steps required to get IIS to serve a Flask app, display a .html web page and pass data between them. 
-
-## Requirements
-
-Other than the free software, you will need a copy of Windows Server. You can install the IIS features in Windows (10) Pro to bypass this, but you're not realistically going to use a desktop OS as your web server. However, if you wanted to perform the bits on a Windows Desktop OS, you'll be able to install IIS by -
-<br>
-1. Open up the Programs and Features control panel applet (or use run dialog + appwiz.cpl).
-<br>
-2. Click Turn Windows features on or off.
-<br>
-3. Locate Internet Information Services.
-<br>
-<br>
-<a href="#"><img alt="Installing IIS on Windows Desktop OS" src="/assets/img/IIS-Windows-Desktop.png"/></a>
+Running [Flask](https://flask.palletsprojects.com/) for web apps is great - a few lines of code, that are ready to [copy & paste](https://palletsprojects.com/p/flask/) from the Pallets Project site and you're good to go. Add in a choice [bootstrap](https://getbootstrap.com/) CSS and within minutes the terible looking HTML web pages you made as a kid (let alone Myspace!) are a distant memory. However, more often than not you're going to need to work with data that is retrieved from that web page, often by way of a form or bulk upload - what's the best way to do it with Flask? For simple things we can use query strings, but for more intensive stuff we're going to want to pass JSON - think, a .CSV file uploaded to a web browser with a lot of data within could need to be converted to JSON to be worked with in Python. In this post I'm going to write a few methods of passing data and sending responses, like redirects, between Flask and the web browser. 
 
 ## My Environment
 
-Coffee: [Timana, Colombia from Union Hand-Roasted Coffee](https://unionroasted.com/products/timana-colombia)
+Coffee: [Bobolink, Brazil from Union Hand-Roasted Coffee](https://unionroasted.com/products/bobolink-brazil)
 <br>
-Music: [Hello Nasty by Beastie Boys](https://open.spotify.com/album/2cT6Yb6EWcBhyqGd7DXeL2?si=EDW8IUMWR7mOpHTpCBk23g)
+Music: [Tigercub](https://open.spotify.com/artist/6ekYAO2D1JkI58CF4uRRqw?si=JfKaaMIeR1CWf1JkXyrPrA)
 <br>
-OS: Windows Server 2012 Datacenter (but also tested on Windows 10 Pro v20H2 x64). 
+OS: Windows 10 Pro v20H2 x64. 
 <br>
 IDE: [Visual Studio Code v1.52.1](https://code.visualstudio.com/)
+<br>
+Browser: [Google Chrome v88](https://www.google.com/intl/en_uk/chrome/)
 
 ## Tip o' the Hat
 
 The [Flask documentation](https://flask.palletsprojects.com/en/1.1.x/) by Pallets
 <br>
-Bilal Bayasut's [post](https://medium.com/@bilalbayasut/deploying-python-web-app-flask-in-windows-server-iis-using-fastcgi-6c1873ae0ad8)  on Medium
+Madan Sapkota's [response](https://stackoverflow.com/questions/18118627/redirecting-after-ajax-post) on Stack Overflow
 <br>
-The [WFastCGI documentation](https://pypi.org/project/wfastcgi/) by Microsoft
-<br>
-This [Stack Overflow post answere](https://stackoverflow.com/questions/50592847/web-platform-installer-python-installer-downloaded-file-failed-signature-veri) by William Sousa
-<br>
-KiranH's [post and document](https://techcommunity.microsoft.com/t5/iis-support-blog/how-to-run-python-application-on-iis-that-uses-flask-framework/ba-p/812898) in the Microsoft Tech forum
-<br>
-Michael Fore's [video](https://www.youtube.com/watch?v=En9vo7Ognm0&t) on YouTube (and [GitHub](https://github.com/Michael-fore))
-<br>
-Prateek's [post](https://www.codementor.io/@overiq/basics-of-flask-fzvh8ueed) on Codementor
+The AJAX with jQuery [documentation](https://flask.palletsprojects.com/en/1.1.x/patterns/jquery/) on The Pallets Projects.
 
 ## Let's begin
 
