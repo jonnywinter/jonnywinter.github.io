@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Deploying a Python Flask app in IIS"
+title: "Passing Data Between HTML & Flask"
 author: "Jonny Winter"
 categories: journal
-tags: [IIS,Python,Flask]
+tags: [Python,Flask,AJAX,JavaScript,jQuery]
 image: Python-Flask.png
 comments: true
 ---
