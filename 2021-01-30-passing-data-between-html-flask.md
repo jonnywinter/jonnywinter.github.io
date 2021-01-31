@@ -125,17 +125,47 @@ So, what has changed here? We've added -
 
 But what is the data query string and the text variable? Well, *text* is JavaScript varaible but the query string must be constructed using the *?foo=bar* format and sent to our */receive* app.route. This is done by the JavaScript code below. It's only one line of code that needs to be placed inside the original JavaScript curley braces, but we're going to pass two lines - one of which is just so we can see the variable in the Chrome DevTools console.
 ```html
-  <script>
-    function myFunction(text) {
-      console.log(text)
-      window.location.href = `/receive?data=${text}`;
-    }
-  </script>
+<script>
+  function myFunction(text) {
+    console.log(text)
+    window.location.href = `/receive?data=${text}`;
+  }
+</script>
 ```
 No time like the present - run it! You'll see the variable breifly if you have the DevTools open, you'll also see it printed in the Python terminal as well as the */next* HTML page. You can see that the results are basically the same as the blog post picture. In the Python window you'll note the 200 OK code for the initial GET request to the */* page, the 302 redirect code with the query string and the 200 OK code for the */next* page. Working as expected - data to Python from HTML via JavaScript using a query string.
 
 **&lt;NOTE>**: If you wanted to display the text in HTML in a .html file, you'll need to specifiy render_remplate like with the initial */* page but use [Jinja2](https://jinja.palletsprojects.com/en/2.11.x/) syntax to display it - which is basically the variable name inside two curley braces either side, i.e. {{ var }} **&lt;/NOTE>**
 
 # POST With jQuery
+
+Although we can use GET requests like the above, we should realy use POST method to send data to a server - [By design, the POST request method requests that a web server accepts the data enclosed in the body of the request message, most likely for storing it](https://en.wikipedia.org/wiki/POST_(HTTP)). The Python part has a few more changes, but to send a POST request with JavaScript, we can use the single line post jQuery function below. The great thing about this function is that we can pass JSON data as seen below with the *data* and *text* key value pair. What happens is the server receives a POST request with the JSON data in the body - which is very simple to manipulate/store.
+```html
+<script>
+  function myFunction(text) {
+    console.log(text)
+    $.post("/receive", {"data": text});
+  }
+</script>
+```
+For the Python part - 
+```python
+@app.route('/receive', methods=['POST'])
+def receive():
+    global text
+
+    text = request.form['data']
+    print(text)
+    return '', 200
+```
+Here we have - 
+- changed the app.route for */receive* to only invoke when it receives a POST request;
+- it then takes the JSON key value pair and stores the variable assigned to *data* as the Python *text* variable.
+
+**&lt;NOTE>**: A big thing to note here is jQuery can't really deal with 302 redirects. You can overcome this with Jinja2 with -
+```python
+$.post("/receive", {"data": text}, (window.location.href = "{{ url_for('next') }}"));
+```
+... however the AJAX library CAN! But this method above may get you out of a jam.
+ **&lt;/NOTE>**
 
 Happy scripting!
