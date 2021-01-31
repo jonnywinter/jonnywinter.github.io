@@ -136,4 +136,6 @@ No time like the present - run it! You'll see the variable breifly if you have t
 
 **&lt;NOTE>**: If you wanted to display the text in HTML in a .html file, you'll need to specifiy render_remplate like with the initial */* page but use [Jinja2](https://jinja.palletsprojects.com/en/2.11.x/) syntax to display it - which is basically the variable name inside two curley braces either side, i.e. {{ var }} **&lt;/NOTE>**
 
+# POST With jQuery
+
 Happy scripting!
