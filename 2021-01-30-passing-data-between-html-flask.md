@@ -159,13 +159,49 @@ def receive():
 ```
 Here we have - 
 - changed the app.route for */receive* to only invoke when it receives a POST request;
-- it then takes the JSON key value pair and stores the variable assigned to *data* as the Python *text* variable.
+- it then takes the JSON key value pair and stores the variable assigned to *data* as the Python *text* variable;
+- the server is then responded a 200 code, as a success.
 
-**&lt;NOTE>**: A big thing to note here is jQuery can't really deal with 302 redirects. You can overcome this with Jinja2 with -
+**&lt;NOTE>**: A big thing to note here is jQuery can't really deal with 302 redirects. A workaround may be to use Jinja2 to then redirect you to the */next* page with -
 ```python
 $.post("/receive", {"data": text}, (window.location.href = "{{ url_for('next') }}"));
 ```
-... however the AJAX library CAN! But this method above may get you out of a jam.
  **&lt;/NOTE>**
+
+# POST With AJAX
+
+```python
+@app.route('/receive', methods=['POST'])
+def receive_data():
+    global text
+
+    text = request.form['data']
+    print(text)
+    
+    redirect_json = {"redirect_url": url_for('next')}
+
+    return jsonify(redirect_json)
+```
+
+```html
+<script>
+  function myFunction(text) {
+      console.log(text)
+      var jsonVar = {"data": text};
+      $.ajax({
+          type: "POST",
+          url: "/receive",
+          data: jsonVar,
+          dataType: "json",
+          success: function (redirect_json) {
+            if (redirect_json.redirect_url) {
+                console.log(redirect_json.redirect_url)
+                window.location.href = redirect_json.redirect_url;
+              }
+            }
+      });
+  }
+</script>
+```
 
 Happy scripting!
