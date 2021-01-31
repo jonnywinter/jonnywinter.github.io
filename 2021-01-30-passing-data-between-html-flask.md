@@ -4,7 +4,7 @@ title: "Passing Data Between HTML & Flask"
 author: "Jonny Winter"
 categories: journal
 tags: [Python,Flask,AJAX,JavaScript,jQuery]
-image: Python-Flask.png
+image: Passing-Data-Between-HTML-Flask.png
 comments: true
 ---
 
