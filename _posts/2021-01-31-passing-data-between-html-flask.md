@@ -169,6 +169,8 @@ Here we have -
 $.post("/receive", {"data": text}, (window.location.href = "{{ url_for('next') }}"));
 ```
  **&lt;/NOTE>**
+ 
+As with the above GET request, you'll see the variable breifly if you have the DevTools open, you'll also see it printed in the Python terminal as well as the */next* HTML page. You can see that the results are basically the same as the blog post picture. In the Python window you'll note the 200 OK code for the initial GET request to the */* page, but unlike the 302 redirect code with the query string from above, you'll see a POST 200 OK code for the */receive* page. 
 
 # POST With AJAX
 
@@ -218,6 +220,8 @@ From the top, we have -
 - *url: "/receive"* is the app.route location;
 - *data: jsonVar* is the newly created JavaScript variable;
 - *success:*[..] to the end is the success function. It's what happens when AJAX receives a 200 code in response. Here we are telling AJAX to look out for the *redirect_json* JSON file and specifically if it has a key value pair for *redirect_url* - if it does, it will load the */next* URL.
+
+As with the above GET & POST requests, you'll see the variable breifly if you have the DevTools open, you'll also see it printed in the Python terminal as well as the */next* HTML page. You can see that the results are basically the same as the blog post picture. In the Python window you'll note the 200 OK code for the initial GET request to the */* page, a POST 200 OK code for the */receive* page and a final 200 OK code for the */next* page. In the DevTools you'll also note the *redirect_url* JSON varialbe - again, useful for troubleshooting.
 
 For completeness, here's the full Python code -
 ```python
