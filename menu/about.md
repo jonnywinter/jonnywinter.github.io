@@ -9,15 +9,14 @@ title: Welcome!
 I’m Jonny, a tech-head with a keen eye for interesting technologies - specifically network oriented ones.
 </p>
 <p style="text-align: center;">
-    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CCENTs" src="/assets/img/Cert-CCENT.png" width="100" /></a>
+    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CCENT" src="/assets/img/Cert-CCENT.png" width="100" /></a>
     <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CCNA Routing & Switching" src="/assets/img/Cert-CCNA.png" width="100" /></a>
-    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CMNA" src="/assets/img/Cert-CMNA.png" width="100" /></a>
     <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="Understanding Cisco Networking Devices" src="/assets/img/Cert-Level-200.png" width="100" /></a>
     <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="Azure Fundamentals" src="/assets/img/Cert-Azure-Fundamentals.png" width="100" /></a>
-    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CMNA" src="/assets/img/Cert-ECMS1.png" width="100" /></a>
-    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CMNA" src="/assets/img/Cert-ECMS2.png" width="100" /></a>
-    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CMNA" src="/assets/img/Cert-CMSS.png" width="100" /></a>
-    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CMNA" src="/assets/img/Cert-DEVASC.png" width="100" /></a>
+    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="ECMS 1" src="/assets/img/Cert-ECMS1.png" width="100" /></a>
+    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="ECMS 2" src="/assets/img/Cert-ECMS2.png" width="100" /></a>
+    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CMSS" src="/assets/img/Cert-CMSS.png" width="100" /></a>
+    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="DEVASC" src="/assets/img/Cert-DEVASC.png" width="100" /></a>
 </p>
 
 ### About this blog
