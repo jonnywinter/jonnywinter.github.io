@@ -43,17 +43,17 @@ To pass data, I'm going to tackle it in three ways - GET with a query string usi
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
-  <title>App</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
+    <title>App</title>
   </head>
   <body>
-  <div>
-    <center>
-    <br>
-    <input style="width: 500px;" class="form-control" id="inputText" placeholder="Enter some text here">
-    <button style="width: 500px;" onclick="myFunction(inputText.value)" type="submit" class="btn btn-primary">Submit</button>
-    </center>
-  </div>
+    <div>
+      <center>
+        <br>
+        <input style="width: 500px;" class="form-control" id="inputText" placeholder="Enter some text here">
+        <button style="width: 500px;" onclick="myFunction(inputText.value)" type="submit" class="btn btn-primary">Submit</button>
+      </center>
+    </div>
   </body>
   <script>
     function myFunction(text) {
@@ -61,5 +61,31 @@ To pass data, I'm going to tackle it in three ways - GET with a query string usi
   </script>
 </html>
 ```
+A few things to note here - 
+- the 4th line is the [Superhero Bootstrap](https://bootswatch.com/superhero/) (just to make it look pretty);
+- the input is alocated the id *inputText*;
+- when clicked, the button triggers a function called *myFunction*, passing it the data (value) of the input box;
+- myFunction has the variable *text*, which is the data passed to it from the button (which in turn see the points above);
+- the html.html file is located inside a folder called *templates* as per the Flask requirements for all HTML files.
+
+The Python data we have to start with is - 
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+
+    return render_template("html.html")
+
+if __name__ == "__main__":
+    app.run(
+        host=("127.0.0.1"), port=int(500), use_reloader=True, debug=True)
+```
+A few things to note here - 
+- when running, Flask is running on http://127.0.0.1:500; 
+- the only HTML file it is rendering is the above html.html file on the route / (AKA, nothing else to add on the end of the URI above). 
+
 
 Happy scripting!
