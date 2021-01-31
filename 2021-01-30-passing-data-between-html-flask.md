@@ -12,7 +12,7 @@ comments: true
 
 ## Summary
 
-Running [Flask](https://flask.palletsprojects.com/) for web apps is great - a few lines of code, that are ready to [copy & paste](https://palletsprojects.com/p/flask/) from the Pallets Project site and you're good to go. Add in a choice [bootstrap](https://getbootstrap.com/) CSS and within minutes the terible looking HTML web pages you made as a kid (let alone Myspace!) are a distant memory. However, more often than not you're going to need to work with data that is retrieved from that web page, often by way of a form or bulk upload - what's the best way to do it with Flask? For simple things we can use query strings, but for more intensive stuff we're going to want to pass JSON - think, a .CSV file uploaded to a web browser with a lot of data within could need to be converted to JSON to be worked with in Python. In this post I'm going to write a few methods of passing data and sending responses, like redirects, between Flask and the web browser. 
+Running [Flask](https://flask.palletsprojects.com/) for web apps is great - a few lines of code, that are ready to [copy & paste](https://palletsprojects.com/p/flask/) from the Pallets Project site and you're good to go. Add in a choice [bootstrap](https://getbootstrap.com/) CSS and within minutes the terible looking HTML web pages you made as a kid (let alone Myspace!) are a distant memory. However, more often than not you're going to need to work with data that is retrieved from that web page, often by way of a form or bulk upload - what's the best way to do it with Flask? For simple things we can use [query strings](https://en.wikipedia.org/wiki/Query_string) in the *?foo=bar* format, but for more intensive stuff we're going to want to pass JSON - think, a .CSV file uploaded to a web browser with a lot of data within could need to be converted to JSON to be worked with in Python. In this post I'm going to write a few methods of passing data and sending responses, like redirects, between Flask and the web browser. 
 
 ## My Environment
 
@@ -34,7 +34,7 @@ Madan Sapkota's [response](https://stackoverflow.com/questions/18118627/redirect
 <br>
 The AJAX with jQuery [documentation](https://flask.palletsprojects.com/en/1.1.x/patterns/jquery/) on The Pallets Projects.
 
-## Let's begin
+## Let's Begin
 
 **&lt;NOTE>**: Instead of re-inventing the wheel and explaining things that have been well defined by someone else, I have included links next to some words/technologies/acronyms/protocols that I feel could proove useful to those not yet 'in the know'. **&lt;/NOTE>**
 
@@ -57,7 +57,7 @@ To pass data, I'm going to tackle it in three ways - GET with a query string usi
   </body>
   <script>
     function myFunction(text) {
-      }
+    }
   </script>
 </html>
 ```
@@ -87,5 +87,53 @@ A few things to note here -
 - when running, Flask is running on http://127.0.0.1:500; 
 - the only HTML file it is rendering is the above html.html file on the route / (AKA, nothing else to add on the end of the URI above). 
 
+# GET With a Query String
+
+To get this set up, there is very minimal code required - happy days. Let's start with Flask. We're going to add two routes, one to receive the data and the next to redirect you to the next page including the text from the one before. We're also going to create a variable and pass it into our function so that it can be writen to.
+```python
+from flask import Flask, render_template, redirect, url_for, request
+
+text = ''
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template("html.html")
+
+@app.route('/receive')
+def receive():
+    global data
+
+    text = request.args.get('data', 0, type=str)
+    print(text)
+    return redirect(url_for('next'))
+
+@app.route('/next')
+def next():
+    return f"You typed this: {text}"
+
+if __name__ == "__main__":
+    app.run(
+        host=("127.0.0.1"), port=int(500), use_reloader=True, debug=True)
+```
+So, what has changed here? We've added - 
+- three more Flask binaries: redirect handles redirects, passing HTTP 302 redirects; url_for retrieves the app.route URL for a given function; request allows you to parse the query strings that Flask receives. 
+- a string variable called *text* with no value.
+- an app.route for */receive* with the function *receive*. The function is given the *text* variable via global so that it can write to it. It also populates then prints *text* variable with the *data* query string. Lastly, it uses redirect & url_for to tell the browser to go to the *next* page. 
+- another app.route for */next* with the function *next*. This function is very simple HTML that simply displays the *text* variable. 
+
+But what is the data query string and the text variable? Well, *text* is JavaScript varaible but the query string must be constructed using the *?foo=bar* format and sent to our */receive* app.route. This is done by the JavaScript code below. It's only one line of code that needs to be placed inside the original JavaScript curley braces, but we're going to pass two lines - one of which is just so we can see the variable in the Chrome DevTools console.
+```html
+  <script>
+    function myFunction(text) {
+      console.log(text)
+      window.location.href = `/receive?data=${text}`;
+    }
+  </script>
+```
+No time like the present - run it! You'll see the variable breifly if you have the DevTools open, you'll also see it printed in the Python terminal as well as the */next* HTML page. You can see that the results are basically the same as the blog post picture. In the Python window you'll note the 200 OK code for the initial GET request to the */* page, the 302 redirect code with the query string and the 200 OK code for the */next* page. Working as expected - data to Python from HTML via JavaScript using a query string.
+
+**&lt;NOTE>**: If you wanted to display the text in HTML in a .html file, you'll need to specifiy render_remplate like with the initial */* page but use [Jinja2](https://jinja.palletsprojects.com/en/2.11.x/) syntax to display it - which is basically the variable name inside two curley braces either side, i.e. {{ var }} **&lt;/NOTE>**
 
 Happy scripting!
