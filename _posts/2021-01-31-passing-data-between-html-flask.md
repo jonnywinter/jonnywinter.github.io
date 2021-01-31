@@ -8,7 +8,7 @@ image: Passing-Data-Between-HTML-Flask.png
 comments: true
 ---
 
-*"jQuery is a small JavaScript library commonly used to simplify working with the DOM and JavaScript in general. It is the perfect tool to make web applications more dynamic by exchanging JSON between server and client."* - [Armin Ronacher on The Pallets Projects](https://flask.palletsprojects.com/en/1.1.x/patterns/jquery/
+*"jQuery is a small JavaScript library commonly used to simplify working with the DOM and JavaScript in general. It is the perfect tool to make web applications more dynamic by exchanging JSON between server and client."* - [Armin Ronacher on The Pallets Projects](https://flask.palletsprojects.com/en/1.1.x/patterns/jquery/)
 
 ## Summary
 
