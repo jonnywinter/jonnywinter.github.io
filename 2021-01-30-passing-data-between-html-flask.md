@@ -12,7 +12,7 @@ comments: true
 
 ## Summary
 
-Running [Flask](https://flask.palletsprojects.com/) for web apps is great - a few lines of code, that are ready to [copy & paste](https://palletsprojects.com/p/flask/) from the Pallets Project site and you're good to go. Add in a choice [bootstrap](https://getbootstrap.com/) CSS and within minutes the terible looking HTML web pages you made as a kid (let alone Myspace!) are a distant memory. However, more often than not you're going to need to work with data that is retrieved from that web page, often by way of a form or bulk upload - what's the best way to do it with Flask? For simple things we can use [query strings](https://en.wikipedia.org/wiki/Query_string) in the *?foo=bar* format, but for more intensive stuff we're going to want to pass JSON - think, a .CSV file uploaded to a web browser with a lot of data within could need to be converted to JSON to be worked with in Python. In this post I'm going to write a few methods of passing data and sending responses, like redirects, between Flask and the web browser. 
+Running [Flask](https://flask.palletsprojects.com/) for web apps is great - a few lines of code, that are ready to [copy & paste](https://palletsprojects.com/p/flask/) from the Pallets Project site and you're good to go. Add in a choice [bootstrap](https://getbootstrap.com/) CSS and within minutes the terible looking HTML web pages you made as a kid (let alone Myspace!) are a distant memory. However, more often than not you're going to need to work with data that is retrieved from that web page, often by way of a form or bulk upload - what's the best way to do it with Flask? For simple things we can use [query strings](https://en.wikipedia.org/wiki/Query_string) in the *?foo=bar* format, but for more intensive stuff we're going to want to pass [JSON](https://www.w3schools.com/whatis/whatis_json.asp) - think, a .CSV file uploaded to a web browser with a lot of data within could need to be converted to JSON to be worked with in Python. In this post I'm going to write a few methods of passing data and sending responses, like redirects, between Flask and the web browser. 
 
 ## My Environment
 
@@ -44,6 +44,7 @@ To pass data, I'm going to tackle it in three ways - GET with a query string usi
 <html lang="en">
   <head>
     <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>App</title>
   </head>
   <body>
@@ -63,6 +64,7 @@ To pass data, I'm going to tackle it in three ways - GET with a query string usi
 ```
 A few things to note here - 
 - the 4th line is the [Superhero Bootstrap](https://bootswatch.com/superhero/) (just to make it look pretty);
+- the 5th line is the jQuery & AJAX script, this isn't used in the first example but is in the later two;
 - the input is alocated the id *inputText*;
 - when clicked, the button triggers a function called *myFunction*, passing it the data (value) of the input box;
 - myFunction has the variable *text*, which is the data passed to it from the button (which in turn see the points above);
@@ -170,19 +172,25 @@ $.post("/receive", {"data": text}, (window.location.href = "{{ url_for('next') }
 
 # POST With AJAX
 
+Here it is. Although there are more ways to send data between browser/client & server, the method below (IMHO) is the best way to pass data between HTML and Flask. This method uses AJAX, a set of functions that work very well in asynchronous scenarios -[AJAX allows web pages to be updated asynchronously by exchanging data with a web server behind the scenes](https://www.w3schools.com/whatis/whatis_ajax.asp). We will use it to send data to and from Flask, without 'bothering' the browser. Unlike the name suggests (**A**synchronous **J**avaScript **A**nd **X**ML), we will use it to transfer JSON data - which it is very good at. The Python code is very similar, all bar the last two lines which are - 
+- creating a variable containing JSON data called *redirect_json*;
+- using the Flask binary jsonify to transfer JSON data.
 ```python
+from flask import Flask, render_template, redirect, url_for, request, jsonify
+#
+#rest of the 
+#script from above
+#
 @app.route('/receive', methods=['POST'])
-def receive_data():
+def receive():
     global text
 
     text = request.form['data']
     print(text)
-    
     redirect_json = {"redirect_url": url_for('next')}
-
     return jsonify(redirect_json)
 ```
-
+Inside the HTML, we need to write the following code. There's a lot more here than our one/two lines in the last examples but because AJAX works somewhat independantly (same issue again as above with redirects) we need to tell it to do a bit more - 
 ```html
 <script>
   function myFunction(text) {
@@ -203,5 +211,81 @@ def receive_data():
   }
 </script>
 ```
+From the top, we have - 
+- *var jsonVar = {"data": text};* this line creates JSON using the JavaScript variable *text* formed from the data in input box;
+- *$.ajax({* invokes AJAX. All of the text to follow relates to AJAX; 
+- *type: "POST"* sets the request method to be POST;
+- *url: "/receive"* is the app.route location;
+- *data: jsonVar* is the newly created JavaScript variable;
+- *success:*[..] to the end is the success function. It's what happens when AJAX receives a 200 code in response. Here we are telling AJAX to look out for the *redirect_json* JSON file and specifically if it has a key value pair for *redirect_url* - if it does, it will load the */next* URL.
+
+For completeness, here's the full Python code -
+```python
+from flask import Flask, render_template, redirect, url_for, request, jsonify
+
+text = ''
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template("html.html")
+
+@app.route('/receive', methods=['POST'])
+def receive():
+    global text
+
+    text = request.form['data']
+    print(text)
+    redirect_json = {"redirect_url": url_for('next')}
+    return jsonify(redirect_json)
+
+@app.route('/next')
+def next():
+    return f"You typed this: {text}"
+
+if __name__ == "__main__":
+    app.run(
+        host=("127.0.0.1"), port=int(500), use_reloader=True, debug=True)
+```
+... and HTML code -
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>App</title>
+  </head>
+  <body>
+  <div>
+    <center>
+    <br>
+    <input style="width: 500px;" class="form-control" id="inputText" placeholder="Enter some text here">
+    <button style="width: 500px;" onclick="myFunction(inputText.value)" type="submit" class="btn btn-primary">Submit</button>
+    </center>
+  </div>
+  </body>
+  <script>
+    function myFunction(text) {
+        console.log(text)
+        var jsonVar = {"data": text};
+        $.ajax({
+            type: "POST",
+            url: "/receive",
+            data: jsonVar,
+            dataType: "json",
+            success: function (redirect_json) {
+              if (redirect_json.redirect_url) {
+                  console.log(redirect_json.redirect_url)
+                  window.location.href = redirect_json.redirect_url;
+                }
+              }
+        });
+    }
+  </script>
+</html>
+```
+So there we have it. Three ways to send data to and from Flask & HTML. 
 
 Happy scripting!
