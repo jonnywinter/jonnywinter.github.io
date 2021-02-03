@@ -15,6 +15,7 @@ I’m Jonny, a tech-head with a keen eye for interesting technologies - specific
     <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="Azure Fundamentals" src="/assets/img/Cert-Azure-Fundamentals.png" width="100" /></a>
     <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="ECMS 1" src="/assets/img/Cert-ECMS1.png" width="100" /></a>
     <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="ECMS 2" src="/assets/img/Cert-ECMS2.png" width="100" /></a>
+    <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CMNA" src="/assets/img/Cert-CMNA.png" width="100" /></a>
     <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="CMSS" src="/assets/img/Cert-CMSS.png" width="100" /></a>
     <a href="https://www.youracclaim.com/users/jonathan-winter.8766fa25"><img alt="DEVASC" src="/assets/img/Cert-DEVASC.png" width="100" /></a>
 </p>
