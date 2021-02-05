@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Passing Data Between HTML & Flask"
+title: "Creating VLANs via CSV Using the Meraki API With Flask"
 author: "Jonny Winter"
 categories: journal
-tags: [Python,Flask,AJAX,JavaScript,jQuery]
-image: Passing-Data-Between-HTML-Flask.png
+tags: [Python,Flask,AJAX,JavaScript,jQuery,Meraki,API]
+image: Creating-VLANs-CSV-Meraki-API-Flask.png
 comments: true
 ---
 
