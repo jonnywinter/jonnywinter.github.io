@@ -14,7 +14,7 @@ comments: true
 
 Running [Flask](https://flask.palletsprojects.com/) for web apps is great - a few lines of code, that are ready to [copy & paste](https://palletsprojects.com/p/flask/) from the Pallets Project site and you're good to go. Add in a choice [bootstrap](https://getbootstrap.com/) CSS and within minutes the terible looking HTML web pages you made as a kid (let alone Myspace!) are a distant memory. However, more often than not you're going to need to work with data that is retrieved from that web page, often by way of a form or bulk upload - what's the best way to do it with Flask? For simple things we can use [query strings](https://en.wikipedia.org/wiki/Query_string) in the *?foo=bar* format, but for more intensive stuff we're going to want to pass [JSON](https://www.w3schools.com/whatis/whatis_json.asp) - think, a .CSV file uploaded to a web browser with a lot of data within could need to be converted to JSON to be worked with in Python. In this post I'm going to write a few methods of passing data and sending responses, like redirects, between Flask and the web browser. 
 
-<a href="#"><img alt="Adding a boilerplate to HTML" src="/assets/img/Boilerplate-HTML.gif"/></a>
+<a href="#"><img alt="Adding a boilerplate to HTML" src="/assets/img/Meraki-VLAN-CSV-Tool.gif"/></a>
 
 ## My Environment
 
