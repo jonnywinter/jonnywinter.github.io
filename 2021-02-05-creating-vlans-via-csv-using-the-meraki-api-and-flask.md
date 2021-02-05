@@ -14,6 +14,8 @@ comments: true
 
 Running [Flask](https://flask.palletsprojects.com/) for web apps is great - a few lines of code, that are ready to [copy & paste](https://palletsprojects.com/p/flask/) from the Pallets Project site and you're good to go. Add in a choice [bootstrap](https://getbootstrap.com/) CSS and within minutes the terible looking HTML web pages you made as a kid (let alone Myspace!) are a distant memory. However, more often than not you're going to need to work with data that is retrieved from that web page, often by way of a form or bulk upload - what's the best way to do it with Flask? For simple things we can use [query strings](https://en.wikipedia.org/wiki/Query_string) in the *?foo=bar* format, but for more intensive stuff we're going to want to pass [JSON](https://www.w3schools.com/whatis/whatis_json.asp) - think, a .CSV file uploaded to a web browser with a lot of data within could need to be converted to JSON to be worked with in Python. In this post I'm going to write a few methods of passing data and sending responses, like redirects, between Flask and the web browser. 
 
+<a href="#"><img alt="Adding a boilerplate to HTML" src="/assets/img/Boilerplate-HTML.gif"/></a>
+
 ## My Environment
 
 Coffee: [Bobolink, Brazil from Union Hand-Roasted Coffee](https://unionroasted.com/products/bobolink-brazil)
@@ -28,9 +30,13 @@ Browser: [Google Chrome v88](https://www.google.com/intl/en_uk/chrome/)
 
 ## Tip o' the Hat
 
-The [Flask documentation](https://flask.palletsprojects.com/en/1.1.x/) by Pallets
+Manav Kothari's [response](https://stackoverflow.com/questions/38636218/how-can-i-convert-csv-to-json-file-in-that-form/38636684#38636684) on Stack Overflow
 <br>
-Madan Sapkota's [response](https://stackoverflow.com/questions/18118627/redirecting-after-ajax-post) on Stack Overflow
+Mudassar Ahmed Khan's [answer](https://www.aspsnippets.com/Articles/Read-Convert-CSV-File-to-JSON-Array-in-jQuery-using-HTML5-File-API.aspx) on ASP Snippets
+<br>
+This TechSlides [article](http://techslides.com/convert-csv-to-json-in-javascript)
+<br>
+Espoir Murhabazi's [answer](https://stackoverflow.com/questions/47627035/how-to-get-ajax-posted-json-in-flask) on Stack Overflow
 <br>
 The AJAX with jQuery [documentation](https://flask.palletsprojects.com/en/1.1.x/patterns/jquery/) on The Pallets Projects.
 
