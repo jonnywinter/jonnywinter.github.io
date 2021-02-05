@@ -20,7 +20,7 @@ Running [Flask](https://flask.palletsprojects.com/) for web apps is great - a fe
 
 Coffee: [Bobolink, Brazil from Union Hand-Roasted Coffee](https://unionroasted.com/products/bobolink-brazil)
 <br>
-Music: [Tigercub](https://open.spotify.com/artist/6ekYAO2D1JkI58CF4uRRqw?si=JfKaaMIeR1CWf1JkXyrPrA)
+Music: [Paul's Boutique by Beastie Boys](https://open.spotify.com/album/1kmyirVya5fRxdjsPFDM05?si=zLgvHUIpReuGl322j89bWQ)
 <br>
 OS: Windows 10 Pro v20H2 x64. 
 <br>
@@ -32,11 +32,11 @@ Browser: [Google Chrome v88](https://www.google.com/intl/en_uk/chrome/)
 
 Manav Kothari's [response](https://stackoverflow.com/questions/38636218/how-can-i-convert-csv-to-json-file-in-that-form/38636684#38636684) on Stack Overflow
 <br>
-Mudassar Ahmed Khan's [answer](https://www.aspsnippets.com/Articles/Read-Convert-CSV-File-to-JSON-Array-in-jQuery-using-HTML5-File-API.aspx) on ASP Snippets
+Mudassar Ahmed Khan's [post](https://www.aspsnippets.com/Articles/Read-Convert-CSV-File-to-JSON-Array-in-jQuery-using-HTML5-File-API.aspx) on ASP Snippets
 <br>
 This TechSlides [article](http://techslides.com/convert-csv-to-json-in-javascript)
 <br>
-Espoir Murhabazi's [answer](https://stackoverflow.com/questions/47627035/how-to-get-ajax-posted-json-in-flask) on Stack Overflow
+Espoir Murhabazi's [response](https://stackoverflow.com/questions/47627035/how-to-get-ajax-posted-json-in-flask) on Stack Overflow
 <br>
 The AJAX with jQuery [documentation](https://flask.palletsprojects.com/en/1.1.x/patterns/jquery/) on The Pallets Projects.
 
