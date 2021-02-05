@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Creating VLANs via CSV Using the Meraki API With Flask"
+title: "Creating VLANs via CSV Using the Meraki API and Flask"
 author: "Jonny Winter"
 categories: journal
 tags: [Python,Flask,AJAX,JavaScript,jQuery,Meraki,API]
