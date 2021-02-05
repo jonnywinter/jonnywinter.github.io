@@ -8,11 +8,11 @@ image: Creating-VLANs-CSV-Meraki-API-Flask.png
 comments: true
 ---
 
-*"jQuery is a small JavaScript library commonly used to simplify working with the DOM and JavaScript in general. It is the perfect tool to make web applications more dynamic by exchanging JSON between server and client."* - [Armin Ronacher on The Pallets Projects](https://flask.palletsprojects.com/en/1.1.x/patterns/jquery/)
+*"Meraki Dashboard API - A RESTful API to programmatically manage and monitor Meraki networks at scale. What can you do with it? Add new organizations, admins, networks, devices, VLANs, and more."* - [Meraki API Docs on developer.cisco.com](https://developer.cisco.com/meraki/api-v1/)
 
 ## Summary
 
-Running [Flask](https://flask.palletsprojects.com/) for web apps is great - a few lines of code, that are ready to [copy & paste](https://palletsprojects.com/p/flask/) from the Pallets Project site and you're good to go. Add in a choice [bootstrap](https://getbootstrap.com/) CSS and within minutes the terible looking HTML web pages you made as a kid (let alone Myspace!) are a distant memory. However, more often than not you're going to need to work with data that is retrieved from that web page, often by way of a form or bulk upload - what's the best way to do it with Flask? For simple things we can use [query strings](https://en.wikipedia.org/wiki/Query_string) in the *?foo=bar* format, but for more intensive stuff we're going to want to pass [JSON](https://www.w3schools.com/whatis/whatis_json.asp) - think, a .CSV file uploaded to a web browser with a lot of data within could need to be converted to JSON to be worked with in Python. In this post I'm going to write a few methods of passing data and sending responses, like redirects, between Flask and the web browser. 
+Over the last [two](https://jonathan-winter.co.uk/journal/python-flask-iis.html) [posts](https://jonathan-winter.co.uk/journal/passing-data-between-html-flask.html), I've documented some how-to's using the almighty [Flask](https://flask.palletsprojects.com/en/1.1.x/), the Python package. However, in this post I'm going to document a project - this project is a small Flask web app that enables you to bulk create MX VLANs using the Meraki API. With minor alteration this could be used to iterate over hundreds of networks' worth of MXs, or be ammended to create firewall rules, etc., etc. To show the tool in action, here's a GIF of it working on my PC - 
 
 <a href="#"><img alt="Adding a boilerplate to HTML" src="/assets/img/Meraki-VLAN-CSV-Tool.gif"/></a>
 
