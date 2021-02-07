@@ -151,7 +151,7 @@ if __name__ == "__main__":
     <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./static/javascript.js"></script>
-    <title>Document</title>
+    <title>CSV Web App</title>
 </head>
 <body>
     <div class="container" style="max-width: 1000px">
@@ -193,7 +193,11 @@ if __name__ == "__main__":
 </body>
 </html>
 ```
-JavaScript - 
+- *{% for vlan in jsonData | sort(attribute="id", reverse=False)  %}* is the Jinja2 for loop which populates n rows depending on the data passed to it by jsonData from the Python GET request to the Meraki API to retrieve the current VLANs.
+- *<input type="file" id="csvFileInput" accept=".csv">* is the CSV file selector
+- *<input type="button" id="upload" onclick="handleFiles(csvFileInput.files)" value="Upload" />* is the button that calls the first JavaScript function below.
+
+## JavaScript - 
 ```javascript
 //---FIRST FUNCTION
 function handleFiles(files) {
