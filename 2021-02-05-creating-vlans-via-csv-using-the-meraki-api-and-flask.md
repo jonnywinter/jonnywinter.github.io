@@ -187,6 +187,7 @@ HTML -
 </body>
 </html>
 ```
+JavaScript - 
 ```javascript
 //---FIRST FUNCTION
 function handleFiles(files) {
@@ -210,46 +211,30 @@ function loadHandler(event) {
 }
 //---NEXT FUNCTION
 function process(csv) {
-
-    // Newline split
     var lines = csv.split("\n");
-
     result = [];
-
     var headers = lines[0].split(",");
-
     for (var i = 1; i < lines.length - 1; i++) {
-
         var obj = {};
-
-        //Comma split
         var currentline = lines[i].split(",");
-
         for (var j = 0; j < headers.length; j++) {
             obj[headers[j]] = currentline[j];
         }
-
         result.push(obj);
     }
-
-    // OUTPUT
-    console.log(result);
     jsonResult = JSON.stringify(result);
     document.getElementById('dvCSV').innerHTML = jsonResult;
-    myFunction(result);
-
+    postFunction(result);
 }
 //---NEXT FUNCTION
 function errorHandler(evt) {
     if (evt.target.error.name == "NotReadableError") {
-        alert("Canno't read file !");
+        alert("Cannot read file !");
     }
 }
 //---NEXT FUNCTION
-function myFunction(text) {
-    
+function postFunction(text) {
     var jsonVar = {"data": text};
-    console.log(jsonVar);
     $.ajax({
         type: "POST",
         url: "/receive",
