@@ -193,6 +193,7 @@ if __name__ == "__main__":
 
 
 ## JavaScript
+
 ```javascript
 //---FIRST FUNCTION
 function handleFiles(files) {
@@ -253,7 +254,8 @@ function postFunction(text) {
     });
 }
 ```
-## CSV 
+## CSV
+
 ```csv
 id,name,subnet,applianceIp
 10,Corporate,172.16.1.0/24, 172.16.1.1
