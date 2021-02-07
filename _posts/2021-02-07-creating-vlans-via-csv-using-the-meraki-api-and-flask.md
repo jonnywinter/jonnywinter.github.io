@@ -136,7 +136,10 @@ if __name__ == "__main__":
         host=("127.0.0.1"), port=int(500), use_reloader=True, debug=True)
 ```
 - *"jsonify serializes data to JavaScript Object Notation (JSON) format, wraps it in a Response object with the application/json mimetype."* - Matt Makai's description on [Full Stack Python](https://www.fullstackpython.com/flask-json-jsonify-examples.html).
-
+- *text = request.get_json()* creates the *text* variable populated of the JSON formated version of the CSV file.
+- *for key, value in i.items():*, *repairedDict[key.strip()] = value.strip().replace("\r","")* & *repairedList.append(repairedDict)* strip the carriage return from the JSON variable added by *JSON.stringify* in the JavaScript.
+- *host=("127.0.0.1"), port=int(500), use_reloader=True, debug=True)* specifies the port & IP that the Flask server should run on.
+- *jsonData* is iterated through in [Jinja2](https://jinja.palletsprojects.com/en/2.11.x/) inside the HTML below.
 
 ## HTML -
 ```html
@@ -190,7 +193,11 @@ if __name__ == "__main__":
 </body>
 </html>
 ```
-
+- *link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css"* is loads the [Superhero Bootstrap](https://bootswatch.com/superhero/) for styling.
+- *script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"* loads AJAX & jQuery.
+- *{% for vlan in jsonData | sort(attribute="id", reverse=False)  %}* is the Jinja2 for loop which populates n rows depending on the data passed to it by jsonData from the Python GET request to the Meraki API to retrieve the current VLANs. The rows inside the table reference the key value pairs inside the JSON.
+- *input type="file" id="csvFileInput" accept=".csv"* is the CSV file selector
+- *input type="button" id="upload" onclick="handleFiles(csvFileInput.files)" value="Upload"* is the button that calls the first JavaScript function below.
 
 ## JavaScript
 
