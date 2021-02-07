@@ -193,9 +193,11 @@ if __name__ == "__main__":
 </body>
 </html>
 ```
-- *{% for vlan in jsonData | sort(attribute="id", reverse=False)  %}* is the Jinja2 for loop which populates n rows depending on the data passed to it by jsonData from the Python GET request to the Meraki API to retrieve the current VLANs.
-- *<input type="file" id="csvFileInput" accept=".csv">* is the CSV file selector
-- *<input type="button" id="upload" onclick="handleFiles(csvFileInput.files)" value="Upload" />* is the button that calls the first JavaScript function below.
+- *link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css"* is loads the [Superhero Bootstrap](https://bootswatch.com/superhero/) for styling.
+- *script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"* loads AJAX & jQuery.
+- *{% for vlan in jsonData | sort(attribute="id", reverse=False)  %}* is the Jinja2 for loop which populates n rows depending on the data passed to it by jsonData from the Python GET request to the Meraki API to retrieve the current VLANs. The rows inside the table reference the key value pairs inside the JSON.
+- *input type="file" id="csvFileInput" accept=".csv"* is the CSV file selector
+- *input type="button" id="upload" onclick="handleFiles(csvFileInput.files)" value="Upload"* is the button that calls the first JavaScript function below.
 
 ## JavaScript - 
 ```javascript
@@ -258,7 +260,7 @@ function postFunction(text) {
     });
 }
 ```
-CSV - 
+## CSV 
 ```csv
 id,name,subnet,applianceIp
 10,Corporate,172.16.1.0/24, 172.16.1.1
@@ -266,6 +268,6 @@ id,name,subnet,applianceIp
 30,Printers,172.16.3.0/24, 172.16.3.1
 40,Guest,172.16.4.0/24, 172.16.4.1
 ```
-
+So that's it. A working web app. As the summary stated, with simple modification and some imagination this code can be used to do a lot.
 
 Happy scripting!
