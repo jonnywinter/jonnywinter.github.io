@@ -195,7 +195,7 @@ if __name__ == "__main__":
 ```
 - *link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css"* is loads the [Superhero Bootstrap](https://bootswatch.com/superhero/) for styling.
 - *script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"* loads AJAX & jQuery.
-- *for vlan in jsonData | sort(attribute="id", reverse=False)* is the Jinja2 for loop which populates n rows depending on the data passed to it by jsonData from the Python GET request to the Meraki API to retrieve the current VLANs. The rows inside the table reference the key value pairs inside the JSON.
+- *for vlan in jsonData* is the Jinja2 for loop which populates n rows depending on the data passed to it by jsonData from the Python GET request to the Meraki API to retrieve the current VLANs. The rows inside the table reference the key value pairs inside the JSON.
 - *input type="file" id="csvFileInput" accept=".csv"* is the CSV file selector
 - *input type="button" id="upload" onclick="handleFiles(csvFileInput.files)" value="Upload"* is the button that calls the first JavaScript function below.
 
