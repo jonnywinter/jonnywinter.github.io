@@ -80,10 +80,12 @@ from flask import Flask, render_template, redirect, url_for, request, jsonify
 import json
 import requests
 
-headers = {}
+headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "X-Cisco-Meraki-API-Key": "YOUR API KEY HERE"
+}
 baseUrl = 'https://api.meraki.com/api/v1'
-headers['X-Cisco-Meraki-API-Key'] = 'YOUR-API-KEY-HERE'
-headers['Content-Type'] = 'application/json'
 networkId = 'YOUR-NETWORK-ID-HERE'
 
 text = ''
