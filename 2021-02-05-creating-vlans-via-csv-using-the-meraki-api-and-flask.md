@@ -72,9 +72,14 @@ response = requests.request('POST', url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
 ```
-Like with the above, there is a quickstart Flask project ready to be copy & pasted from the [Pallets Projects site](https://flask.palletsprojects.com/en/1.1.x/quickstart/#quickstart). A great place to start. Using the Meraki & Flask quickstart code, I created the following project that works like the GIF at top of this post. The code is split into four files - Python, HTML & CSV. The Python file is in the root of the folder, the HTML must be inside a sub-folder called *templates*, the JavaScript must be inside a sub-folder of the root called *static* and the CSV file, which can live anywhere, is in the root. Here's the code - 
+Like with the above, there is a quickstart Flask project ready to be copy & pasted from the [Pallets Projects site](https://flask.palletsprojects.com/en/1.1.x/quickstart/#quickstart). A great place to start. Using the Meraki & Flask quickstart code, I created the following project that works like the GIF at top of this post. The code is split into four files - Python, HTML & CSV. The Python file is in the root of the folder, the HTML must be inside a sub-folder called *templates*, the JavaScript must be inside a sub-folder of the root called *static* and the CSV file, which can live anywhere, is in the root. Here's the code & notes next to each section - 
 
-Python - 
+## Python
+- *"jsonify serializes data to JavaScript Object Notation (JSON) format, wraps it in a Response object with the application/json mimetype."* - Matt Makai's description on [Full Stack Python](https://www.fullstackpython.com/flask-json-jsonify-examples.html).
+- *text = request.get_json()* creates the *text* variable populated of the JSON formated version of the CSV file.
+- *for key, value in i.items():*, *repairedDict[key.strip()] = value.strip().replace("\r","")* & *repairedList.append(repairedDict)* strip \r carriage return from the JSON variable added by *JSON.stringify* in the JavaScript.
+- *host=("127.0.0.1"), port=int(500), use_reloader=True, debug=True)* specifies the port & IP that the Flask server should run on.
+
 ```python
 from flask import Flask, render_template, redirect, url_for, request, jsonify
 import json
