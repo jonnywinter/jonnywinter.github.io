@@ -72,7 +72,7 @@ response = requests.request('POST', url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
 ```
-Like with the above, there is a quickstart Flask project ready to be copy & pasted from the [Pallets Projects site](https://flask.palletsprojects.com/en/1.1.x/quickstart/#quickstart). A great place to start. Using the Meraki & Flask quickstart code, I created the following project that works like the GIF at top of this post. The code is split into three files - Python, HTML & CSV. The Python file is in the root of the folder, the HTML must be inside a sub-folder called *templates* and the CSV file, which can live anywhere, is in the root. Here's the code - 
+Like with the above, there is a quickstart Flask project ready to be copy & pasted from the [Pallets Projects site](https://flask.palletsprojects.com/en/1.1.x/quickstart/#quickstart). A great place to start. Using the Meraki & Flask quickstart code, I created the following project that works like the GIF at top of this post. The code is split into four files - Python, HTML & CSV. The Python file is in the root of the folder, the HTML must be inside a sub-folder called *templates*, the JavaScript must be inside a sub-folder of the root called *static* and the CSV file, which can live anywhere, is in the root. Here's the code - 
 
 Python - 
 ```python
@@ -86,7 +86,7 @@ headers = {
     "X-Cisco-Meraki-API-Key": "YOUR API KEY HERE"
 }
 baseUrl = 'https://api.meraki.com/api/v1'
-networkId = 'YOUR-NETWORK-ID-HERE'
+networkId = 'YOUR NETWORK ID HERE'
 
 text = ''
 repairedList = []
@@ -144,6 +144,7 @@ HTML -
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./static/javascript.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -184,86 +185,85 @@ HTML -
         </div>
     </div>
 </body>
-    <script>
-        //---FIRST FUNCTION
-        function handleFiles(files) {
-            if (window.FileReader) {
-                getText(files[0]);
-            } else {
-                alert('FileReader are not supported in this browser.');
-            }
-        }
-        //---NEXT FUNCTION
-        function getText(fileToRead) {
-            var reader = new FileReader(); 
-            reader.readAsText(fileToRead);
-            reader.onload = loadHandler;
-            reader.onerror = errorHandler;
-        }
-        //---NEXT FUNCTION
-        function loadHandler(event) {
-            var csv = event.target.result;
-            process(csv);
-        }
-        //---NEXT FUNCTION
-        function process(csv) {
-
-            // Newline split
-            var lines = csv.split("\n");
-
-            result = [];
-
-            var headers = lines[0].split(",");
-
-            for (var i = 1; i < lines.length - 1; i++) {
-
-                var obj = {};
-
-                //Comma split
-                var currentline = lines[i].split(",");
-
-                for (var j = 0; j < headers.length; j++) {
-                    obj[headers[j]] = currentline[j];
-                }
-
-                result.push(obj);
-            }
-
-            // OUTPUT
-            console.log(result);
-            jsonResult = JSON.stringify(result);
-            document.getElementById('dvCSV').innerHTML = jsonResult;
-            myFunction(result);
-
-        }
-        //---NEXT FUNCTION
-        function errorHandler(evt) {
-            if (evt.target.error.name == "NotReadableError") {
-                alert("Canno't read file !");
-            }
-        }
-        //---NEXT FUNCTION
-        function myFunction(text) {
-            
-            var jsonVar = {"data": text};
-            console.log(jsonVar);
-            $.ajax({
-                type: "POST",
-                url: "/receive",
-                data: JSON.stringify(text),
-                contentType: "application/json",
-                dataType: "json",
-                success: function (redirect_json) {
-                    if (redirect_json.redirect_url) {
-                        console.log(redirect_json.redirect_url)
-                        window.location.href = redirect_json.redirect_url;
-                    }
-                }
-            });
-        }
-
-  </script>
 </html>
+```
+```javascript
+//---FIRST FUNCTION
+function handleFiles(files) {
+    if (window.FileReader) {
+        getText(files[0]);
+    } else {
+        alert('FileReader are not supported in this browser.');
+    }
+}
+//---NEXT FUNCTION
+function getText(fileToRead) {
+    var reader = new FileReader(); 
+    reader.readAsText(fileToRead);
+    reader.onload = loadHandler;
+    reader.onerror = errorHandler;
+}
+//---NEXT FUNCTION
+function loadHandler(event) {
+    var csv = event.target.result;
+    process(csv);
+}
+//---NEXT FUNCTION
+function process(csv) {
+
+    // Newline split
+    var lines = csv.split("\n");
+
+    result = [];
+
+    var headers = lines[0].split(",");
+
+    for (var i = 1; i < lines.length - 1; i++) {
+
+        var obj = {};
+
+        //Comma split
+        var currentline = lines[i].split(",");
+
+        for (var j = 0; j < headers.length; j++) {
+            obj[headers[j]] = currentline[j];
+        }
+
+        result.push(obj);
+    }
+
+    // OUTPUT
+    console.log(result);
+    jsonResult = JSON.stringify(result);
+    document.getElementById('dvCSV').innerHTML = jsonResult;
+    myFunction(result);
+
+}
+//---NEXT FUNCTION
+function errorHandler(evt) {
+    if (evt.target.error.name == "NotReadableError") {
+        alert("Canno't read file !");
+    }
+}
+//---NEXT FUNCTION
+function myFunction(text) {
+    
+    var jsonVar = {"data": text};
+    console.log(jsonVar);
+    $.ajax({
+        type: "POST",
+        url: "/receive",
+        data: JSON.stringify(text),
+        contentType: "application/json",
+        dataType: "json",
+        success: function (redirect_json) {
+            if (redirect_json.redirect_url) {
+                console.log(redirect_json.redirect_url)
+                window.location.href = redirect_json.redirect_url;
+            }
+        }
+    });
+}
 ```
 CSV - 
 ```csv
