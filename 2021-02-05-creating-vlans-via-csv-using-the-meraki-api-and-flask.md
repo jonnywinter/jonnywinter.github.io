@@ -234,7 +234,6 @@ function errorHandler(evt) {
 }
 //---NEXT FUNCTION
 function postFunction(text) {
-    var jsonVar = {"data": text};
     $.ajax({
         type: "POST",
         url: "/receive",
@@ -243,7 +242,6 @@ function postFunction(text) {
         dataType: "json",
         success: function (redirect_json) {
             if (redirect_json.redirect_url) {
-                console.log(redirect_json.redirect_url)
                 window.location.href = redirect_json.redirect_url;
             }
         }
