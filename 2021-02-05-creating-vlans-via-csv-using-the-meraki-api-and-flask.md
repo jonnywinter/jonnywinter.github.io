@@ -44,6 +44,46 @@ The AJAX with jQuery [documentation](https://flask.palletsprojects.com/en/1.1.x/
 
 **&lt;NOTE>**: Instead of re-inventing the wheel and explaining things that have been well defined by someone else, I have included links next to some words/technologies/acronyms/protocols that I feel could proove useful to those not yet 'in the know'. **&lt;/NOTE>**
 
+To create a VLAN on a [Meraki MX Security Appliance](https://meraki.cisco.com/products/security-sd-wan/), the Meraki API [documentation](https://developer.cisco.com/meraki/api-v1/#!create-network-appliance-vlan) says to send a POST request to the following endpoint - 
+```html
+https://api.meraki.com/api/v1/networks/{networkId}/appliance/vlans
+```
+As a base, you can retrieve the below Python [Requests](https://pypi.org/project/requests/) code from the documentation page by clicking on Template on the far right. This will give you everything required to make the POST request - 
+```python
+import requests
+
+url = "https://api.meraki.com/api/v1/networks/{networkId}/appliance/vlans"
+
+payload = '''{
+    "id": "1234",
+    "name": "My VLAN",
+    "subnet": "192.168.1.0/24",
+    "applianceIp": "192.168.1.2",
+    "groupPolicyId": "101"
+}'''
+
+headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "X-Cisco-Meraki-API-Key": "YOUR API KEY HERE"
+}
+
+response = requests.request('POST', url, headers=headers, data = payload)
+
+print(response.text.encode('utf8'))
+```
+
+
+
+CSV - 
+```csv
+id,name,subnet,applianceIp
+10,Corporate,172.16.1.0/24, 172.16.1.1
+20,IoT,172.16.2.0/24, 172.16.2.1
+30,Printers,172.16.3.0/24, 172.16.3.1
+40,Guest,172.16.4.0/24, 172.16.4.1
+```
+
 Python - 
 ```python
 from flask import Flask, render_template, redirect, url_for, request, jsonify
@@ -233,13 +273,6 @@ HTML -
   </script>
 </html>
 ```
-CSV - 
-```csv
-id,name,subnet,applianceIp
-10,Corporate,172.16.1.0/24, 172.16.1.1
-20,IoT,172.16.2.0/24, 172.16.2.1
-30,Printers,172.16.3.0/24, 172.16.3.1
-40,Guest,172.16.4.0/24, 172.16.4.1
-```
+
 
 Happy scripting!
