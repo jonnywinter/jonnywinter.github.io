@@ -48,7 +48,7 @@ To create a VLAN on a [Meraki MX Security Appliance](https://meraki.cisco.com/pr
 ```html
 https://api.meraki.com/api/v1/networks/{networkId}/appliance/vlans
 ```
-As a base, you can retrieve the below Python [Requests](https://pypi.org/project/requests/) code from the documentation page by clicking on Template on the far right. This will give you everything required to make the POST request - 
+As a base, you can retrieve the below Python [Requests](https://pypi.org/project/requests/) code from the documentation page by clicking on Template on the far right. This will give you everything required to make the POST request to create a VLAN - 
 ```python
 import requests
 
@@ -72,18 +72,7 @@ response = requests.request('POST', url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
 ```
-
-
-
-CSV - 
-```csv
-id,name,subnet,applianceIp
-10,Corporate,172.16.1.0/24, 172.16.1.1
-20,IoT,172.16.2.0/24, 172.16.2.1
-30,Printers,172.16.3.0/24, 172.16.3.1
-40,Guest,172.16.4.0/24, 172.16.4.1
-```
-
+Like with the above, there is a quickstart Flask project ready to be copy & pasted from the [Pallets Projects site](https://flask.palletsprojects.com/en/1.1.x/quickstart/#quickstart). A great place to start. Using the Meraki & Flask quickstart code, I created the following project that works like the GIF at top of this post. The code is split into three files - Python, HTML & CSV. The Python file is in the root of the folder, the HTML must be inside a sub-folder called *templates* and the CSV file, which can live anywhere, is in the root. Here's the code - 
 Python - 
 ```python
 from flask import Flask, render_template, redirect, url_for, request, jsonify
@@ -131,13 +120,13 @@ def getVlans():
     vlanData = []
 
     url = f"{baseUrl}/networks/{networkId}/appliance/vlans"
-    vlanData = requests.request('GET', url, headers=headers, verify=False).json()
+    vlanData = requests.request('GET', url, headers=headers).json()
 
 def createVlans():
 
     url = f"{baseUrl}/networks/{networkId}/appliance/vlans"
     for i in repairedList:
-        requests.request('POST', url, headers=headers, data=json.dumps(i), verify=False).json()
+        requests.request('POST', url, headers=headers, data=json.dumps(i)).json()
 
 if __name__ == "__main__":
     app.run(
@@ -272,6 +261,14 @@ HTML -
 
   </script>
 </html>
+```
+CSV - 
+```csv
+id,name,subnet,applianceIp
+10,Corporate,172.16.1.0/24, 172.16.1.1
+20,IoT,172.16.2.0/24, 172.16.2.1
+30,Printers,172.16.3.0/24, 172.16.3.1
+40,Guest,172.16.4.0/24, 172.16.4.1
 ```
 
 
