@@ -137,8 +137,9 @@ if __name__ == "__main__":
 ```
 - *"jsonify serializes data to JavaScript Object Notation (JSON) format, wraps it in a Response object with the application/json mimetype."* - Matt Makai's description on [Full Stack Python](https://www.fullstackpython.com/flask-json-jsonify-examples.html).
 - *text = request.get_json()* creates the *text* variable populated of the JSON formated version of the CSV file.
-- *for key, value in i.items():*, *repairedDict[key.strip()] = value.strip().replace("\r","")* & *repairedList.append(repairedDict)* strip \r carriage return from the JSON variable added by *JSON.stringify* in the JavaScript.
+- *for key, value in i.items():*, *repairedDict[key.strip()] = value.strip().replace("\r","")* & *repairedList.append(repairedDict)* strip the carriage return from the JSON variable added by *JSON.stringify* in the JavaScript.
 - *host=("127.0.0.1"), port=int(500), use_reloader=True, debug=True)* specifies the port & IP that the Flask server should run on.
+- *jsonData* is iterated through in [Jinja2](https://jinja.palletsprojects.com/en/2.11.x/) inside the HTML below.
 
 ## HTML -
 ```html
