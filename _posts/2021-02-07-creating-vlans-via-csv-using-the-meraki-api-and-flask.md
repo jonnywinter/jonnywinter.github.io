@@ -141,7 +141,7 @@ if __name__ == "__main__":
 - *host=("127.0.0.1"), port=int(500), use_reloader=True, debug=True)* specifies the port & IP that the Flask server should run on.
 - *jsonData* is iterated through in [Jinja2](https://jinja.palletsprojects.com/en/2.11.x/) inside the HTML below.
 
-## HTML -
+## HTML
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -200,7 +200,6 @@ if __name__ == "__main__":
 - *input type="button" id="upload" onclick="handleFiles(csvFileInput.files)" value="Upload"* is the button that calls the first JavaScript function below.
 
 ## JavaScript
-
 ```javascript
 //---FIRST FUNCTION
 function handleFiles(files) {
@@ -261,8 +260,8 @@ function postFunction(text) {
     });
 }
 ```
-## CSV
 
+## CSV
 ```csv
 id,name,subnet,applianceIp
 10,Corporate,172.16.1.0/24, 172.16.1.1
