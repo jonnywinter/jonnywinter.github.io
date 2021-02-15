@@ -63,10 +63,14 @@ Microsoft's Python-Flask quickstart [guide](https://docs.microsoft.com/en-gb/azu
 
 Unfortuanately we're going to need to dip in and out of the 1, 2 & 3 of the prerequisites (i.e. we can't do one at a time) so take note of the headings for each section change.
 
-# Umbrella
+## Umbrella
 
-123fhfh ddg
+Having already created your account, make your way to the [dashboard](https://dashboard.umbrella.com). On the left side, navigate to **Policies** > **Policy Components** > **Integration** and click add to create a new integration. Give your integration a name, for this example I'm going to call it *Umbrella Google Assistant*. Once you've created it, **save** it and open it to **enable** it. Here, make note of the **Custom Domains** list; this is what we're going to be adding domains to via our voice commands. Before exiting this bit, copy the **API URL**.
 
+**&lt;NOTE>**: The API URL is formed of *https://s-platform.api.opendns.com/1.0*, */events* and the query string *?&customerKey=1111-2222-3333-4444*. The first part is common amongst all Enforcement API endpoints, the second is specifically where we will send POST requests to add domains to our block list & the last bit is your integration specific API key - keep this safe as it is the only way that your request is validated. **&lt;/NOTE>**
 
+Next we need to our integration to a policy that affects one/more devices which will be affected by this project. To do this, navigate to **Policies** > **DNS Policies** > *Select policiy*. Here, click **Security Setting Applied** to edit your policy, **Categories to Block** and then edit. **Enable** your newly created integration, **save** > **proceed** > **set & return** > **save**. We're now done with the Umbrella part.
+
+**&lt;NOTE>**: Within **Reporting** > **Management** > **Admin Audit Log** > **Filter** > **Filter by Identities & Settings: Umbrella Google Assistant Domain List** you can see/report on when domains are added to your domain list, as well as in the **Custom Domains** section of the integration. **&lt;/NOTE>**
 
 Happy scripting!
