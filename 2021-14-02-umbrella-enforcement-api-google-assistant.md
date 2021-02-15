@@ -50,15 +50,22 @@ Azure-Samples [Python file](https://github.com/Azure-Samples/python-docs-hello-w
 <br>
 Microsoft's Python-Flask quickstart [guide](https://docs.microsoft.com/en-gb/azure/app-service/quickstart-python?tabs=bash&pivots=python-framework-flask) on microsoft.com.
 
-## Let's Begin
+## Prerequisites
 
-**&lt;NOTE>**: Instead of re-inventing the wheel and explaining things that have been well defined by someone else, I have included links next to some words/technologies/acronyms/protocols that I feel could proove useful to those not yet 'in the know'. **&lt;/NOTE>**
-
-To get this achieved, we're going to need a few things - 
 1. A Cisco Umbrella subscription (trial or full).
 2. An Azure subscription (trial or full), but the App Service is free for the first 10. See F1 [here](https://azure.microsoft.com/en-gb/pricing/details/app-service/windows/).
 3. An IFTTT subscription (free or paid). The standard subscription is free for 3 integrations, but you will need to re-activate your integration once every 3 months to keep it from being de-activated. Some handy information [here](https://help.ifttt.com/hc/en-us/articles/360053706813-IFTTT-Plans-at-a-glance).
 4. Access to a Google Assistant device. I'm using a Sonons product here, but it also worked with my Google Pixel 4a handset.
+
+## Let's Begin
+
+**&lt;NOTE>**: Instead of re-inventing the wheel and explaining things that have been well defined by someone else, I have included links next to some words/technologies/acronyms/protocols that I feel could proove useful to those not yet 'in the know'. **&lt;/NOTE>**
+
+Unfortuanately we're going to need to dip in and out of the 1, 2 & 3 of the prerequisites (i.e. we can't do one at a time) so take note of the headings for each section change.
+
+# Umbrella
+
+123fhfh ddg
 
 
 
