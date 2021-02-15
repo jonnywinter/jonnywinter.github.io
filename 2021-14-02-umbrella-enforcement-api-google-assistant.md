@@ -42,8 +42,6 @@ SearchingGood's [post](https://www.reddit.com/r/ifttt/comments/871r0i/example_of
 <br>
 Chrivand's [Python file](https://github.com/chrivand/UmbrellaPythonSamples/blob/master/UmbrellaEnforcementPostRequest.py) on GitHub.
 <br>
-Cisco Umbrella's [documentation](https://support.umbrella.com/hc/en-us/articles/231248748-Cisco-Umbrella-The-Umbrella-Enforcement-API-for-Custom-Integrations) on the Enforcement API.
-<br>
 Cisco Umbrella's [reference guide](https://docs.umbrella.com/enforcement-api/reference) on the Enforcement API.
 <br>
 The Cisco DevNet [Umbrella](https://developer.cisco.com/umbrella/) page.
