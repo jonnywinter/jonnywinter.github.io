@@ -14,8 +14,6 @@ comments: true
 
 WORDS
 
-<a href="#"><img alt="Adding a boilerplate to HTML" src="/assets/img/Meraki-VLAN-CSV-Tool.gif"/></a>
-
 ## My Environment
 
 Coffee: [Bobolink, Brazil from Union Hand-Roasted Coffee](https://unionroasted.com/products/bobolink-brazil)
