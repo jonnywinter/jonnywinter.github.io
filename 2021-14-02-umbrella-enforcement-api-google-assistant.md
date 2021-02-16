@@ -97,14 +97,31 @@ Before we get to the *then that* section, head over to webhook.site and create y
 
 After that, click **continue** at the bottom and save your applet. At this point, you'll be able to give Google Assistant a command and you will see a POST message with the JSON data in the webhook.site page. Pretty neat! Try: "Hey Google, please block the site abc123.com". You will be able to see that domain referenced in the raw JSON. Our next step is to create the Python & Flask code in an Azure App Service so we can parse that JSON domain into a string which we provide in another JSON file up to Umbrella. It's easier than it sounds 😉.
 
+We will need to return to IFTTT to change the webhook.site endpoint to be the URL given to us by Azure in the next step.
+
 ## Azure
 
-requirements.txt must be created in the root of the directory with the following data -
+You are given 10 free Azure App Services at all time, which is great. Using one of these free F1 App Services & VScode we can have this last step configured in no time. So, head over to [Azure](https://portal.azure.com) and locate and open **Free Services**. Under **Always free services**, select **App Service** and then click **Create**. Here, create a new **Resource group** and give it a name, like *Umbrella Google Asssistant Tie-in* or something memorable. In the **Instance Details** screen - 
+1. **Name**: *umbrellagoogleassistanttiein* or something like that
+2. **Publish**: Code
+3. **Runtime Stack**: Python 3.8
+4. **OS**: Linux
+5. **Region**: I did mine in UK South.
+
+The **App Service Plan** is the next bit to fill in, here the only thing you need to change/select is **Free F1** under **Dev/Testing** in the **SKU & Size** setting. Lastly, **Review & Create**. Once it's created (will take a few mins), go ahead and open up your newly created resource and copy the **URL**. 
+
+At this point, paste the newly copied URL into IFTTT replacing the webook.site endpoint. That's it for IFTTT. 
+
+On your computer, open up [VScode](https://code.visualstudio.com/) and install the [Azure App Services add-in](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice). Once installed, sign-in and open it up. Within a few clicks you'll see your App Service under your subscription. At this point, create a new folder on your computer and point VScode to it. Create two files in the root of the directory (see below). 
+1. The requirements text file is used to tell Azure which Python packages we require in our app.
+2. The only thing to change in the Python file is your customer key, whcih can be found in the first of the two Umbrella notes earlier in the post.
+
+requirements.txt -
 ```text
 Flask>=1.0,<=1.1.2
 requests
 ```
-The Python code for the project is -
+app.py - 
 ```python
 import json
 import requests
