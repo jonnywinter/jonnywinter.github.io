@@ -14,6 +14,8 @@ comments: true
 
 After stumbling onto Salnikov Andrey's [article](https://medium.com/@salnikov.andrei/hey-google-enable-my-meraki-guest-wifi-cc49bc01bc73) on Medium, I got inspired to do something similar but with a twist. I wanted to use Google Assistant & APIs, but I wanted to use the [Cisco Umbrella](https://umbrella.cisco.com/) [Enforcement API](https://docs.umbrella.com/enforcement-api/docs) to block a site on command rather than Meraki, use [Azure App Services](https://azure.microsoft.com/en-gb/services/app-service/) instead of [PythonAnywhere](https://www.pythonanywhere.com/) and feed a variable between [IFTTT](https://ifttt.com/) & [Flask](https://flask.palletsprojects.com/) as opposed to a static webhook endpoint. In this post I'm going to detail the steps required to simulate the below video in your own environment whilst adding in contextual information where relevant -
 
+<center><a href="https://www.youtube.com/watch?v=Bx4H-a5RQd8"><img src="https://img.youtube.com/vi/Bx4H-a5RQd8/0.jpg" alt="Umbrella API & Google Assistant"></a></center>
+
 [![Umbrella API & Google Assistant](http://img.youtube.com/vi/Bx4H-a5RQd8/0.jpg)](http://www.youtube.com/watch?v=Bx4H-a5RQd8 "Umbrella API & Google Assistant")
 
 ## My Environment
