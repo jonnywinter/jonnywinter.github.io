@@ -78,12 +78,26 @@ Next we need to our integration to a policy that affects one/more devices which 
 IFTTT is the platform that we will use to integrate our Azure webhook endpoint to our Google Assistant commands. Head to their site and create an account - for this post I created a Standard account, which is free. Once you've signed up and signed in, locate the ability to **Create** a new integration. They come in two components, 'if this' and 'then that' - 
 
 ### If This
-Add > select **Gooogle Assistant** > select **Say a phrase with a text ingredient** > connect your Google Assistant account, if not already done. In the next screen you will select what you want to say (the $ symbols mean variable). 
-1. What do you want to say?: Block $
-2. Alternate: Block the site $
-3. Alternate: Please block $
-4. Response: Sure, blocking $
+**Add** > select **Gooogle Assistant** > select **Say a phrase with a text ingredient** > *connect your Google Assistant account, if not already done*. In the next screen you will select what you want to say (the $ symbols mean variable) -
+1. **What do you want to say?**: Block $
+2. **Alternate**: Block the site $
+3. **Alternate**: Please block $
+4. **Response**: Sure, blocking $
+
+Before we get to the *then that* section, head over to webhook.site and create yourself a test webhook endpoint (it just appears in the middle of the screen). Copy the **Your unique URL** url. We will use this to check that Google Assistant is sending POST messages.
 
 ### Then That: 
+**Add** > select **Webhook** > select **Make a web request**. In the next screen you will dictate what Google Assistant will send you and where - 
+1. **URL**: *your unique URL from webhook.site*
+2. **Method**: POST
+3. **Content Type**: application/json
+4. **Body**: *{"data":"{{TextField}}"}*
+
+After that, click **continue** at the bottom and save your applet. At this point, you'll be able to give Google Assistant a command and you will see a POST message with the JSON data in the webhook.site page. Pretty neat! Try: "Hey Google, please block the site abc123.com". You will be able to see that domain referenced in the raw JSON. Our next step is to create the Python & Flask code in an Azure App Service so we can parse that JSON domain into a string which we provide in another JSON file up to Umbrella. It's easier than it sounds 😉.
+
+## Azure
+
+
+
 
 Happy scripting!
