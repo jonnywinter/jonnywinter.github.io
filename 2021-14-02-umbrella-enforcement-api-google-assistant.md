@@ -93,11 +93,66 @@ Before we get to the *then that* section, head over to webhook.site and create y
 3. **Content Type**: application/json
 4. **Body**: *{"data":"{{TextField}}"}*
 
+**&lt;NOTE>**: The text in step 4 above is JSON; the key is *data* and the value is the *TextField* variable. This forms a key-value pair. **&lt;/NOTE>**
+
 After that, click **continue** at the bottom and save your applet. At this point, you'll be able to give Google Assistant a command and you will see a POST message with the JSON data in the webhook.site page. Pretty neat! Try: "Hey Google, please block the site abc123.com". You will be able to see that domain referenced in the raw JSON. Our next step is to create the Python & Flask code in an Azure App Service so we can parse that JSON domain into a string which we provide in another JSON file up to Umbrella. It's easier than it sounds 😉.
 
 ## Azure
 
+requirements.txt must be created in the root of the directory with the following data -
+```text
+Flask>=1.0,<=1.1.2
+requests
+```
+The Python code for the project is -
+```python
+import json
+import requests
+from datetime import datetime
+from flask import Flask, request
 
+customerKey = 'ENTER YOUR CUSTOMER KEY HERE'
+postUrl = f'https://s-platform.api.opendns.com/1.0/events?customerKey={customerKey}'
+getUrl = f'https://s-platform.api.opendns.com/1.0/domains?customerKey={customerKey}'
 
+headers = {
+    'Content-Type':'application/json',
+    'Accept': 'application/json'
+}
+
+app = Flask(__name__)
+
+#Uncomment the following three lines if you want to display a page so you can check to see easily if your app is up and working
+#@app.route("/")
+#def hello():
+#    return "Latest udate: 1.1"
+
+@app.route('/block',methods=["POST"])
+def block():
+
+    domainJson = request.get_json()
+    domain = (domainJson['data']).replace(" ", "")
+
+    print(domain)
+    now = str(datetime.now().isoformat()) + 'Z'
+
+    data = {
+        "alertTime": now,
+        "deviceId": "ba6a59f4-e692-4724-ba36-c28132c761de",
+        "deviceVersion": "13.7a",
+        "dstDomain": domain,
+        "dstUrl": "http://" + domain + "/",
+        "eventTime": now,
+        "protocolVersion": "1.0a",
+        "providerName": "Security Platform"
+    }
+
+    post = requests.request('POST', postUrl, headers=headers, data=json.dumps(data)).json()
+    get = requests.request('GET', getUrl, headers=headers).json()
+    print(post)
+    print(get)
+
+    return 'success', 202
+```
 
 Happy scripting!
