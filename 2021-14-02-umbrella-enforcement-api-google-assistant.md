@@ -147,12 +147,14 @@ def block():
         "providerName": "Security Platform"
     }
 
+    #Uncomment out the following two GET lines if you wan to see domains in your block list
     post = requests.request('POST', postUrl, headers=headers, data=json.dumps(data)).json()
-    get = requests.request('GET', getUrl, headers=headers).json()
+    #get = requests.request('GET', getUrl, headers=headers).json()
     print(post)
-    print(get)
+    #print(get)
 
     return 'success', 202
 ```
+**&lt;NOTE>**: The code isn't included above for brevity, however you could run a Flask web server and use Postman to send POST requests with the same JSON body you saw from webhook.site to see how your code parses the data and if it errors out - the above code works, but if you change anything this method could really help! **&lt;/NOTE>**
 
 Happy scripting!
