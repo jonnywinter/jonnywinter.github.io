@@ -4,7 +4,7 @@ title: "Integrating the Umbrella Enforcement API with Google Assistant"
 author: "Jonny Winter"
 categories: journal
 tags: [Python,Flask,Azure,Umbrella,API,IFTTT,Google]
-image: Creating-VLANs-CSV-Meraki-API-Flask.png
+image: Umbrella-Google-Assistant-Thumbnail.png
 comments: true
 ---
 
