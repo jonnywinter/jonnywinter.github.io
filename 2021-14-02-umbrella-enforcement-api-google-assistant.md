@@ -172,6 +172,16 @@ def block():
 
     return 'success', 202
 ```
+Noteworthy code - 
+1. The data JSON body is standardised and all feilds are required (most of which mean little-to-nothing to me) as documented [here](https://docs.umbrella.com/enforcement-api/docs/events2). 
+2. The line *domain = (domainJson['data']).replace(" ", "")* is used to remove any spaes created by Google Assistant, which it adds every time.
+3. The datetime specified in the JSON data body has to be provided in ISO standard and appended with a Z at the end, which is the zone designator for zero UTC offset.
+4. If you want to know more about the above code, my most recent three posts have gone into Flask in more detail. They should help out here, or the [official documentation](https://palletsprojects.com/p/flask/).
+
 **&lt;NOTE>**: The code isn't included above for brevity, however you could run a Flask web server and use Postman to send POST requests with the same JSON body you saw from webhook.site to see how your code parses the data and if it errors out - the above code works, but if you change anything this method could really help! **&lt;/NOTE>**
+
+Once you've copied & pasted in the code, right click your App Service in the Azure extension and select **Deploy to web app**. After a few minutes you will see a success message presented to you from VScode, then your app is good to go!
+
+Although we're using the Umbrella Enforcement API, Salnikov Andrey used the Meraki API to disable/enable an SSID which goes to show a common use case for this. With minor changes, this can be used to embed data into any JSON body for any POST/PUT/DELETE request. Time to get creative! :D 
 
 Happy scripting!
