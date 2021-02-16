@@ -73,4 +73,17 @@ Next we need to our integration to a policy that affects one/more devices which 
 
 **&lt;NOTE>**: Within **Reporting** > **Management** > **Admin Audit Log** > **Filter** > **Filter by Identities & Settings: Umbrella Google Assistant Domain List** you can see/report on when domains are added to your domain list, as well as in the **Custom Domains** section of the integration. **&lt;/NOTE>**
 
+## IFTTT
+
+IFTTT is the platform that we will use to integrate our Azure webhook endpoint to our Google Assistant commands. Head to their site and create an account - for this post I created a Standard account, which is free. Once you've signed up and signed in, locate the ability to **Create** a new integration. They come in two components, 'if this' and 'then that' - 
+
+### If This
+Add > select **Gooogle Assistant** > select **Say a phrase with a text ingredient** > connect your Google Assistant account, if not already done. In the next screen you will select what you want to say (the $ symbols mean variable). 
+1. What do you want to say?: Block $
+2. Alternate: Block the site $
+3. Alternate: Please block $
+4. Response: Sure, blocking $
+
+### Then That: 
+
 Happy scripting!
