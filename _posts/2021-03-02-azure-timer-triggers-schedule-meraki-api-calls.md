@@ -46,7 +46,9 @@ Vishal's [post](https://pynative.com/python-generate-random-string/) on PYnative
 ## Azure
 
 There's a few places to start here, but lets start by getting logged into the [Azure Portal](https://portal.azure.com) and creating our Function. Once logged in, open up **Free Services**, locate **Functions** and click **Create**. 
+
 <a href="#"><img alt="Functions within Free Services in the Azure Portal" src="/assets/img/Azure-Functions-Free-Services.png"/></a>
+
 This will take you to a new page where you need to detail the specifics for the Function we're creating. I've detailed these below - 
 ### Basics
 - **Resource Group** > **Create New** > **Name**: *Your Resource Group Name* > **OK**. <- I will refer to this as *myResourceGroupName*
@@ -108,7 +110,9 @@ response = requests.request('PUT', url, headers=headers, data=body)
 
 print(response.status_code)
 ```
-**&lt;NOTE>**: I'm not going to delve into how to get a network ID here, but you can get some more information from my previous post [here](https://jonathan-winter.co.uk/journal/meraki-api-powershell-basics-get.html). I apreciate that it is in PowerShell, but the information still applies here. **&lt;/NOTE>**
+**&lt;NOTE>**: I'm not going to delve into how to get a network ID here, but you can get some more information from my previous post [here](https://jonathan-winter.co.uk/journal/meraki-api-powershell-basics-get.html). I apreciate that it is in PowerShell, but the information still applies here.
+
+Although the code above and below doesn't programatically 'tell' anyone/anything of the string that you're setting the Wi-Fi SSID PSK to, this can be sent to an endpoint via webhook by simply sending data in a JSON payload (an example [here](https://gist.github.com/devStepsize/b1b795309a217d24566dcc0ad136f784) of someone sending it to Slack) or emailed to someone (an example [here](https://stackoverflow.com/questions/46160886/how-to-send-smtp-email-for-office365-with-python-using-tls-ssl) of someone sending an email via Office 365) as an example. **&lt;/NOTE>**
 
 Test your version of the code above by running it in VSCode. If all is well, proceed to integrate it into the __init__.py file so that it reads as follows - 
 ```python
@@ -139,6 +143,27 @@ def main(mytimer: func.TimerRequest) -> None:
     
     logging.info('Python timer trigger function ran at %s', utc_timestamp)
 ```
+Once you've changed the .py file to the above, you will need to modify the requirements.txt file in the root of the folder you created. Some information on the requirements.txt file for Azure Functions can be found [here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-python). We don't need to add a requirement for all modules we imported into our code as most of them are loaded by default, only for **requests**. The requirements.txt file should look like this - 
+```txt
+# DO NOT include azure-functions-worker in this file
+# The Python Worker is managed by Azure Functions platform
+# Manually managing azure-functions-worker may cause unexpected issues
 
+azure-functions
+requests
+```
+Now both init.py and requirements.txt have been modified, we are ready to deploy our Function App to Azure. To do this, go to the **Azure Extension** > click **Functions** > click your subscription name, in my case **Pay-As-You-Go** > right click *myFunctionAppName* followed by **Deploy to Function App** > in the message box that shows up, click **deploy & wait**. It will take a few minutes but your app will deploy. Success!
+
+**&lt;NOTE>**: This note kind of goes without saying, but if you don't want to wait for your app to go a full day in between being called - i.e. testing - then simply modify the Cron expression to be shorter. I did mention this earlier, but you can use the Azure Functions CLI Tools to run your code from within your PC, this can be done at will and should function the exact same as the cloud copy. **&lt;/NOTE>**
+
+If at any point you want to see the logs (and *prints*!), right click the *myFunctionAppName* the same as when you deployed the app, and select **Start Streaming Logs**. This will take you to the Azure portal where you can see the logs. To get here directly from the portal, find and open your Function App and click **Log stream** from the left hand side.
+
+<a href="#"><img alt="The log stream from within the Azure Portal" src="/assets/img/Azure-Functions-Log-Stream.png"/></a>
+
+## Finishing Up
+
+Because we created the new resource in it's own resource group, we can simply delete it and all of it's resources with a single delete request. To do this, open up **Resource Groups** in the Azure Portal and find *myResourceGroupName*. Here, click on the name of it and select **Delete Resource Group**, confirm your choice by typing it's name and then select delete to finalise the action. After a few moments the Resource group will be deleted. Of course, you don't have to do this - you can keep it live forever, and ever, and ever, and...
+
+An easy project but the applications are vast - think of the things that you want to happen once every 'now and again', once a night, twice a day, three times a year, etc. 
 
 Happy scripting!
