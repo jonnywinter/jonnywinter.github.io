@@ -133,7 +133,7 @@ def main(mytimer: func.TimerRequest) -> None:
     url = 'https://n23.meraki.com/api/v1/networks/L_575897802350005790/wireless/ssids/0'
 
     headers = {
-        'X-Cisco-Meraki-API-Key':'cbe84978e4b5ab436d3d394c7fa5dd4ebace35c3',
+        'X-Cisco-Meraki-API-Key':'YOUR API KEY HERE',
         'Accept':'application/json',
         'Content-Type':'application/json'
     }
