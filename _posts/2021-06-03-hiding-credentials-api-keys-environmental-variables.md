@@ -22,7 +22,7 @@ Music: [Funk & Soul Classics Playlist by Various](https://open.spotify.com/album
 <br>
 OS: Windows 10 Pro v20H2 x64.
 <br>
-Python: v3.9.2
+Python: [v3.9.2](https://www.python.org/downloads/release/python-392/)
 <br>
 IDE: [Visual Studio Code v1.56.2](https://code.visualstudio.com/)
 
@@ -46,11 +46,11 @@ For production, processes differ than in development - simply put, a front end s
 
 In development, it really depends on your environment, if you're using shared source code, etc.
 
-If the aim of the game is to simply want to store credentials outside of the source code, we can use something like an environmental variable. An environmental variable is a variable whose value is set outside of the program (like Python), typically through functionality built into the OS (like Windows). In this instance, I have a single Python file - app.py - which needs access to an API key. The following process explains how to store both temporary (cleared after the session/application is terminated) and persistant (remains after the session/application is terminated) on both Windows and macOS and access them in Python.
+If the aim of the game is to simply want to store credentials outside of the source code, we can use something like an environmental variable. An environmental variable is a variable whose value is set outside of the program (like Python), typically through functionality built into the OS (like Windows). In this instance, I have a single Python file - app.py - which needs access to an API key. The following process explains how to store both temporary (cleared after the session/application is terminated) and persistent (remains after the session/application is terminated) on both Windows and macOS and access them in Python.
 
 ## Temporary Environmental Variables in Windows, macOS & Python
 
-Although the following code 
+As mentioned, temporary environmental variables are only stored for the remainder of that session - looking at the following GIF of me displaying this in Command Prompt, if I were to close and re-open the application, I would not be able to re-call the variable. For me, in most applications these are next to useless - I've included them in this post to serve as contrast to persistent ones.
 
 <a href="#"><img alt="Setting and showing environmental variables in command prompt" src="/assets/img/Temporary-Environmental-Variables-Command-Prompt.gif"/></a>
 
@@ -91,4 +91,29 @@ os.environ['pass'] = "123456789"
 print(os.environ['user'] + "'s password is " + os.environ['pass'])
 ```
 
+## Persistent Environmental Variables in Windows & macOS and Retrieving Them in Python
+
+This [Help Desk Geek blog post](https://helpdeskgeek.com/how-to/create-custom-environment-variables-in-windows/) written by Aseem Kishore goes into creating this in depth, but from a high level - 
+1. Open **System Properties** by going to **Settings** > **System** > **About** and clicking **Advanced system settings**.
+2. On the **Advanced** tab, click **Environmental Variables...**.
+3. Here, click **New** under **User variables for %username%**. 
+4. Give the variable a name, for example *user* followed by a value, like *jonnywinter*
+5. Click **OK** to save.
+
+That's really it for Windows. You can now open up either Command Prompt or PowerShell and display the list of variables or that specific variable by - 
+
+Command Prompt
+```cmd
+::Display the list of environmental variables
+set
+::Display a specific environmental variable
+echo %user%
+```
+PowerShell
+```powershell
+#Display the list of environmental variables
+Get-ChildItem -path env:
+#Display a specific environmental variable
+$env:user
+```
 Happy scripting!
