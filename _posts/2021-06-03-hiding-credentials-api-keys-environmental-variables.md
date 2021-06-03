@@ -100,6 +100,9 @@ This [Help Desk Geek blog post](https://helpdeskgeek.com/how-to/create-custom-en
 4. Give the variable a name, for example *user* followed by a value, like *jonnywinter*
 5. Click **OK** to save.
 
+<a href="#"><img alt="Setting an environmental variable in Windows" src="https://helpdeskgeek.com/wp-content/pictures/2012/09/environment-variables-dialog.png"/></a>
+
+
 That's really it for Windows. You can now open up either Command Prompt or PowerShell and display the list of variables or that specific variable by - 
 
 Command Prompt
