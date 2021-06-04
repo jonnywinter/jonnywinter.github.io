@@ -12,7 +12,7 @@ comments: true
 
 ## Summary
 
-Working with credentials, wether username & password in [BASE64](https://www.base64decode.org/) or an API key, when programming causes us to face a problem - where to store them for my code to access? Writing them down inside your code, which may be copied/cloned/shared, is no way acceptable due to obvious risks. Of course, you could choose to enter them every time your code runs, which is secure to an extent but time consuming. What's the middle ground? In production environments, it's common to have a back end server that provides information to a front end server without exposing the API key to any third party. What about test/dev environments? In this post I'm going to detail a few options. 
+Working with credentials when programming, wether username & password in [BASE64](https://www.base64decode.org/), an API key or one of the many, many other forms, causes us to face a problem - where to store them for my code to access? Writing them down inside your code, which may be copied/cloned/shared, is no way acceptable due to obvious risks. Of course, you could choose to enter them every time your code runs, which is secure to an extent but time consuming. What's the middle ground? In production environments, it's common to have a back end server that provides information to a front end server without exposing the API key to any third party. What about test/dev environments? In this post I'm going to detail a few options. 
 
 ## My Environment
 
