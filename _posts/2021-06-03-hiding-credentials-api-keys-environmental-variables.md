@@ -42,11 +42,9 @@ Steve Griffith's [video](https://www.youtube.com/watch?v=3XjkaN8psp0&ab_channel=
 
 **&lt;NOTE>**: Instead of re-inventing the wheel and explaining things that have been well defined by someone else, I have included links next to some words/technologies/acronyms/protocols that I feel could proove useful to those not yet 'in the know'. **&lt;/NOTE>**
 
-For production, processes differ than in development - simply put, a front end server sends a request to a backend server, which in turn sends a request to a final destination server using an authentication medium that it has access to. Once the back end server receives data from the final destination server, it sends to the front end server. Essentially the front end server never has access to that authentication information and uses the back end server as a proxy. The back end server may store the authentication information in environmental variables, in a local config file or in some sort of secure repository/server that it has access to. This YouTube [video](https://www.youtube.com/watch?v=NpWWOS-tC5s&ab_channel=PortEXE) by PortEXE explains this process with [React](https://reactjs.org/).
+For production, processes differ than in development - simply put, a front end server sends a request to a backend server, which in turn sends a request to a final destination server using an authentication medium that it has access to. Once the back end server receives data from the final destination server, it sends to the front end server. Essentially the front end server never has access to that authentication information and uses the back end server as a proxy. The back end server may store the authentication information in environmental variables, in a local config file or in some sort of secure repository/server that it has access to. This YouTube [video](https://www.youtube.com/watch?v=NpWWOS-tC5s&ab_channel=PortEXE) by PortEXE explains this process with [React](https://reactjs.org/). Backend servers can be behind strict firewall rules to permit/deny all but relevant & secure traffic, usually from only the front end server and management infrastructure.
 
-In development, it really depends on your environment, if you're using shared source code, etc.
-
-If the aim of the game is to simply want to store credentials outside of the source code, we can use something like an environmental variable. An environmental variable is a variable whose value is set outside of the program (like Python), typically through functionality built into the OS (like Windows). In this instance, I have a single Python file - app.py - which needs access to an API key. The following process explains how to store both temporary (cleared after the session/application is terminated) and persistent (remains after the session/application is terminated) on both Windows and macOS and access them in Python.
+In local development, it really depends on your environment, if you're using shared source code, etc. If the aim of the game is to simply want to store credentials outside of the source code, we can use something like an environmental variable. An environmental variable is a variable whose value is set outside of the program (like Python), typically through functionality built into the OS (like Windows). In this instance, I have a single Python file - app.py - which needs access to an API key. The following process explains how to store both temporary (cleared after the session/application is terminated) and persistent (remains after the session/application is terminated) on both Windows and macOS and access them in Python.
 
 ## Temporary Environmental Variables in Windows, macOS & Python
 
@@ -154,6 +152,8 @@ print(user + "'s password is " + pass)
 ```
 In the above code, you are importing the *os* module and using the *environ.get* method to retrieve the environmental variables, setting them as python variables *user* and *pass* respectively.   
 
+I've detailed another option for storing authentication information outside of source code below. In the following examople I'm not using environmental variables, but instead creating a JSON file to store and retrieve that data. Immediately following that section I've included another section on how to exclude that file from commits in the Git VCS system.
+
 ## Storing Authentication Information Outside of Source Code in JSON
 
 As an alternative to environmental variables, storing something like an API key in a file in a local directory or secure server can be a great option. This could easily be YAML or XML, but I like working with JSON so I'm using that in this example. The directory could be an absolute path (i.e. c:\foo\bar.json) or simply relying on the working directory (i.e. bar.json). The great thing here is that your source code, once again, doesn't have your authentication information within it but instead references another place that does - 
@@ -179,7 +179,16 @@ JSON
 GitHub is fantastic, and using it is great. However, if you start to commit directories & files to the cloud and share them with others then you're going to need to exclude files & folders from being synced. Luckily the creators of Git thought of this and came up with the [.gitignore file](https://git-scm.com/docs/gitignore). Although the .gitignore file is synced to the cloud, the files and folders that the file references will not be. This YouTube [video](https://www.youtube.com/watch?v=17UVejOw3zA&t=334s&ab_channel=TheCodingTrainTheCodingTrain) by The Coding Train (~06:10 mins in) goes into creating this file and specifically not syncing a .env file which contains an API key. To do this - 
 1. The .gitignore file must exist in the root directory and will be created manually.
 2. You can specify files (i.e. config.json) & folders (i.e. project_notes/).
-3. You can use the astrix wildcard to specifiy 
+3. You can use the \* wildcard to specifiy files or folders that start/end with any string (i.e. \*.json will ignore any .json files)
 
+The below picture taken from Raul Guarini's [answer](https://stackoverflow.com/questions/46800503/how-should-i-use-gitignore) on Stack Overflow shows what this should/could look like in practice - 
+
+<a href="#"><img alt="Contents of a gitignore file" src="https://i.stack.imgur.com/rhtHN.png"/></a>
+
+## Cloud Key Management
+
+As a final mention, there are various cloud systems, including [GitHub](https://docs.github.com/en/actions/reference/encrypted-secrets), [Azure](https://docs.microsoft.com/en-us/azure/key-vault/secrets/about-secrets), [AWS](https://aws.amazon.com/secrets-manager/), etc. that will allow you to safely store and retrieve keys, connection strings and authentication information which can be both used in production & dev/testing. Although this post doesn't delve into them, they are very valuable and widely used tools. Some paid for, some not - often they really rely on where you are storing your code.
+
+So, there we have it - a few options for hiding/obscuring secrets in both development/test environments as well as in production. 
 
 Happy scripting!
