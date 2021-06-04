@@ -86,7 +86,7 @@ export pass="123456789"
 echo $user"'"s password is $pass
 #Output = jonny's password is 123456789
 ```
-Python (For completeness, but missing the point)
+Python (for completeness, but missing the point)
 ```python
 import os
 
@@ -127,20 +127,24 @@ Get-ChildItem -path env:
 $env:user
 ```
 For macOS, the process is a little different; the environmental variables are stored in a file that we must edit in a text editor. The easiset way to do this is to open up Terminal and - 
+
+Terminal/Bash
 ```bash
 #Navigate to your home directory
 cd ~
 #Open up the hidden file, .bash_profile (or .zprofile if your using ZSH and not Bash)
 nano .bash_profile
 ```
-Here, we need to enter the following text into the text editor (and if using nano press **CTRL+W** to quit, selecting **Y** to save)
+Here, we need to enter the following text into the text editor (and if using nano press **CTRL+W** to quit, selecting **Y** to save) -
+
+Nano
 ```bash
 export user="jonny"
 export pass="123456789"
 ```
-Once saved, the variables will be persistent if you close & re-open Terminal. Like with the above, you can call the variables in Terminal by using *echo*.
+Once saved, the variables will be persistent if you close & re-open Terminal. Like with the above, you can call the variables in Terminal by using *echo*. With the above steps complete, we can now go about calling those variables from within Python. It's the same process for macOS or Windows.
 
-With the above steps complete, we can now go about calling those variables from within Python. It's the same process for macOS or Windows.
+Python
 ```python
 import os
 
