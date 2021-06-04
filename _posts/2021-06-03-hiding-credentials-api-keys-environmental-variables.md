@@ -185,7 +185,7 @@ The below picture taken from Raul Guarini's [answer](https://stackoverflow.com/q
 
 <a href="#"><img alt="Contents of a gitignore file" src="https://i.stack.imgur.com/rhtHN.png"/></a>
 
-## Cloud Key Management
+## Cloud Key Management & Finishing Up
 
 As a final mention, there are various cloud systems, including [GitHub](https://docs.github.com/en/actions/reference/encrypted-secrets), [Azure](https://docs.microsoft.com/en-us/azure/key-vault/secrets/about-secrets), [AWS](https://aws.amazon.com/secrets-manager/), etc. that will allow you to safely store and retrieve keys, connection strings and authentication information which can be both used in production & dev/testing. Although this post doesn't delve into them, they are very valuable and widely used tools. Some paid for, some not - often they really rely on where you are storing your code.
 
