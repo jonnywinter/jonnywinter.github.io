@@ -54,7 +54,9 @@ As mentioned, temporary environmental variables are only stored for the remainde
 
 <a href="#"><img alt="Setting and showing environmental variables in command prompt" src="/assets/img/Temporary-Environmental-Variables-Command-Prompt.gif"/></a>
 
-In **Command Prompt**, you can set and show envrionmental variables with the following syntax - 
+You can set and show envrionmental variables with the following syntax - 
+
+Command Prompt
 ```cmd
 ::Set the environmental variables - 
 set user=jonny
@@ -64,7 +66,7 @@ set pass=123456789
 echo %user%'s password is %pass%
 ::Output = jonny's password is 123456789
 ```
-In **PowerShell**, you can set and show envrionmental variables with the following syntax - 
+PowerShell
 ```powershell
 #Set the environmental variables - 
 $env:user = "jonny"
@@ -74,7 +76,7 @@ $env:pass = 123456789
 Write-Host $env:user"'"s password is $env:pass
 #Output = jonny's password is 123456789
 ```
-In macOS **Terminal/Bash**, you can set and show envrionmental variables with the following syntax - 
+Terminal/Bash
 ```bash
 #Set the environmental variables - 
 export user="jonny"
@@ -84,7 +86,7 @@ export pass="123456789"
 echo $user"'"s password is $pass
 #Output = jonny's password is 123456789
 ```
-For completeness (but missing the point), in **Python**, you can set and show envrionmental variables with the following syntax - 
+Python (For completeness, but missing the point)
 ```python
 import os
 
