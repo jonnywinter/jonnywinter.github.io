@@ -59,6 +59,7 @@ In **Command Prompt**, you can set and show envrionmental variables with the fol
 ::Set the environmental variables - 
 set user=jonny
 set pass=123456789
+
 ::Display the environmental variables - 
 echo %user%'s password is %pass%
 ::Output = jonny's password is 123456789
@@ -68,6 +69,7 @@ In **PowerShell**, you can set and show envrionmental variables with the followi
 #Set the environmental variables - 
 $env:user = "jonny"
 $env:pass = 123456789
+
 #Display the environmental variables - 
 Write-Host $env:user"'"s password is $env:pass
 #Output = jonny's password is 123456789
@@ -77,6 +79,7 @@ In macOS **Terminal/Bash**, you can set and show envrionmental variables with th
 #Set the environmental variables - 
 export user="jonny"
 export pass="123456789"
+
 #Display the environmental variables - 
 echo $user"'"s password is $pass
 #Output = jonny's password is 123456789
@@ -91,6 +94,7 @@ os.environ['pass'] = "123456789"
 
 #Display the environmental variables -
 print(os.environ['user'] + "'s password is " + os.environ['pass'])
+#Output = jonny's password is 123456789
 ```
 
 ## Persistent Environmental Variables in Windows & macOS and Retrieving Them in Python
@@ -142,7 +146,25 @@ user = os.environ.get("user")
 pass = os.environ.get("pass")
 
 print(user + "'s password is " + pass)
+#Output = jonny's password is 123456789
 ```
 In the above code, you are importing the *os* module and using the *environ.get* method to retrieve the environmental variables, setting them as python variables *user* and *pass* respectively.   
+
+## Storing Authentication Information Outside of Source Code in JSON
+
+As an alternative to environmental variables, storing something like an API key in a file in a local directory or secure server can be a great option. This could easily be YAML or XML, but I like working with JSON so I'm using that in this example. The directory could be an absolute path (i.e. c:\foo\bar.json) or simply relying on the working directory (i.e. bar.json). The great thing here is that your source code, once again, doesn't have your authentication information within it but instead references another place that does - 
+```python
+import os
+import json
+
+config = json.load(open('C:\\app\\config.json', 'r'))
+
+print(config['apikey'])
+#Output = 123-456-789
+```
+
+## Using GitHub & .gitignore
+
+
 
 Happy scripting!
