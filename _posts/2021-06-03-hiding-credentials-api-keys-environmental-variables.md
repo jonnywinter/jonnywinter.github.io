@@ -12,7 +12,7 @@ comments: true
 
 ## Summary
 
-Working with credentials, wether username & password in BASE64 or an API key, when programming causes us to face a problem - where to store them for my code to access? Writing them down inside your code, which may be copied/cloned, is no way acceptable due to obvious risks. Of course, you could choose to enter them every time your code runs, which is secure to an extent but time consuming. What's the middle ground? In production environments, it's common to have a back end server that provides information to a front end server without exposing the API key to any third party. What about test/dev environments? In this post I'm going to detail a few options. 
+Working with credentials, wether username & password in [BASE64](https://www.base64decode.org/) or an API key, when programming causes us to face a problem - where to store them for my code to access? Writing them down inside your code, which may be copied/cloned/shared, is no way acceptable due to obvious risks. Of course, you could choose to enter them every time your code runs, which is secure to an extent but time consuming. What's the middle ground? In production environments, it's common to have a back end server that provides information to a front end server without exposing the API key to any third party. What about test/dev environments? In this post I'm going to detail a few options. 
 
 ## My Environment
 
@@ -42,7 +42,7 @@ Steve Griffith's [video](https://www.youtube.com/watch?v=3XjkaN8psp0&ab_channel=
 
 **&lt;NOTE>**: Instead of re-inventing the wheel and explaining things that have been well defined by someone else, I have included links next to some words/technologies/acronyms/protocols that I feel could proove useful to those not yet 'in the know'. **&lt;/NOTE>**
 
-For production, processes differ than in development - simply put, a front end server sends a request to a backend server, which in turn sends a request to a final destination server using an authentication medium that it has access to. Once the back end server receives data from the final destination server, it sends to the front end server. Essentially the front end server never has access to that authentication information and uses the back end server as a proxy. The back end server may store the authentication information in environmental variables, in a local config file or in some sort of secure repository/server that it has access to. 
+For production, processes differ than in development - simply put, a front end server sends a request to a backend server, which in turn sends a request to a final destination server using an authentication medium that it has access to. Once the back end server receives data from the final destination server, it sends to the front end server. Essentially the front end server never has access to that authentication information and uses the back end server as a proxy. The back end server may store the authentication information in environmental variables, in a local config file or in some sort of secure repository/server that it has access to. This YouTube [video](https://www.youtube.com/watch?v=NpWWOS-tC5s&ab_channel=PortEXE) by PortEXE explains this process with [React](https://reactjs.org/).
 
 In development, it really depends on your environment, if you're using shared source code, etc.
 
@@ -120,7 +120,7 @@ Get-ChildItem -path env:
 #Display a specific environmental variable
 $env:user
 ```
-For macOS, the process is a little different; the environmental variables are stored in a file that we must edit in a text editor. The easiset way to do this is to open up **Terminal** and - 
+For macOS, the process is a little different; the environmental variables are stored in a file that we must edit in a text editor. The easiset way to do this is to open up Terminal and - 
 ```bash
 #Navigate to your home directory
 cd ~
@@ -132,7 +132,7 @@ Here, we need to enter the following text into the text editor (and if using nan
 export user="jonny"
 export pass="123456789"
 ```
-Once saved, the variables will be persistent if you close & re-open **Terminal**. Like with the above, you can call the variables in **Terminal** by using *echo*.
+Once saved, the variables will be persistent if you close & re-open Terminal. Like with the above, you can call the variables in Terminal by using *echo*.
 
 With the above steps complete, we can now go about calling those variables from within Python. It's the same process for macOS or Windows.
 ```python
