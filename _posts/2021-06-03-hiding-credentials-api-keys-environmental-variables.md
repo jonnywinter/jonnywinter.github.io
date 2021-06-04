@@ -126,7 +126,7 @@ Get-ChildItem -path env:
 #Display a specific environmental variable
 $env:user
 ```
-For macOS, the process is a little different; the environmental variables are stored in a file that we must edit in a text editor. The easiset way to do this is to open up Terminal and - 
+For macOS, the process is a little different; the environmental variables are stored in a file that we must edit in a text editor (and if using nano press **CTRL+W** to quit, selecting **Y** to save). The easiset way to do this is to open up Terminal and - 
 
 Terminal/Bash
 ```bash
@@ -135,8 +135,6 @@ cd ~
 #Open up the hidden file, .bash_profile (or .zprofile if your using ZSH and not Bash)
 nano .bash_profile
 ```
-Here, we need to enter the following text into the text editor (and if using nano press **CTRL+W** to quit, selecting **Y** to save) -
-
 Nano
 ```bash
 export user="jonny"
