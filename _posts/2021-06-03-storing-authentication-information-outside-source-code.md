@@ -138,6 +138,10 @@ Nano
 export user="jonny"
 export pass="123456789"
 ```
+The following image, taken from Alexander Fox's [post](https://www.applegazette.com/mac/pro-terminal-commands-editing-bash_profile/) on AppleGazette shows you what this would look like in nano -
+
+<a href="#"><img alt="Contents of a .bash_profile file" src="https://www.applegazette.com/wp-content/uploads/2018/01/terminal-edit-bash_profile-2-550x344.png"/></a>
+
 Once saved, the variables will be persistent if you close & re-open Terminal. Like with the above, you can call the variables in Terminal by using *echo*. With the above steps complete, we can now go about calling those variables from within Python. It's the same process for macOS or Windows.
 
 Python
