@@ -174,10 +174,12 @@ JSON
   "apikey":"123-456-789"
 }
 ```
-
-
 ## Using GitHub & .gitignore
 
+GitHub is fantastic, and using it is great. However, if you start to commit directories & files to the cloud and share them with others then you're going to need to exclude files & folders from being synced. Luckily the creators of Git thought of this and came up with the [.gitignore file](https://git-scm.com/docs/gitignore). Although the .gitignore file is synced to the cloud, the files and folders that the file references will not be. This YouTube [video](https://www.youtube.com/watch?v=17UVejOw3zA&t=334s&ab_channel=TheCodingTrainTheCodingTrain) by The Coding Train (~06:10 mins in) goes into creating this file and specifically not syncing a .env file which contains an API key. To do this - 
+1. The .gitignore file must exist in the root directory and will be created manually.
+2. You can specify files (i.e. config.json) & folders (i.e. project_notes/).
+3. You can use the astrix wildcard to specifiy 
 
 
 Happy scripting!
