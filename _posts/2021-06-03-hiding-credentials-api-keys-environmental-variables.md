@@ -153,6 +153,8 @@ In the above code, you are importing the *os* module and using the *environ.get*
 ## Storing Authentication Information Outside of Source Code in JSON
 
 As an alternative to environmental variables, storing something like an API key in a file in a local directory or secure server can be a great option. This could easily be YAML or XML, but I like working with JSON so I'm using that in this example. The directory could be an absolute path (i.e. c:\foo\bar.json) or simply relying on the working directory (i.e. bar.json). The great thing here is that your source code, once again, doesn't have your authentication information within it but instead references another place that does - 
+
+Python
 ```python
 import os
 import json
@@ -162,6 +164,13 @@ config = json.load(open('C:\\app\\config.json', 'r'))
 print(config['apikey'])
 #Output = 123-456-789
 ```
+JSON
+```json
+{
+  "apikey":"123-456-789"
+}
+```
+
 
 ## Using GitHub & .gitignore
 
