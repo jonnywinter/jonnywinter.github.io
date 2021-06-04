@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Hiding Authentication Information and Environmental Variables"
+title: "Storing Authentication Information Outside of Source Code"
 author: "Jonny Winter"
 categories: journal
 tags: [Python,Windows,API,macOS]
