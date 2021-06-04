@@ -84,9 +84,11 @@ echo $user"'"s password is $pass
 For completeness (but missing the point), in **Python**, you can set and show envrionmental variables with the following syntax - 
 ```python
 import os
+
 #Set the environmental variables - 
 os.environ['user'] = "jonny"
 os.environ['pass'] = "123456789"
+
 #Display the environmental variables -
 print(os.environ['user'] + "'s password is " + os.environ['pass'])
 ```
@@ -101,7 +103,6 @@ This [Help Desk Geek blog post](https://helpdeskgeek.com/how-to/create-custom-en
 5. Click **OK** to save.
 
 <a href="#"><img alt="Setting an environmental variable in Windows" src="https://helpdeskgeek.com/wp-content/pictures/2012/09/environment-variables-dialog.png"/></a>
-
 
 That's really it for Windows. You can now open up either Command Prompt or PowerShell and display the list of variables or that specific variable by - 
 
@@ -119,4 +120,29 @@ Get-ChildItem -path env:
 #Display a specific environmental variable
 $env:user
 ```
+For macOS, the process is a little different; the environmental variables are stored in a file that we must edit in a text editor. The easiset way to do this is to open up **Terminal** and - 
+```bash
+#Navigate to your home directory
+cd ~
+#Open up the hidden file, .bash_profile (or .zprofile if your using ZSH and not Bash)
+nano .bash_profile
+```
+Here, we need to enter the following text into the text editor (and if using nano press **CTRL+W** to quit, selecting **Y** to save)
+```bash
+export user="jonny"
+export pass="123456789"
+```
+Once saved, the variables will be persistent if you close & re-open **Terminal**. Like with the above, you can call the variables in **Terminal** by using *echo*.
+
+With the above steps complete, we can now go about calling those variables from within Python. It's the same process for macOS or Windows.
+```python
+import os
+
+user = os.environ.get("user")
+pass = os.environ.get("pass")
+
+print(user + "'s password is " + pass)
+```
+In the above code, you are importing the *os* module and using the *environ.get* method to retrieve the environmental variables, setting them as python variables *user* and *pass* respectively.   
+
 Happy scripting!
